@@ -1,22 +1,10 @@
-vim.o.conceallevel = 1
-
 return {
   "epwalsh/obsidian.nvim",
   version = "*",  -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre path/to/my-vault/**.md",
-  --   "BufNewFile path/to/my-vault/**.md",
-  -- },
   dependencies = {
-    -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
   opts = {
     workspaces = {
@@ -24,19 +12,32 @@ return {
         name = "personal",
         path = "~/notes",
       },
-      -- {
-      --   name = "work",
-      --   path = "~/vaults/work",
-      -- },
     },
-    -- see below for full list of options 👇
+    ui = {
+      enable = true,
+      conceallevel = 1,  -- Ensure conceallevel is set correctly
+    },
+    prepend_note_id = true,
+    new_notes_location = "current_dir",
+    completion = {
+      nvim_cmp = true,
+      min_chars = 2,
+    },
   },
-      prepend_note_id= true,
-      new_notes_location = "current_dir",
-      completion = {
-        -- Set to false to disable completion.
-        nvim_cmp = true,
-        -- Trigger completion at 2 chars.
-        min_chars = 2,
-      },
+  config = function()
+    -- Set conceallevel globally or for markdown files specifically
+    vim.cmd("set conceallevel=1")
+    vim.cmd([[
+      augroup ObsidianMarkdown
+        autocmd!
+        autocmd FileType markdown setlocal conceallevel=1
+      augroup END
+    ]])
+
+    -- Custom command to handle image pasting using xclip
+    vim.cmd([[
+      command! -nargs=0 ObsidianPasteImg lua require('obsidian').paste_image()
+    ]])
+  end,
 }
+

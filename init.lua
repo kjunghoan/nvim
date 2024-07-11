@@ -34,5 +34,6 @@ spec "simon.oil"
 spec "simon.neorg" -- Note Taking tool
 -- spec "simon.markdown"
 -- spec "simon.peek"
+spec "simon.obsidian"
 
 require "simon.lazy"

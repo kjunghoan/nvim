@@ -38,7 +38,7 @@ vim.opt.signcolumn = "yes" -- always show sign column
 vim.opt.colorcolumn = "80" -- add line at 80 columns
 vim.opt.list = false --make dash line placeholder go away
 
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append { 'unnamedplus' }
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.timeoutlen = 300

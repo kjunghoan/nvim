@@ -31,7 +31,7 @@ spec "simon.lspconfig"
 spec "simon.undotree"
 spec "simon.colorizer"
 spec "simon.oil"
-spec "simon.neorg" -- Note Taking tool
+-- spec "simon.neorg" -- Note Taking tool
 -- spec "simon.markdown"
 -- spec "simon.peek"
 spec "simon.obsidian"

@@ -30,10 +30,14 @@ spec "simon.cmp"
 spec "simon.lspconfig"
 spec "simon.undotree"
 spec "simon.colorizer"
+
+spec "simon.obsidian"
+spec "simon.web-devicons"
+spec "simon.mini-icons"
+
 spec "simon.oil"
 -- spec "simon.neorg" -- Note Taking tool
 -- spec "simon.markdown"
 -- spec "simon.peek"
-spec "simon.obsidian"
 
 require "simon.lazy"

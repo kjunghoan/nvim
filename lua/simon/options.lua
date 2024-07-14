@@ -38,7 +38,7 @@ vim.opt.signcolumn = "yes" -- always show sign column
 vim.opt.colorcolumn = "80" -- add line at 80 columns
 vim.opt.list = false --make dash line placeholder go away
 
-vim.opt.clipboard:append { 'unnamedplus' }
+vim.opt.clipboard = 'unnamedplus'
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.timeoutlen = 300
@@ -50,3 +50,9 @@ vim.opt.pumheight = 10
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+
+-- Opting out of Perl provider 
+vim.g.loaded_perl_provider = 0
+-- Opting out of ruby provider
+vim.g.loaded_ruby_provider = 0

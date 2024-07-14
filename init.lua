@@ -3,6 +3,7 @@ require "simon.options"
 require "simon.keymaps"
 require "simon.autocmds"
 
+spec "simon.luasnip"
 spec "simon.colorscheme"
 spec "simon.treesitter"
 spec "simon.whichkey"

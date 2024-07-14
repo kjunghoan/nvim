@@ -23,7 +23,7 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(true, { bufnr })
+    vim.lsp.inlay_hint.enable(bufnr, true)
   end
 end
 
@@ -113,6 +113,12 @@ function M.config()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
+  vim.lsp.handlers["workspace/didChangeWatchedFiles"] = vim.lsp.handlers["workspace/didChangeWatchedFiles"] or {}
+  vim.lsp.handlers["workspace/didChangeWatchedFiles"].onChange = function(_, result)
+    -- Handle file changes here
+    -- You can add custom logic here if needed
+  end
+
   for _, server in pairs(servers) do
     local opts = {
       on_attach = M.on_attach,
@@ -133,4 +139,3 @@ function M.config()
 end
 
 return M
-

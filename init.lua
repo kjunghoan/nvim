@@ -31,6 +31,7 @@ spec "simon.cmp"
 spec "simon.lspconfig"
 spec "simon.undotree"
 spec "simon.colorizer"
+spec "simon.autotags"
 
 spec "simon.obsidian"
 spec "simon.web-devicons"

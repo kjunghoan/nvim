@@ -7,10 +7,14 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Window Navigation --
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap('n', '<c-h>', ':wincmd h<CR>', opts)
+keymap('n', '<c-j>', ':wincmd j<CR>', opts)
+keymap('n', '<c-k>', ':wincmd k<CR>', opts)
+keymap('n', '<c-l>', ':wincmd l<CR>', opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
 keymap("n", "<C-7>", ":resize -2<CR>", opts)

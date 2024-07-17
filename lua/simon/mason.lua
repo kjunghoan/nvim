@@ -25,6 +25,10 @@ function M.config()
   }
 
   require("mason").setup {
+    ensure_installed = {
+      "sonarlint-language-server",
+      "prettierd",
+    },
     ui = {
       border = "rounded",
     },

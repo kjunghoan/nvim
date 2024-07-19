@@ -5,6 +5,7 @@ local keymap = vim.keymap.set
 
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Window Navigation --
 keymap('n', '<c-h>', ':wincmd h<CR>', opts)

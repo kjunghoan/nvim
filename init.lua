@@ -37,7 +37,7 @@ spec "simon.autotags"
 spec "simon.obsidian"
 spec "simon.web-devicons"
 spec "simon.mini-icons"
-spec "simon.nvim-tmux-navigator"
+-- spec "simon.nvim-tmux-navigator"
 spec "simon.oil"
 
 require "simon.lazy"

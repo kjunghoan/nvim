@@ -1,8 +1,9 @@
-require "simon.launch"
-require "simon.options"
-require "simon.keymaps"
+-- Main settings
+require("config.launch")
+require("config.options")
+require("config.globalKeymaps")
+require("config.autoCmds")
 
-spec "simon.treesitter"
+spec("colorscheme.ayu")
 
-
-require "simon.lazy"
+require("config.lazy")

@@ -75,3 +75,7 @@ vo.undofile = true -- Save undo history to a file
 -- Undercurl
 -- vo.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl color
 -- vo.cmd([[let &t_Ce = "\e[4:0m"]]) -- Reset undercurl color
+
+-- disable provider
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0

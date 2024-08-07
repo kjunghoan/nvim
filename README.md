@@ -1,4 +1,1 @@
 # Required
-- [ripgrep]()
-- [luarocks]()
-- [stylua]()

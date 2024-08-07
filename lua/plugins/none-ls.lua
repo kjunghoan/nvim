@@ -5,12 +5,23 @@ return {
   },
   config = function()
     local null_ls = require("null-ls")
+    local nb = null_ls.builtins
     null_ls.setup(
       {
-        null_ls.builtins.formatting.stylua,   -- Lua formatter
-        null_ls.builtins.formatting.prettier, -- JavaScript formatter
-        null_ls.builtins.completion.spell,    -- Spell checker
-        null_ls.builtins.formatting.black,    -- Python formatter
+        -- Formatting
+        nb.formatting.stylua,   -- Lua formatter
+
+        nb.formatting.black,    -- Python formatter
+        nb.formatting.isort,    -- Python import formatter
+
+        -- Diagnostics
+        -- nb.diagnostics.stylua, -- Lua diagnostics
+        -- nb.diagnostics.eslint_d, -- EsLint diagnostics
+        -- nb.formatting.sonarlint, -- JavaScript formatter
+
+        -- Completion
+        nb.completion.spell,    -- Spell checker
+
       }
     )
     local wk = require("which-key")
@@ -19,4 +30,3 @@ return {
     }
   end
 }
-

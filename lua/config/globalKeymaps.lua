@@ -16,6 +16,5 @@ km("n", "<C-Down>", ":resize -2<CR>", opts)
 km("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 km("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 
-km('n', '<leader>e', ':Neotree left<CR>', opts, {description = 'Show file tree'})
 km('n', '<leader>r', '<cmd>NvimTreeRefresh<cr>', opts)
 km('n', '<leader>n', '<cmd>NvimTreeFindFile<cr>', opts)

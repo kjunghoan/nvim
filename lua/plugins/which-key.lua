@@ -55,7 +55,6 @@ return {
         ["d"] = { name = "Debug" },
         ["f"] = { name = "Find" },
         ["g"] = { name = "Git" },
-        ["l"] = { name = "LSP" },
         ["p"] = { name = "Plugins" },
         ["t"] = { name = "Test" },
         ["a"] = {

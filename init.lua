@@ -9,7 +9,7 @@ spec("colorscheme.ayu") -- The default colorscheme
 -- Plugins
 spec("plugins.comment") -- Batch Commenting
 spec("plugins.copilot") -- Github Copilot
-spec("plugins.gitsigns") -- Git integrations
+spec("plugins.git") -- Git integrations
 spec("plugins.harpoon") -- Mark and go back to files
 spec("plugins.indent-blankline") -- indents blank lines when pressing tab
 spec("plugins.lsp-config") -- Language Server Protocol file

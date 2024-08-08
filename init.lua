@@ -16,6 +16,7 @@ spec("plugins.indent-blankline") -- indents blank lines when pressing tab
 spec("plugins.lsp-config") -- Language Server Protocol file
 spec("plugins.lualine") -- Status line
 spec("plugins.luasnip") -- snipets
+spec("plugins.mini-icons") -- Icons for the status line
 spec("plugins.neotest") -- Test Runner
 spec("plugins.none-ls") -- Language Server Protocol file
 spec("plugins.nvim-ts-autotag") -- Autotags

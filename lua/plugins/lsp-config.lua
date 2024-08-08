@@ -1,15 +1,14 @@
---- Mason, lspconfig
+--- Mason, lspconfig dotenv
 return {
   {
     "williamboman/mason.nvim",
-    config = function ()
+    config = function()
       require("mason").setup()
-
     end
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function ()
+    config = function()
       require("mason-lspconfig").setup({
         auto_install = true,
       })
@@ -17,12 +16,17 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    config = function ()
+    config = function()
       local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.lua_ls.setup({}) -- Lua
+      lspconfig.tsserver.setup({}) -- TypeScript
+      lspconfig.bashls.setup({}) -- Bash
+      lspconfig.jsonls.setup({}) -- JSON
+      lspconfig.yamlls.setup({}) -- YAML
+      lspconfig.dockerls.setup({}) -- Docker
+      lspconfig.prismals.setup({}) -- Prisma
       local wk = require("which-key")
-      wk.register{
+      wk.register {
         ["<leader>l"] = {
           name = "LSP",
           a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },

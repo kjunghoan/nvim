@@ -16,14 +16,9 @@ return {
         ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
         ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
         ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        ["<leader>gu"] = {
-          "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-          "Undo Stage Hunk",
-        },
-        ["<leader>gd"] = {
-          "<cmd>Gitsigns diffthis HEAD<cr>",
-          "Git Diff",
-        },
+        ["<leader>gu"] = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>","Undo Stage Hunk"},
+        ["<leader>gd"] = {"<cmd>Gitsigns diffthis HEAD<cr>","Git Diff"},
+        -- ["<leader>gg"] = {"<cmd>LazyGit<cr>", "lazygit"},
       }
 
       require("gitsigns").setup {

@@ -16,9 +16,8 @@ return {
         ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
         ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
         ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        ["<leader>gu"] = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>","Undo Stage Hunk"},
-        ["<leader>gd"] = {"<cmd>Gitsigns diffthis HEAD<cr>","Git Diff"},
-        -- ["<leader>gg"] = {"<cmd>LazyGit<cr>", "lazygit"},
+        ["<leader>gu"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+        ["<leader>gd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
       }
 
       require("gitsigns").setup {
@@ -59,5 +58,24 @@ return {
   },
   {
     "tpope/vim-fugitive"
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
   }
 }

@@ -16,5 +16,5 @@ km("n", "<C-Down>", ":resize -2<CR>", opts)
 km("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 km("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 
-km('n', '<leader>r', '<cmd>NvimTreeRefresh<cr>', opts)
-km('n', '<leader>n', '<cmd>NvimTreeFindFile<cr>', opts)
+-- Wrap lines toggle
+km("n", "<leader>w", ":set wrap!<CR>", {noremap = true, silent = true, desc = "Toggle Wrap"})

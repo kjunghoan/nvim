@@ -1,4 +1,4 @@
--- gitsigns, vim-fugitive
+-- gitsigns, vim-fugitive, lazygit
 return {
   {
     "lewis6991/gitsigns.nvim",

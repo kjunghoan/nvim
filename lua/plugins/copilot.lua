@@ -68,7 +68,7 @@ return { -- my current plugin
         Conciseness = "Please rewrite the following text to be more concise",
       },
       auto_follow_cursor = false, -- Don't follow the cursor after getting a response
-      show_help = true,           -- TODO: Change to false to disable help message
+      show_help = false,           -- TODO: Change to false to disable help message
       mappings = {
         complete = {
           detail = "Use @<Tab> or /<Tab> for options.",

@@ -17,7 +17,7 @@ return { -- TODO: LuaSnip completion isn't working correctly I will fix this lat
   },
   config = function()
     local cmp = require "cmp"
-    local luasnip = require ("luasnip")
+    local luasnip = require("luasnip")
     require("luasnip/loaders/from_vscode").lazy_load()
 
     vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
@@ -92,6 +92,7 @@ return { -- TODO: LuaSnip completion isn't working correctly I will fix this lat
         { name = "nvim_lua" },
         { name = "calc" },
         { name = "emoji" },
+        { name = "codeium" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,

@@ -19,7 +19,7 @@ spec("plugins.lsp-config") -- Language Server Protocol file
 spec("plugins.lualine") -- Status line
 spec("plugins.luasnip") -- snippets
 spec("plugins.mini-icons") -- Icons for the status line
-spec("plugins.neotest") -- Test Runner
+spec("plugins.testing") -- Test Runner (neotest, codium)
 spec("plugins.none-ls") -- Language Server Protocol file
 spec("plugins.nvim-ts-autotag") -- Autotags
 spec("plugins.nvim-autopairs") -- Auto pairs

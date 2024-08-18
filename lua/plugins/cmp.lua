@@ -51,7 +51,7 @@ return { -- TODO: LuaSnip completion isn't working correctly I will fix this lat
         },
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<C-CR>"] = cmp.mapping.confirm { select = true },
+        ["<C-y>"] = cmp.mapping.confirm { select = true },
         ["<C-l>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()

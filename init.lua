@@ -26,6 +26,7 @@ spec("plugins.nvim-autopairs") -- Auto pairs
 spec("plugins.nvim-web-devicons") -- webdev icons
 spec("plugins.obsidian") -- Markdown viewer for obsidian vault
 spec("plugins.oil") -- File tree
+spec("plugins.tailwind-tools") -- Tailwind support
 spec("plugins.telekasten") -- Zetelkasten support for wikilinks
 spec("plugins.telescope") -- Fuzzy finder
 spec("plugins.treesitter") -- Syntax highlighting

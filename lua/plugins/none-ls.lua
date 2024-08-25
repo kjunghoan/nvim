@@ -22,7 +22,6 @@ return { -- Currently debugging diagnostics
         -- Diagnostics
         -- doesn't work without require for some reason
         require("none-ls.diagnostics.eslint_d"), -- JavaScript linter
-        require("none-ls.diagnostics.stylua"), -- lua linter
 
         -- Code Actions
         nb.code_actions.eslint_d, -- JavaScript code actions

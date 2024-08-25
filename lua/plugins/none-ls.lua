@@ -1,37 +1,36 @@
 return { -- Currently debugging diagnostics
   "nvimtools/none-ls.nvim",
   dependencies = {
-    "nvim-lua/plenary.nvim"
+    "nvim-lua/plenary.nvim",
+    "nvimtools/none-ls-extras.nvim",
   },
   config = function()
     -- print ("loading null-ls conf")
     local null_ls = require("null-ls")
     local nb = null_ls.builtins
-    null_ls.setup(
-      {
+    null_ls.setup({
+      sources = {
         -- Formatting
-        -- nb.formatting.stylua,   -- Lua formatter
-
-        -- nb.formatting.black,    -- Python formatter
-        nb.formatting.ruff,     -- Python formatter (civic tech DC)
-        nb.formatting.isort,    -- Python import formatter
-        
-        -- nb.formatting.sonarlint, -- JavaScript formatter
-        nb.formatting.prettier,  -- JavaScript formatter
+        nb.formatting.prettier, -- JavaScript formatter
+        nb.formatting.black, -- Python formatter
+        nb.formatting.isort, -- Python import formatter
+        nb.formatting.stylua, -- Lua formatter
+        nb.formatting.yamlfmt, -- YAML formatter
+        nb.formatting.shfmt, -- Shellscript formatter
+        -- nb.formatting.ruff,     -- Python formatter (civic tech DC)
 
         -- Diagnostics
-        -- nb.diagnostics.stylua, -- Lua diagnostics
-        -- nb.diagnostics.eslint_d, -- EsLint diagnostics
+        -- doesn't work without require for some reason
+        require("none-ls.diagnostics.eslint_d"), -- JavaScript linter
+        require("none-ls.diagnostics.stylua"), -- lua linter
 
+        -- Code Actions
+        nb.code_actions.eslint_d, -- JavaScript code actions
+        
         -- Completion
-        nb.completion.spell,    -- Spell checker
+        nb.completion.spell, -- Spell checker
         -- debug = true
-
-      }
-    )
-    local wk = require("which-key")
-    wk.register {
-      ["<leader>bf"] = { vim.lsp.buf.format, "Format Buffer", { mode = "n" } },
-    }
-  end
+      },
+    })
+  end,
 }

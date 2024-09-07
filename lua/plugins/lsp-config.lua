@@ -39,6 +39,7 @@ return {
         typos_lsp = {}, -- Spell check language server
         vtsls = {}, -- Vue language server
         yamlls = {}, -- YAML language server
+        jdtls = {}, -- Java language server
       }
 
       for server, config in pairs(servers) do

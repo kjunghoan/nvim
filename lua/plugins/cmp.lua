@@ -92,7 +92,7 @@ return { -- TODO: LuaSnip completion isn't working correctly I will fix this lat
         { name = "nvim_lua" },
         { name = "calc" },
         { name = "emoji" },
-        { name = "codeium" },
+        -- { name = "codeium" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,

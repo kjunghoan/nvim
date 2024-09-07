@@ -63,7 +63,7 @@ return { -- my current plugin
         -- Text Related Prompts
         Summarize = "Please summarize the following text",
         Spelling = "Please correct any spelling or grammatical errors in the following text",
-        Wording = "Please imporve the wording and grammar of the following text",
+        Wording = "Please improve the wording and grammar of the following text",
         Consistency = "Please ensure that the following text is consistent in style and tone",
         Conciseness = "Please rewrite the following text to be more concise",
       },

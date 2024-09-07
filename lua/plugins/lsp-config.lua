@@ -35,7 +35,7 @@ return {
         pylsp = {}, -- Python language server
         pyright = {}, -- Python language server
         tailwindcss = {}, -- Tailwind CSS language server
-        tsserver = {}, -- TypeScript language server
+        ts_ls = {}, -- TypeScript language server
         typos_lsp = {}, -- Spell check language server
         vtsls = {}, -- Vue language server
         yamlls = {}, -- YAML language server

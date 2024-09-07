@@ -23,7 +23,7 @@ spec("plugins.testing") -- Test Runner (neotest, codium)
 spec("plugins.none-ls") -- Language Server Protocol file
 spec("plugins.nvim-ts-autotag") -- Autotags
 spec("plugins.nvim-autopairs") -- Auto pairs
-spec("plugins.nvim-jdtls") -- Java Language Server
+spec("plugins.nvim-java") -- Java Language Server
 spec("plugins.nvim-web-devicons") -- webdev icons
 spec("plugins.obsidian") -- Markdown viewer for obsidian vault
 spec("plugins.oil") -- File tree

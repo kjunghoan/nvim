@@ -39,7 +39,40 @@ return {
         typos_lsp = {}, -- Spell check language server
         vtsls = {}, -- Vue language server
         yamlls = {}, -- YAML language server
-        jdtls = {}, -- Java language server
+        jdtls = { -- Java language server
+          settings = {
+            java = {
+              configuration = {
+                runtimes = {
+                  {
+                    name = "JavaSE-17",
+                    path = "/usr/lib/jvm/java-17-openjdk",
+                  },
+                },
+              },
+              project = {
+                referencedLibraries = {
+                  "/home/kjunghoan/.local/share/lombok/lombok.jar",
+                },
+              },
+              jdt = {
+                ls = {
+                  lombokSupport = true,
+                },
+              },
+              enabled = true,
+              signatureHelp = { enabled = true },
+              contentProvider = { preferred = "fernflower" },
+              implementationsCodeLens = { enabled = true },
+              referencesCodeLens = { enabled = true },
+            },
+          },
+          init_options = {
+            bundles = {
+              vim.fn.glob("/home/kjunghoan/.local/share/lombok/lombok.jar"),
+            },
+          },
+        },
       }
 
       for server, config in pairs(servers) do

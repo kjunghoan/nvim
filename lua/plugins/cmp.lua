@@ -15,6 +15,10 @@ return {
       local luasnip = require("luasnip")
 
       cmp.setup({
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
+        native_menu = false,
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -46,13 +50,31 @@ return {
       })
 
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      -- Command line completion setup
       cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
+        completion = { completeopt = "menu,menuone,noselect" },
+        mapping = {
+          ["<Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              cmp.complete()
+            end
+          end),
+          ["<S-Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.select_prev_item()
+            end
+          end),
+          ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item()),
+          ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item()),
+          ["<C-e>"] = cmp.mapping(cmp.mapping.abort()),
+          ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = true })),
+        },
+        sources = {
           { name = "cmdline" },
-        }),
+          { name = "path" },
+        },
       })
     end,
   },

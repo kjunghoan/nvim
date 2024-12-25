@@ -58,19 +58,17 @@ return {
 
     -- Set up which-key mappings
     local wk = require("which-key")
-    wk.register({ -- TODO WK spec
-      t = {
-        name = "Test",
-        t = { "<cmd>lua require('neotest').run.run()<cr>", "Run Nearest" },
-        f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run File" },
-        d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Test" },
-        s = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
-        a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach" },
-        o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Open Output" },
-        p = { "<cmd>lua require('neotest').output_panel.toggle()<cr>", "Toggle Output Panel" },
-        w = { "<cmd>lua require('neotest').watch.toggle()<cr>", "Toggle Watch" },
-        l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last" },
-      },
-    }, { prefix = "<leader>" })
+    wk.add({
+      { "<leader>t", group = "Test" },
+      { "<leader>ta", "<cmd>lua require('neotest').run.attach()<cr>", desc = "Attach" },
+      { "<leader>td", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Debug Test" },
+      { "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Run File" },
+      { "<leader>tl", "<cmd>lua require('neotest').run.run_last()<cr>", desc = "Run Last" },
+      { "<leader>to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", desc = "Open Output" },
+      { "<leader>tp", "<cmd>lua require('neotest').output_panel.toggle()<cr>", desc = "Toggle Output Panel" },
+      { "<leader>ts", "<cmd>lua require('neotest').run.stop()<cr>", desc = "Stop" },
+      { "<leader>tt", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run Nearest" },
+      { "<leader>tw", "<cmd>lua require('neotest').watch.toggle()<cr>", desc = "Toggle Watch" },
+    })
   end,
 }

@@ -19,8 +19,11 @@ vo.laststatus = 2 -- Always show the status line
 vo.showcmd = true -- Show the command being typed
 vo.scrolloff = 10 -- Keep 10 lines above and below the cursor
 vim.opt.clipboard = "unnamedplus" -- Use the system clipboard
--- look into lemonade (https://github.com/pocke/lemonade) TODO
+-- look into lemonade (https://github.com/pocke/lemonade) TODO maybe not the answer
 vim.opt.updatetime = 300 -- Faster completion
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wildoptions = "pum"
+vim.opt.wildmenu = true
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes" -- always show the sign column
@@ -35,6 +38,8 @@ function ToggleWrap()
   end
 end
 
+-- passing python through
+vim.g.python3_host_prog = vim.fn.expand('~/.config/nvim/venv/neovim/bin/python3')
 -- Indentation and Tab Settings
 vo.autoindent = true -- Automatically indent new lines to the same level as the previous line
 vo.smartindent = true -- Automatically insert indentation in some cases (e.g., after `{`)
@@ -59,14 +64,13 @@ vo.writebackup = false -- Don't create a backup before overwriting a file
 vo.swapfile = false -- Don't use swap files
 
 -- Mouse Settings
-vo.mouse = "a" -- Enable mouse support in all modes (TODO)
+vo.mouse = "a" -- To Enable mouse uncomment the "a" (TODO)
 
 -- Timeout Settings
 vo.ttimeoutlen = 10 -- Wait indefinitely for key codes
 vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
 
--- Editor Settings
--- vo.rocks.hererocks = 0 TODO figure out how to remove.
+
 
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode
@@ -79,3 +83,5 @@ vo.undofile = true -- Save undo history to a file
 -- disable provider
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.rocks_nvim = false
+vim.g.loaded_rocks = 1

@@ -52,26 +52,26 @@ return {
 
     -- Add which-key mappings for formatting
     local wk = require("which-key")
-    wk.register({ -- TODO wk spec
-      l = {
-        name = "LSP",
-        f = {
-          function()
-            vim.lsp.buf.format()
-          end,
-          "Format Buffer",
-        },
-        i = {
-          function()
-            local null_ls = require("null-ls")
-            local sources = null_ls.get_sources({ name = "isort" })
-            if sources and #sources > 0 then
-              vim.lsp.buf.format({ sources = sources })
-            end
-          end,
-          "Format Imports",
-        },
+    wk.add({
+      { "<leader>l", group = "LSP" },
+      {
+        "<leader>lf",
+        function()
+          vim.lsp.buf.format()
+        end,
+        desc = "Format Buffer",
       },
-    }, { prefix = "<leader>" })
+      {
+        "<leader>li",
+        function()
+          local null_ls = require("null-ls")
+          local sources = null_ls.get_sources({ name = "isort" })
+          if sources and #sources > 0 then
+            vim.lsp.buf.format({ sources = sources })
+          end
+        end,
+        desc = "Format Imports",
+      },
+    })
   end,
 }

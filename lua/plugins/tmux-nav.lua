@@ -18,11 +18,35 @@ return {
 
       -- Register keybindings with which-key
       local wk = require("which-key")
-      wk.register({ -- TODO: wk spec
-        ["<C-h>"] = { nvim_tmux.NvimTmuxNavigateLeft, "Navigate Left" },
-        ["<C-j>"] = { nvim_tmux.NvimTmuxNavigateDown, "Navigate Down" },
-        ["<C-k>"] = { nvim_tmux.NvimTmuxNavigateUp, "Navigate Up" },
-        ["<C-l>"] = { nvim_tmux.NvimTmuxNavigateRight, "Navigate Right" },
+      wk.add({
+        {
+          "<C-h>",
+          function()
+            require("nvim-tmux-navigation").NvimTmuxNavigateLeft()
+          end,
+          desc = "Navigate Left",
+        },
+        {
+          "<C-j>",
+          function()
+            require("nvim-tmux-navigation").NvimTmuxNavigateDown()
+          end,
+          desc = "Navigate Down",
+        },
+        {
+          "<C-k>",
+          function()
+            require("nvim-tmux-navigation").NvimTmuxNavigateUp()
+          end,
+          desc = "Navigate Up",
+        },
+        {
+          "<C-l>",
+          function()
+            require("nvim-tmux-navigation").NvimTmuxNavigateRight()
+          end,
+          desc = "Navigate Right",
+        },
       })
     end,
   },
@@ -60,14 +84,18 @@ return {
 
       -- Terminal keybindings
       local wk = require("which-key")
-      wk.register({ -- TODO wk spec
-        ["<leader>t"] = {
-          name = "Terminal",
-          g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-          f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-          h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-          v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+      wk.add({ -- TODO wk spec
+        { "<leader>t", group = "Terminal" },
+        {
+          "<leader>tg",
+          function()
+            _LAZYGIT_TOGGLE()
+          end,
+          desc = "Lazygit",
         },
+        { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float" },
+        { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal" },
+        { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical" },
       })
     end,
   },

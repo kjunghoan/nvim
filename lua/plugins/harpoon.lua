@@ -9,17 +9,15 @@ return {
     harpoon:setup()
 
     local wk = require("which-key")
-    wk.register({ -- TODO wk spec
-      h = {
-        name = "Harpoon",
-        a = { function() harpoon:list():add() end, "Add File" },
-        e = { function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "Toggle Menu" },
-        ["1"] = { function() harpoon:list():select(1) end, "File 1" },
-        ["2"] = { function() harpoon:list():select(2) end, "File 2" },
-        ["3"] = { function() harpoon:list():select(3) end, "File 3" },
-        ["4"] = { function() harpoon:list():select(4) end, "File 4" },
-      }
-    }, { prefix = "<leader>" })
+    wk.add({
+      { "<leader>h", group = "Harpoon" },
+      { "<leader>ha", function() harpoon:list():add() end, desc = "Add File" },
+      { "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Toggle Menu" },
+      { "<leader>h1", function() harpoon:list():select(1) end, desc = "File 1" },
+      { "<leader>h2", function() harpoon:list():select(2) end, desc = "File 2" },
+      { "<leader>h3", function() harpoon:list():select(3) end, desc = "File 3" },
+      { "<leader>h4", function() harpoon:list():select(4) end, desc = "File 4" },
+    })
 
     -- Additional navigation keymaps if you want them
     vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)

@@ -29,82 +29,90 @@ return {
         automatic_installation = true,
       })
 
-      -- Register base LSP keymaps
       local wk = require("which-key")
-      wk.register({ -- TODO: change to newer which-key spec
-        l = {
-          name = "LSP",
-          f = {
-            function()
-              vim.lsp.buf.format()
-            end,
-            "Format",
-          },
-          a = {
-            function()
-              vim.lsp.buf.code_action()
-            end,
-            "Code Action",
-          },
-          r = {
-            function()
-              vim.lsp.buf.rename()
-            end,
-            "Rename",
-          },
-          s = {
-            function()
-              vim.lsp.buf.signature_help()
-            end,
-            "Signature Help",
-          },
-          d = {
-            function()
-              vim.lsp.buf.definition()
-            end,
-            "Go to Definition",
-          },
-          t = {
-            function()
-              vim.lsp.buf.type_definition()
-            end,
-            "Type Definition",
-          },
-          h = {
-            function()
-              vim.lsp.buf.hover()
-            end,
-            "Hover",
-          },
-          i = {
-            function()
-              vim.lsp.buf.implementation()
-            end,
-            "Implementation",
-          },
-          l = {
-            function()
-              vim.diagnostic.open_float()
-            end,
-            "Line Diagnostics",
-          },
+      wk.add({
+        { "<leader>l", group = "LSP" },
+        {
+          "<leader>lf",
+          function()
+            vim.lsp.buf.format()
+          end,
+          desc = "Format",
         },
-      }, { prefix = "<leader>" })
-
-      -- Diagnostic keymaps
-      wk.register({ -- TODO: change to newer which-key spec
-        ["[d"] = {
+        {
+          "<leader>la",
+          function()
+            vim.lsp.buf.code_action()
+          end,
+          desc = "Code Action",
+        },
+        {
+          "<leader>lr",
+          function()
+            vim.lsp.buf.rename()
+          end,
+          desc = "Rename",
+        },
+        {
+          "<leader>ls",
+          function()
+            vim.lsp.buf.signature_help()
+          end,
+          desc = "Signature Help",
+        },
+        {
+          "<leader>ld",
+          function()
+            vim.lsp.buf.definition()
+          end,
+          desc = "Go to Definition",
+        },
+        {
+          "<leader>lt",
+          function()
+            vim.lsp.buf.type_definition()
+          end,
+          desc = "Type Definition",
+        },
+        {
+          "<leader>lh",
+          function()
+            vim.lsp.buf.hover()
+          end,
+          desc = "Hover",
+        },
+        {
+          "<leader>li",
+          function()
+            vim.lsp.buf.implementation()
+          end,
+          desc = "Implementation",
+        },
+        {
+          "<leader>ll",
+          function()
+            vim.diagnostic.open_float()
+          end,
+          desc = "Line Diagnostics",
+        },
+        -- Diagnostic keymaps
+        {
+          "[d",
           function()
             vim.diagnostic.goto_prev()
           end,
-          "Previous Diagnostic",
+          desc = "Previous Diagnostic",
         },
-        ["]d"] = {
+        {
+          "]d",
           function()
             vim.diagnostic.goto_next()
           end,
-          "Next Diagnostic",
+          desc = "Next Diagnostic",
         },
+        -- LSP selector
+        { "<leader>ls", group = "LSP Select" },
+        { "<leader>lss", select_lsp_server, desc = "Select LSP Server" },
       })
 
       -- LSP selector function
@@ -141,21 +149,6 @@ return {
           end
         end)
       end
-
-      -- Register LSP selector
-      wk.register({ -- TODO: change to newer which-key spec
-        l = {
-          s = {
-            name = "LSP Select",
-            s = {
-              function()
-                select_lsp_server()
-              end,
-              "Select LSP Server",
-            },
-          },
-        },
-      }, { prefix = "<leader>" })
     end,
   },
 }

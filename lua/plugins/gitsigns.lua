@@ -7,18 +7,18 @@ return {
       local icons = require("icons")
 
       local wk = require("which-key")
-      wk.register({ -- TODO Change to new wk spec
-        ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
-        ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
-        ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-        ["<leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-        ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
-        ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        ["<leader>gu"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-        ["<leader>gd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
+      wk.add({
+        { "<leader>g", group = "Git" },
+        { "<leader>gj", function() require('gitsigns').next_hunk({navigation_message = false}) end, desc = "Next Hunk" },
+        { "<leader>gk", function() require('gitsigns').prev_hunk({navigation_message = false}) end, desc = "Prev Hunk" },
+        { "<leader>gp", function() require('gitsigns').preview_hunk() end, desc = "Preview Hunk" },
+        { "<leader>gr", function() require('gitsigns').reset_hunk() end, desc = "Reset Hunk" },
+        { "<leader>gl", function() require('gitsigns').toggle_current_line_blame() end, desc = "Toggle Blame" },
+        { "<leader>gR", function() require('gitsigns').reset_buffer() end, desc = "Reset Buffer" },
+        { "<leader>gs", function() require('gitsigns').stage_hunk() end, desc = "Stage Hunk" },
+        { "<leader>gu", function() require('gitsigns').undo_stage_hunk() end, desc = "Undo Stage Hunk" },
+        { "<leader>gd", function() vim.cmd('Gitsigns diffthis HEAD') end, desc = "Git Diff" },
       })
-
       require("gitsigns").setup({
         signs = {
           add = {

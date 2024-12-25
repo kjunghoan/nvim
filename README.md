@@ -1,19 +1,25 @@
 # kjunghoan's nvim config
 
-## Dependencies
+This repo should be placed in ~/.config/nvim and requires a few dependencies to be installed.
 
-### Required
+## Dependencies
 
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [a valid node version](https://github.com/nvm-sh/nvm)
+- [mason](https://github.com/williamboman/mason.nvim)
+
+## Things to add / change
+- Debugging configuration for Java
+- Test runner integration
+- Spring Boot specific features (like autowiring support, application.properties completion)
+- Add test runner configurations
+- figure out if I can safely remove luarocks
 
 ## Configured Languages
 
 - go
-- php
 - luarocks
 - java
-- javac
 - julia
 - ruby
 

@@ -1,14 +1,13 @@
--- gitsigns, vim-fugitive, lazygit
 return {
   {
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",
     cmd = "Gitsigns",
     config = function()
-      local icons = require "icons"
+      local icons = require("icons")
 
-      local wk = require "which-key"
-      wk.register {
+      local wk = require("which-key")
+      wk.register({ -- TODO Change to new wk spec
         ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
         ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
         ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
@@ -18,9 +17,9 @@ return {
         ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
         ["<leader>gu"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
         ["<leader>gd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
-      }
+      })
 
-      require("gitsigns").setup {
+      require("gitsigns").setup({
         signs = {
           add = {
             text = icons.ui.BoldLineMiddle,
@@ -53,29 +52,10 @@ return {
           row = 0,
           col = 1,
         },
-      }
-    end
+      })
+    end,
   },
   {
-    "tpope/vim-fugitive"
+    "tpope/vim-fugitive",
   },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
-  }
 }

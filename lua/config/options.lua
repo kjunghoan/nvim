@@ -18,7 +18,8 @@ vo.splitright = true -- Put new windows right of current
 vo.laststatus = 2 -- Always show the status line
 vo.showcmd = true -- Show the command being typed
 vo.scrolloff = 10 -- Keep 10 lines above and below the cursor
-vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard
+vim.opt.clipboard = "unnamedplus" -- Use the system clipboard
+-- look into lemonade (https://github.com/pocke/lemonade) TODO
 vim.opt.updatetime = 300 -- Faster completion
 -- Colorscheme
 vo.termguicolors = true
@@ -27,7 +28,6 @@ vo.colorcolumn = "80" -- highlight the 80th column
 vo.list = true -- show invisible characters
 -- Toggle line wrapping function
 function ToggleWrap()
----@diagnostic disable-next-line: undefined-field
   if vo.wrap:get() then
     vo.wrap = false
   else
@@ -35,39 +35,38 @@ function ToggleWrap()
   end
 end
 
-
 -- Indentation and Tab Settings
-vo.autoindent = true      -- Automatically indent new lines to the same level as the previous line
-vo.smartindent = true     -- Automatically insert indentation in some cases (e.g., after `{`)
-vo.expandtab = true       -- Convert tabs to spaces
-vo.tabstop = 2            -- Number of spaces that a <Tab> in the file counts for
-vo.softtabstop = 2        -- Number of spaces that a <Tab> key press counts for while editing
-vo.shiftwidth = 2         -- Number of spaces to use for each step of (auto)indent
-vo.smarttab = true        -- Insert 'tabstop' number of spaces when pressing <Tab> in front of a line
-
+vo.autoindent = true -- Automatically indent new lines to the same level as the previous line
+vo.smartindent = true -- Automatically insert indentation in some cases (e.g., after `{`)
+vo.expandtab = true -- Convert tabs to spaces
+vo.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+vo.softtabstop = 2 -- Number of spaces that a <Tab> key press counts for while editing
+vo.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vo.smarttab = true -- Insert 'tabstop' number of spaces when pressing <Tab> in front of a line
 
 -- Search Settings
-vo.hlsearch = true        -- Highlight search results
-vo.incsearch = true       -- Incremental search
-vo.ignorecase = true      -- Ignore case when searching
-vo.smartcase = true       -- Override 'ignorecase' if the search pattern contains uppercase characters
-vo.wrapscan = true        -- Searches wrap around the end of the file
+vo.hlsearch = true -- Highlight search results
+vo.incsearch = true -- Incremental search
+vo.ignorecase = true -- Ignore case when searching
+vo.smartcase = true -- Override 'ignorecase' if the search pattern contains uppercase characters
+vo.wrapscan = true -- Searches wrap around the end of the file
 vo.wildignore:append({ ".git", "node_modules", "vendor" }) -- Ignore these directories when searching
 vo.path:append("**") -- Search in the current directory and its subdirectories
 
 -- Backup and Swap Files
-vo.backup = false         -- Don't create backup files
-vo.writebackup = false    -- Don't create a backup before overwriting a file
-vo.swapfile = false       -- Don't use swap files
+vo.backup = false -- Don't create backup files
+vo.writebackup = false -- Don't create a backup before overwriting a file
+vo.swapfile = false -- Don't use swap files
 
 -- Mouse Settings
-vo.mouse = "a"            -- Enable mouse support in all modes (TODO)
+vo.mouse = "a" -- Enable mouse support in all modes (TODO)
 
 -- Timeout Settings
-vo.ttimeoutlen = 10        -- Wait indefinitely for key codes
-vo.timeoutlen = 300        -- Time in milliseconds to wait for a key code
+vo.ttimeoutlen = 10 -- Wait indefinitely for key codes
+vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
 
 -- Editor Settings
+-- vo.rocks.hererocks = 0 TODO figure out how to remove.
 
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode

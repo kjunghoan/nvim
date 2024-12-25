@@ -2,141 +2,92 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      {'nvim-lua/plenary.nvim'},
+      "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
-        lazy = true
+        lazy = true,
       },
-      {'nvim-telescope/telescope-project.nvim'}
+      "nvim-telescope/telescope-project.nvim",
     },
     config = function()
-      local wk = require("which-key")
-      wk.register {
-        ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-        ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-        ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-        ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.project.project{}<cr>", "Projects" },
-        ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "Grep" },
-        ["<leader>fs"] = { "<cmd>Telescope grep_string<cr>", "Grep String" },
-        ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-        ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-        ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
-        ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-      }
+      local actions = require("telescope.actions")
 
-      local icons = require "icons"
-      local actions = require "telescope.actions"
-      require'telescope'.load_extension('project')
-      require("telescope").setup {
+      require("telescope").setup({
         defaults = {
-          prompt_prefix = icons.ui.Telescope .. " ",
-          selection_caret = icons.ui.Forward .. " ",
-          entry_prefix = "   ",
-          initial_mode = "insert",
-          selection_strategy = "reset",
           path_display = { "smart" },
-          color_devicons = true,
-          vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--hidden",
-            "--glob=!.git/",
+          sorting_strategy = "ascending",
+          layout_config = {
+            horizontal = {
+              prompt_position = "top",
+              preview_width = 0.55,
+            },
+            vertical = {
+              mirror = false,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
           },
           mappings = {
             i = {
-              ["<C-n>"] = actions.cycle_history_next,
-              ["<C-p>"] = actions.cycle_history_prev,
-
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
+              ["<C-n>"] = actions.cycle_history_next,
+              ["<C-p>"] = actions.cycle_history_prev,
             },
             n = {
-              ["<esc>"] = actions.close,
-              ["j"] = actions.move_selection_next,
-              ["k"] = actions.move_selection_previous,
               ["q"] = actions.close,
             },
           },
         },
         pickers = {
-          live_grep = {
-            theme = "dropdown",
-          },
-          grep_string = {
-            theme = "dropdown",
-          },
           find_files = {
             theme = "dropdown",
-            previewer = true,
+            previewer = true, -- Changed to true to show previewer
+            hidden = true,
+          },
+          live_grep = {
+            theme = "dropdown",
+            previewer = true, -- Ensure previewer is enabled for live_grep
           },
           buffers = {
             theme = "dropdown",
             previewer = false,
             initial_mode = "normal",
-            mappings = {
-              i = {
-                ["<C-d>"] = actions.delete_buffer,
-              },
-              n = {
-                ["dd"] = actions.delete_buffer,
-              },
-            },
           },
+        },
+      })
 
-          planets = {
-            show_pluto = true,
-            show_moon = true,
-          },
-          colorscheme = {
-            enable_preview = true,
-          },
-          lsp_references = {
-            theme = "dropdown",
-            initial_mode = "normal",
-          },
-          lsp_definitions = {
-            theme = "dropdown",
-            initial_mode = "normal",
-          },
-          lsp_declarations = {
-            theme = "dropdown",
-            initial_mode = "normal",
-          },
-          lsp_implementations = {
-            theme = "dropdown",
-            initial_mode = "normal",
-          },
-        },
-        extensions = {
-          fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-          },
-        },
-      }
+      -- Load extensions
+      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("project")
+
+      -- Add which-key mappings
+      local wk = require("which-key")
+      wk.add({
+        { "<leader>f", group = "Find" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+        { "<leader>fp", "<cmd>Telescope project<cr>", desc = "Projects" },
+        { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+        { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Find String" },
+      })
     end,
   },
   {
-    'nvim-telescope/telescope-ui-select.nvim',
+    "nvim-telescope/telescope-ui-select.nvim",
     config = function()
-      require("telescope").setup {
+      require("telescope").setup({
         extensions = {
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-            }
-          }
-        }
-      }
+            require("telescope.themes").get_dropdown(),
+          },
+        },
+      })
       require("telescope").load_extension("ui-select")
     end,
-  }
+  },
 }

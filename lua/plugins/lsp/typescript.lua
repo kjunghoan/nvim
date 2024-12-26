@@ -13,20 +13,35 @@ return {
 
       -- TypeScript specific keymaps
       local function on_attach(client, bufnr)
+        print("TypeScript LSP attaching to buffer", bufnr)
+        print("Client name:", client.name)
+        print("Root dir:", client.config.root_dir)
+        
         local wk = require("which-key")
         wk.add({
-          { "<leader>ts", group = "TypeScript" },
-          { "<leader>tsi", "<cmd>TypescriptAddMissingImports<cr>", desc = "Add Missing Imports", buffer = bufnr },
-          { "<leader>tso", "<cmd>TypescriptOrganizeImports<cr>", desc = "Organize Imports", buffer = bufnr },
-          { "<leader>tsf", "<cmd>TypescriptFixAll<cr>", desc = "Fix All", buffer = bufnr },
-          { "<leader>tsr", "<cmd>TypescriptRenameFile<cr>", desc = "Rename File", buffer = bufnr },
+          { "<leader>lyti", function() client.request("_typescript.addMissingImports", { vim.api.nvim_buf_get_name(0) }) end, desc = "Add Missing Imports" },
+          { "<leader>lyto", function() client.request("_typescript.organizeImports", { vim.api.nvim_buf_get_name(0) }) end, desc = "Organize Imports" },
+          { "<leader>lytf", function() client.request("_typescript.fixAll", { vim.api.nvim_buf_get_name(0) }) end, desc = "Fix All" },
+          { "<leader>lytr", function() vim.lsp.buf.rename() end, desc = "Rename" },
         })
+        
+        print("TypeScript LSP keymaps registered for buffer", bufnr)
       end
 
-      -- Enhanced TypeScript config using ts_ls
+      -- Enhanced TypeScript config using typescript-language-server
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+        single_file_support = true,
+        priority = 100,  -- Higher priority than other LSPs
+        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+        init_options = {
+          hostInfo = "neovim",
+          preferences = {
+            importModuleSpecifierPreference = "relative",
+          },
+        },
         settings = {
           typescript = {
             inlayHints = {

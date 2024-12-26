@@ -17,6 +17,7 @@ spec("plugins.lsp.init") -- Language Server Protocol file
 spec("plugins.lsp.java") -- Java
 
 -- Other plugins
+spec("plugins.copilot") -- Github copilot
 spec("plugins.neotest") -- Test Runner
 spec("plugins.lazygit") -- Git integrations
 spec("plugins.gitsigns") -- Git diff on the side

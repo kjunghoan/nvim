@@ -19,58 +19,18 @@ return {
 
       -- Custom attach function for Java
       local function on_attach(client, bufnr)
-        -- Register keybindings
         local wk = require("which-key")
-        wk.register({ -- TODO: change to new whichkey spec
-          j = {
-            name = "Java",
-            i = {
-              function()
-                require("jdtls").organize_imports()
-              end,
-              "Organize Imports",
-            },
-            t = {
-              function()
-                require("jdtls").test_class()
-              end,
-              "Test Class",
-            },
-            n = {
-              function()
-                require("jdtls").test_nearest_method()
-              end,
-              "Test Method",
-            },
-            v = {
-              name = "Extract Variable",
-              n = {
-                function()
-                  require("jdtls").extract_variable()
-                end,
-                "Extract Variable (normal)",
-              },
-              v = {
-                function()
-                  require("jdtls").extract_variable_all()
-                end,
-                "Extract Variable (visual)",
-              },
-            },
-            c = {
-              function()
-                require("jdtls").extract_constant()
-              end,
-              "Extract Constant",
-            },
-            m = {
-              function()
-                require("jdtls").extract_method()
-              end,
-              "Extract Method",
-            },
-          },
-        }, { prefix = "<leader>", buffer = bufnr })
+        wk.add({
+          { "<leader>lyji", function() require("jdtls").organize_imports() end, desc = "Organize Imports" },
+          { "<leader>lyjt", function() require("jdtls").test_class() end, desc = "Test Class" },
+          { "<leader>lyjn", function() require("jdtls").test_nearest_method() end, desc = "Test Method" },
+          { "<leader>lyjc", function() require("jdtls").extract_constant() end, desc = "Extract Constant" },
+          { "<leader>lyjm", function() require("jdtls").extract_method() end, desc = "Extract Method" },
+          -- Variable extraction submenu
+          { "<leader>lyjv", group = "Extract Variable" },
+          { "<leader>lyjvn", function() require("jdtls").extract_variable() end, desc = "Extract Variable (normal)" },
+          { "<leader>lyjvv", function() require("jdtls").extract_variable_all() end, desc = "Extract Variable (visual)" },
+        })
       end
 
       -- Function to find root directory

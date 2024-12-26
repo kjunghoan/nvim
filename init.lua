@@ -12,9 +12,6 @@ spec("plugins.cmp")
 
 -- Language Server Protocols
 spec("plugins.lsp") -- Language Server Protocol file
-spec("plugins.lsp.typescript") -- TypeScript/JavaScript
-spec("plugins.lsp.init") -- Language Server Protocol file
-spec("plugins.lsp.java") -- Java
 
 -- Other plugins
 spec("plugins.copilot") -- Github copilot

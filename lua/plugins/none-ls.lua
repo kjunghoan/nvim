@@ -8,7 +8,7 @@ return {
     local null_ls = require("null-ls")
     local nb = null_ls.builtins
     local eslint = require("none-ls.diagnostics.eslint_d")
-    local ruff = require("none-ls.diagnostics.ruff")  -- Import ruff from extras
+    local ruff = require("none-ls.diagnostics.ruff")
 
     -- Helper function to check if a command is available
     local function is_available(command)

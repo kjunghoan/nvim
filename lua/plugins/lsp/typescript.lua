@@ -4,14 +4,11 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   opts = function()
-    -- Add additional capabilities supported by nvim-cmp
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     return {
-      -- Server configurations
       servers = {
-        -- TypeScript configuration
-        tsserver = {
+        ts_ls = {
           capabilities = capabilities,
           filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
           root_dir = require("lspconfig.util").root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
@@ -38,11 +35,9 @@ return {
             },
           },
           on_attach = function(client, bufnr)
-            -- Disable formatting from tsserver if using prettier
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
 
-            -- TypeScript specific keymaps
             local opts = { noremap = true, silent = true, buffer = bufnr }
             vim.keymap.set("n", "<leader>lyt", function()
               vim.lsp.buf.execute_command({
@@ -53,12 +48,11 @@ return {
           end,
         },
 
-        -- ESLint configuration
         eslint = {
           capabilities = capabilities,
           settings = {
             workingDirectory = { mode = "auto" },
-            format = false, -- Disable formatting since we're using prettier
+            format = false,
             packageManager = "npm",
             eslint = {
               enable = true,
@@ -73,5 +67,6 @@ return {
         },
       },
     }
+    -- TODO: Add deno
   end,
 }

@@ -25,12 +25,11 @@ return {
           "ts_ls",
           "gopls",
           "jdtls",
-          "ruff",  -- Added for Python
+          "ruff",
         },
         automatic_installation = true,
       })
 
-      -- LSP selector function (define before we use it)
       local function select_lsp_server()
         local servers = require("mason-lspconfig").get_installed_servers()
         local current_ft = vim.bo.filetype
@@ -65,7 +64,6 @@ return {
         end)
       end
 
-      -- Set up which-key mappings
       local wk = require("which-key")
       wk.register({
         ["<leader>l"] = {

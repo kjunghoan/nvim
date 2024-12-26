@@ -44,12 +44,12 @@ return {
         pickers = {
           find_files = {
             theme = "dropdown",
-            previewer = true, -- Changed to true to show previewer
+            previewer = true,
             hidden = true,
           },
           live_grep = {
             theme = "dropdown",
-            previewer = true, -- Ensure previewer is enabled for live_grep
+            previewer = true,
           },
           buffers = {
             theme = "dropdown",
@@ -59,11 +59,9 @@ return {
         },
       })
 
-      -- Load extensions
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("project")
 
-      -- Add which-key mappings
       local wk = require("which-key")
       wk.add({
         { "<leader>f", group = "Find" },

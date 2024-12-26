@@ -33,7 +33,6 @@ return {
       },
     })
 
-    -- Add which-key mappings in the new format
     local wk = require("which-key")
     wk.add({
       { "<leader>p", group = "Project/Plugins" },

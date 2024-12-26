@@ -1,3 +1,4 @@
+-- TODO: Update python path in neotest-python adapter
 return {
   "nvim-neotest/neotest",
   dependencies = {

@@ -4,10 +4,9 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     dependencies = {
-      "zbirenbaum/copilot-cmp"
+      "zbirenbaum/copilot-cmp",
     },
     config = function()
-      -- First, map Space-c to do nothing to prevent the default behavior
       vim.keymap.set("n", "<leader>c", "<Nop>", { silent = true })
 
       require("copilot").setup({
@@ -36,16 +35,14 @@ return {
         },
       })
 
-      -- Set up copilot-cmp integration
       require("copilot_cmp").setup()
 
-      -- Add which-key bindings for Copilot after clearing the mapping
       local wk = require("which-key")
       wk.add({
         { "<leader>c", group = "Copilot" },
         { "<leader>ct", "<cmd>Copilot toggle<cr>", desc = "Toggle Copilot" },
-        { "<leader>cp", "<cmd>Copilot panel<cr>", desc = "Open Panel" }, -- Added panel command
-        { "<leader>cs", "<cmd>Copilot status<cr>", desc = "Check Status" }, -- Added status command
+        { "<leader>cp", "<cmd>Copilot panel<cr>", desc = "Open Panel" },
+        { "<leader>cs", "<cmd>Copilot status<cr>", desc = "Check Status" },
       })
     end,
   },

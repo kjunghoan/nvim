@@ -11,10 +11,11 @@ spec("plugins.mason") -- Mason needs to load first
 spec("plugins.cmp")
 
 -- Language Server Protocols
-spec("plugins.lsp") -- Language Server Protocol file
+-- spec("plugins.lsp") -- Language Server Protocol file
+spec("plugins.lsp.init")
 spec("plugins.lsp.typescript") -- TypeScript/JavaScript
-spec("plugins.lsp.init") -- Language Server Protocol file
 spec("plugins.lsp.java") -- Java
+spec("plugins.lsp.python") -- Python
 
 -- Other plugins
 spec("plugins.copilot") -- Github copilot

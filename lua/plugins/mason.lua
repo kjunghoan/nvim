@@ -26,6 +26,7 @@ return {
         "pyright",
         "gopls",
         "jdtls",
+        "ruff"
       },
       automatic_installation = true,
     },

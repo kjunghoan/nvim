@@ -7,6 +7,8 @@ return {
   config = function()
     local null_ls = require("null-ls")
     local nb = null_ls.builtins
+    local eslint = require("none-ls.diagnostics.eslint_d")
+    local ruff = require("none-ls.diagnostics.ruff")  -- Import ruff from extras
 
     -- Helper function to check if a command is available
     local function is_available(command)
@@ -19,18 +21,41 @@ return {
       return false
     end
 
+    -- Helper to check if config file exists in root
+    local function has_file(files)
+      return function(utils)
+        return utils.root_has_file(files)
+      end
+    end
+
     -- Initialize sources table
     local sources = {}
 
-    -- Add formatters that are installed
-    if is_available("prettier") then
-      table.insert(sources, nb.formatting.prettier)
+    -- Python Configuration
+    if is_available("ruff") then
+      table.insert(sources, ruff)  -- Use the imported ruff directly
     end
     if is_available("black") then
-      table.insert(sources, nb.formatting.black)
+      table.insert(sources, nb.formatting.black.with({
+        condition = has_file({
+          "pyproject.toml",
+          "setup.cfg",
+        }),
+      }))
     end
     if is_available("isort") then
-      table.insert(sources, nb.formatting.isort)
+      table.insert(sources, nb.formatting.isort.with({
+        condition = has_file({
+          "pyproject.toml",
+          ".isort.cfg",
+          "setup.cfg",
+        }),
+      }))
+    end
+
+    -- Keep your existing formatters
+    if is_available("prettier") then
+      table.insert(sources, nb.formatting.prettier)
     end
     if is_available("stylua") then
       table.insert(sources, nb.formatting.stylua)
@@ -47,7 +72,7 @@ return {
 
     null_ls.setup({
       sources = sources,
-      -- debug = true,  -- Uncomment for debugging
+      diagnostics_format = "[#{s}] #{m}",
     })
 
     -- Add which-key mappings for formatting
@@ -64,7 +89,6 @@ return {
       {
         "<leader>li",
         function()
-          local null_ls = require("null-ls")
           local sources = null_ls.get_sources({ name = "isort" })
           if sources and #sources > 0 then
             vim.lsp.buf.format({ sources = sources })

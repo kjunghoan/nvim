@@ -74,6 +74,7 @@ return {
           a = { function() vim.lsp.buf.code_action() end, "Code Action" },
           r = { function() vim.lsp.buf.rename() end, "Rename" },
           s = { name = "LSP Select" },
+          ss= { select_lsp_server, "Select LSP Server" },
           d = { function() vim.lsp.buf.definition() end, "Go to Definition" },
           t = { function() vim.lsp.buf.type_definition() end, "Type Definition" },
           h = { function() vim.lsp.buf.hover() end, "Hover" },

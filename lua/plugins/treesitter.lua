@@ -38,7 +38,7 @@ return {
           "java",
           "python",
           "lua",
-          "go",
+          -- "go",
           "markdown",
           "markdown_inline",
           "bash",
@@ -46,6 +46,8 @@ return {
           "dockerfile",
           "gitignore",
           "query",
+          "ini",
+          "toml"
         },
 
         incremental_selection = {

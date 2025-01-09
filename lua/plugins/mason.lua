@@ -21,12 +21,12 @@ return {
     opts = {
       ensure_installed = {
         -- LSPs
-        "lua_ls",
-        "ts_ls",
-        "pyright",
-        "gopls",
-        "jdtls",
-        "ruff"
+        "lua_ls", -- for lua support
+        "ts_ls", -- for typescript support
+        "pyright", -- for python support
+        "gopls", -- for go support
+        "jdtls", -- for java support
+        "ruff" -- for ruby support
       },
       automatic_installation = true,
     },

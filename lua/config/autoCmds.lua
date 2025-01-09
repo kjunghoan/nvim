@@ -53,11 +53,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "gitcommit", "markdown", "NeogitCommitMessage" },
+-- Set filetype for .env and .dev.vars files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { ".env", ".env.*", "*.dev.vars" },
   callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
+    vim.opt_local.filetype = "sh" -- This will give us basic shell script highlighting
   end,
 })
 

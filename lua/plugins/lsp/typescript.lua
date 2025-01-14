@@ -59,11 +59,7 @@ return {
               validateOnType = true,
             },
           },
-          root_dir = require("lspconfig.util").root_pattern(
-            ".eslintrc",
-            ".eslintrc.js",
-            ".eslintrc.json"
-          ),
+          root_dir = require("lspconfig.util").root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js"),
         },
       },
     }

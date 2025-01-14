@@ -16,5 +16,9 @@ km("n", "<C-S-Down>", ":resize -2<CR>", opts)
 km("n", "<C-S-Left>", ":vertical resize +2<CR>", opts)
 km("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)
 
+-- Split windows
+km("n", "<leader>sv", ":vsplit<CR>", {noremap = true, silent = true, desc = "Split vertically"})
+km("n", "<leader>sh", ":split<CR>", {noremap = true, silent = true, desc = "Split Horizontally"})
+
 -- Wrap lines toggle
 km("n", "<leader>w", ":set wrap!<CR>", {noremap = true, silent = true, desc = "Toggle Wrap"})

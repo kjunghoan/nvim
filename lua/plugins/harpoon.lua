@@ -24,32 +24,59 @@ return {
       ["<leader>h"] = { name = "Harpoon", _ = "which_key_ignore" },
     })
 
+    -- Function to handle telescope harpoon list
+    local function toggle_telescope(harpoon_files)
+      local conf = require("telescope.config").values
+      local file_paths = {}
+      for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+          results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr, map)
+          local actions = require("telescope.actions")
+          local action_state = require("telescope.actions.state")
+
+          -- Delete harpoon mark
+          map("n", "d", function()
+            local selection = action_state.get_selected_entry()
+            local list = harpoon:list()
+            
+            -- Find the item with matching path and remove it
+            for idx, item in ipairs(list.items) do
+              if item.value == selection.value then
+                list:remove_at(idx)
+                break
+              end
+            end
+            
+            actions.close(prompt_bufnr)
+            -- Reopen telescope with updated list
+            toggle_telescope(list)
+          end)
+
+          return true
+        end
+      }):find()
+    end
+
     -- Register the keymaps
     wk.register({
       ["<leader>ha"] = {
         function()
-          harpoon:list():append()
+          harpoon:list():add()
         end,
         "Harpoon Add File"
       },
       ["<leader>he"] = {
         function()
           local conf = require("telescope.config").values
-          local function toggle_telescope(harpoon_files)
-            local file_paths = {}
-            for _, item in ipairs(harpoon_files.items) do
-              table.insert(file_paths, item.value)
-            end
-
-            require("telescope.pickers").new({}, {
-              prompt_title = "Harpoon",
-              finder = require("telescope.finders").new_table({
-                results = file_paths,
-              }),
-              previewer = conf.file_previewer({}),
-              sorter = conf.generic_sorter({}),
-            }):find()
-          end
           toggle_telescope(harpoon:list())
         end,
         "Harpoon Quick Menu"

@@ -2,7 +2,7 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     dependencies = {
       "zbirenbaum/copilot-cmp",
     },
@@ -16,7 +16,7 @@ return {
         },
         suggestion = {
           enabled = true,
-          auto_trigger = true,
+          auto_trigger = false,
           debounce = 75,
           keymap = {
             accept = "<M-S-j>",

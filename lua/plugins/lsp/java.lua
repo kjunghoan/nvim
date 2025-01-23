@@ -26,33 +26,24 @@ return {
         end
 
         local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-        local workspace_dir = vim.fn.expand("~/.cache/jdtls/workspace/") .. project_name
+        local workspace_dir = vim.fn.stdpath("data") .. "/jdtls/workspace/" .. project_name
 
         -- Main Config
-        -- Get the mason path and verify jdtls installation
-        local lombok_path =
-          "/home/kjunghoan/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar"
-        local mason_registry = require("mason-registry")
-        local jdtls_pkg = mason_registry.get_package("jdtls")
-
-        if not jdtls_pkg:is_installed() then
-          print("JDTLS is not installed. Installing...")
-          jdtls_pkg:install()
-        end
+        -- Get the mason path
+        local mason_path = vim.fn.stdpath("data") .. "/mason"
+        local jdtls_path = mason_path .. "/packages/jdtls"
 
         -- Get bundles for debugging and testing support
         local bundles = {
-          vim.fn.glob(
-            "/home/kjunghoan/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
-            1
-          ),
+          vim.fn.glob(mason_path .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 1),
         }
-        vim.list_extend(
-          bundles,
-          vim.split(vim.fn.glob("/home/kjunghoan/.local/share/nvim/mason/packages/java-test/extension/server/*.jar", 1), "\\n")
+        vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "/packages/java-test/extension/server/*.jar", 1), "\n"))
+
+        -- Find the lombok jar - adjust version as needed
+        local lombok_path = vim.fn.expand(
+          "$HOME/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar"
         )
 
-        local jdtls_path = jdtls_pkg:get_install_path()
         local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 
         if launcher_jar == "" then
@@ -68,6 +59,7 @@ return {
             "-Declipse.product=org.eclipse.jdt.ls.core.product",
             "-Dlog.protocol=true",
             "-Dlog.level=ALL",
+            "-javaagent:" .. lombok_path, -- Add Lombok support
             "-Xmx1g",
             "--add-modules=ALL-SYSTEM",
             "--add-opens",
@@ -96,6 +88,8 @@ return {
                   "org.junit.jupiter.api.Assumptions.*",
                   "org.junit.jupiter.api.DynamicContainer.*",
                   "org.junit.jupiter.api.DynamicTest.*",
+                  "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
+                  "org.springframework.test.web.servlet.result.MockMvcResultMatchers.*",
                 },
                 filteredTypes = {
                   "com.sun.*",
@@ -124,14 +118,14 @@ return {
                 runtimes = {
                   {
                     name = "JavaSE-17",
-                    path = "/home/linuxbrew/.linuxbrew/Cellar/openjdk@17/17.0.13/libexec", -- Linuxbrew Java path
+                    path = os.getenv("JAVA_HOME"),
                   },
                 },
               },
             },
           },
           init_options = {
-            bundles = {},
+            bundles = bundles,
             extendedClientCapabilities = {
               progressReportProvider = true,
               classFileContentsSupport = true,
@@ -148,6 +142,7 @@ return {
           },
         }
 
+        -- Register keybindings with which-key
         local wk = require("which-key")
         wk.register({
           ["<leader>lyj"] = {

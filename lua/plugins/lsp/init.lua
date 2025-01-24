@@ -68,24 +68,74 @@ return {
       wk.register({
         ["<leader>l"] = {
           name = "LSP",
-          f = { function() vim.lsp.buf.format() end, "Format" },
-          a = { function() vim.lsp.buf.code_action() end, "Code Action" },
-          r = { function() vim.lsp.buf.rename() end, "Rename" },
+          f = {
+            function()
+              vim.lsp.buf.format()
+            end,
+            "Format",
+          },
+          a = {
+            function()
+              vim.lsp.buf.code_action()
+            end,
+            "Code Action",
+          },
+          r = {
+            function()
+              vim.lsp.buf.rename()
+            end,
+            "Rename",
+          },
           s = { name = "LSP Select" },
-          ss= { select_lsp_server, "Select LSP Server" },
-          d = { function() vim.lsp.buf.definition() end, "Go to Definition" },
-          t = { function() vim.lsp.buf.type_definition() end, "Type Definition" },
-          h = { function() vim.lsp.buf.hover() end, "Hover" },
-          i = { function() vim.lsp.buf.implementation() end, "Implementation" },
-          l = { function() vim.diagnostic.open_float() end, "Line Diagnostics" },
+          ss = { select_lsp_server, "Select LSP Server" },
+          d = {
+            function()
+              vim.lsp.buf.definition()
+            end,
+            "Go to Definition",
+          },
+          t = {
+            function()
+              vim.lsp.buf.type_definition()
+            end,
+            "Type Definition",
+          },
+          h = {
+            function()
+              vim.lsp.buf.hover()
+            end,
+            "Hover",
+          },
+          i = {
+            function()
+              vim.lsp.buf.implementation()
+            end,
+            "Implementation",
+          },
+          l = {
+            function()
+              vim.diagnostic.open_float()
+            end,
+            "Line Diagnostics",
+          },
           y = { name = "Language Specific" },
         },
       })
 
       -- Diagnostic keymaps
       wk.register({
-        ["[d"] = { function() vim.diagnostic.goto_prev() end, "Previous Diagnostic" },
-        ["]d"] = { function() vim.diagnostic.goto_next() end, "Next Diagnostic" },
+        ["[d"] = {
+          function()
+            vim.diagnostic.goto_prev()
+          end,
+          "Previous Diagnostic",
+        },
+        ["]d"] = {
+          function()
+            vim.diagnostic.goto_next()
+          end,
+          "Next Diagnostic",
+        },
       })
     end,
   },

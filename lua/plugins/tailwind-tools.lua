@@ -3,9 +3,18 @@ return {
   "luckasRanarison/tailwind-tools.nvim",
   name = "tailwind-tools",
   build = ":UpdateRemotePlugins",
-  ft = { 
-    "css", "scss", "sass", "html", "vue", "svelte", "astro",
-    "typescript", "javascript", "typescriptreact", "javascriptreact"
+  ft = {
+    "css",
+    "scss",
+    "sass",
+    "html",
+    "vue",
+    "svelte",
+    "astro",
+    "typescript",
+    "javascript",
+    "typescriptreact",
+    "javascriptreact",
   },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
@@ -14,9 +23,18 @@ return {
   },
   opts = {
     server = {
-      filetypes = { 
-        "css", "scss", "sass", "html", "vue", "svelte", "astro",
-        "typescript", "javascript", "typescriptreact", "javascriptreact"
+      filetypes = {
+        "css",
+        "scss",
+        "sass",
+        "html",
+        "vue",
+        "svelte",
+        "astro",
+        "typescript",
+        "javascript",
+        "typescriptreact",
+        "javascriptreact",
       },
     },
   },

@@ -47,7 +47,7 @@ return {
           "gitignore",
           "query",
           "ini",
-          "toml"
+          "toml",
         },
 
         incremental_selection = {

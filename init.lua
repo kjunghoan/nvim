@@ -32,6 +32,7 @@ spec("plugins.nvim-web-devicons") -- webdev icons
 spec("plugins.obsidian") -- Markdown viewer for obsidian vault
 spec("plugins.oil") -- File tree
 spec("plugins.telescope") -- Fuzzy finder
+spec("plugins.terminal") -- Creates terminals in their own buffers
 spec("plugins.treesitter") -- Syntax highlighting
 spec("plugins.tailwind-tools") -- Tailwind support
 spec("plugins.undotree") -- Undo tree

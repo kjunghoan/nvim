@@ -38,7 +38,7 @@ return {
           -- Command for python test runner
           runner = "pytest",
           -- Python path
-          python = "python3", -- TODO update this to actual path
+          python = vim.fn.expand('~/.config/nvim/venv/neovim/bin/python3'),
         }),
         require("neotest-plenary"),
         require("neotest-vitest"),

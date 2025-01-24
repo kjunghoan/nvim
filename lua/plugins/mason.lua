@@ -26,7 +26,7 @@ return {
         "pyright", -- for python support
         "gopls", -- for go support
         "jdtls", -- for java support
-        "ruff" -- for ruby support
+        "ruff", -- for ruby support
       },
       automatic_installation = true,
     },

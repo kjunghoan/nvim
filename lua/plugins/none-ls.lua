@@ -33,24 +33,30 @@ return {
 
     -- Python Configuration
     if is_available("ruff") then
-      table.insert(sources, ruff)  -- Use the imported ruff directly
+      table.insert(sources, ruff) -- Use the imported ruff directly
     end
     if is_available("black") then
-      table.insert(sources, nb.formatting.black.with({
-        condition = has_file({
-          "pyproject.toml",
-          "setup.cfg",
-        }),
-      }))
+      table.insert(
+        sources,
+        nb.formatting.black.with({
+          condition = has_file({
+            "pyproject.toml",
+            "setup.cfg",
+          }),
+        })
+      )
     end
     if is_available("isort") then
-      table.insert(sources, nb.formatting.isort.with({
-        condition = has_file({
-          "pyproject.toml",
-          ".isort.cfg",
-          "setup.cfg",
-        }),
-      }))
+      table.insert(
+        sources,
+        nb.formatting.isort.with({
+          condition = has_file({
+            "pyproject.toml",
+            ".isort.cfg",
+            "setup.cfg",
+          }),
+        })
+      )
     end
 
     -- Keep your existing formatters

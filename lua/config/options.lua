@@ -39,7 +39,7 @@ function ToggleWrap()
 end
 
 -- passing python through
-vim.g.python3_host_prog = vim.fn.expand('~/.config/nvim/venv/neovim/bin/python3')
+vim.g.python3_host_prog = vim.fn.expand("~/.config/nvim/venv/neovim/bin/python3")
 -- Indentation and Tab Settings
 vo.autoindent = true -- Automatically indent new lines to the same level as the previous line
 vo.smartindent = true -- Automatically insert indentation in some cases (e.g., after `{`)
@@ -69,8 +69,6 @@ vo.mouse = "a" -- To Enable mouse uncomment the "a" (TODO)
 -- Timeout Settings
 vo.ttimeoutlen = 10 -- Wait indefinitely for key codes
 vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
-
-
 
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode

@@ -6,7 +6,7 @@ return {
   },
   config = function()
     local harpoon = require("harpoon")
-    
+
     -- Set up harpoon with a basic configuration
     harpoon:setup({
       settings = {
@@ -14,8 +14,8 @@ return {
         sync_on_ui_close = true,
         key = function()
           return vim.loop.cwd()
-        end
-      }
+        end,
+      },
     })
 
     -- Create a which-key prefix group for Harpoon
@@ -32,38 +32,40 @@ return {
         table.insert(file_paths, item.value)
       end
 
-      require("telescope.pickers").new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table({
-          results = file_paths,
-        }),
-        previewer = conf.file_previewer({}),
-        sorter = conf.generic_sorter({}),
-        attach_mappings = function(prompt_bufnr, map)
-          local actions = require("telescope.actions")
-          local action_state = require("telescope.actions.state")
+      require("telescope.pickers")
+        .new({}, {
+          prompt_title = "Harpoon",
+          finder = require("telescope.finders").new_table({
+            results = file_paths,
+          }),
+          previewer = conf.file_previewer({}),
+          sorter = conf.generic_sorter({}),
+          attach_mappings = function(prompt_bufnr, map)
+            local actions = require("telescope.actions")
+            local action_state = require("telescope.actions.state")
 
-          -- Delete harpoon mark
-          map("n", "d", function()
-            local selection = action_state.get_selected_entry()
-            local list = harpoon:list()
-            
-            -- Find the item with matching path and remove it
-            for idx, item in ipairs(list.items) do
-              if item.value == selection.value then
-                list:remove_at(idx)
-                break
+            -- Delete harpoon mark
+            map("n", "d", function()
+              local selection = action_state.get_selected_entry()
+              local list = harpoon:list()
+
+              -- Find the item with matching path and remove it
+              for idx, item in ipairs(list.items) do
+                if item.value == selection.value then
+                  list:remove_at(idx)
+                  break
+                end
               end
-            end
-            
-            actions.close(prompt_bufnr)
-            -- Reopen telescope with updated list
-            toggle_telescope(list)
-          end)
 
-          return true
-        end
-      }):find()
+              actions.close(prompt_bufnr)
+              -- Reopen telescope with updated list
+              toggle_telescope(list)
+            end)
+
+            return true
+          end,
+        })
+        :find()
     end
 
     -- Register the keymaps
@@ -72,39 +74,39 @@ return {
         function()
           harpoon:list():add()
         end,
-        "Harpoon Add File"
+        "Harpoon Add File",
       },
       ["<leader>he"] = {
         function()
           local conf = require("telescope.config").values
           toggle_telescope(harpoon:list())
         end,
-        "Harpoon Quick Menu"
+        "Harpoon Quick Menu",
       },
       ["<leader>h1"] = {
         function()
           harpoon:list():select(1)
         end,
-        "Harpoon File 1"
+        "Harpoon File 1",
       },
       ["<leader>h2"] = {
         function()
           harpoon:list():select(2)
         end,
-        "Harpoon File 2"
+        "Harpoon File 2",
       },
       ["<leader>h3"] = {
         function()
           harpoon:list():select(3)
         end,
-        "Harpoon File 3"
+        "Harpoon File 3",
       },
       ["<leader>h4"] = {
         function()
           harpoon:list():select(4)
         end,
-        "Harpoon File 4"
-      }
+        "Harpoon File 4",
+      },
     })
 
     -- Additional navigation keymaps

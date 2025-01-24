@@ -36,7 +36,6 @@ return {
     wk.setup(opts)
 
     local mappings = {
-      { "<leader>;", "<cmd>tabnew | terminal<CR>", desc = "Term" },
       { "<leader>T", group = "Treesitter" },
       { "<leader>a", group = "Tab" },
       { "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },
@@ -52,7 +51,7 @@ return {
       { "<leader>p", group = "Plugins" },
       { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
       { "<leader>t", group = "Test" },
-      {"<leader>s", group = "Split"},
+      { "<leader>s", group = "Split" },
     }
     wk.add(mappings)
   end,

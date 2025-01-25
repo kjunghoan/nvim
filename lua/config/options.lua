@@ -64,7 +64,7 @@ vo.writebackup = false -- Don't create a backup before overwriting a file
 vo.swapfile = false -- Don't use swap files
 
 -- Mouse Settings
-vo.mouse = "a" -- To Enable mouse uncomment the "a" (TODO)
+vo.mouse = "" -- To Enable mouse uncomment the "a" (TODO)
 
 -- Timeout Settings
 vo.ttimeoutlen = 10 -- Wait indefinitely for key codes

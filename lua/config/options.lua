@@ -19,7 +19,6 @@ vo.laststatus = 2 -- Always show the status line
 vo.showcmd = true -- Show the command being typed
 vo.scrolloff = 10 -- Keep 10 lines above and below the cursor
 vim.opt.clipboard = "unnamedplus" -- Use the system clipboard
--- look into lemonade (https://github.com/pocke/lemonade) TODO maybe not the answer
 vim.opt.updatetime = 300 -- Faster completion
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildoptions = "pum"
@@ -64,7 +63,7 @@ vo.writebackup = false -- Don't create a backup before overwriting a file
 vo.swapfile = false -- Don't use swap files
 
 -- Mouse Settings
-vo.mouse = "" -- To Enable mouse uncomment the "a" (TODO)
+vo.mouse = "" -- To Enable mouse set to "a"
 
 -- Timeout Settings
 vo.ttimeoutlen = 10 -- Wait indefinitely for key codes
@@ -73,10 +72,6 @@ vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode
 vo.undofile = true -- Save undo history to a file
-
--- Undercurl
--- vo.cmd([[let &t_Cs = "\e[4:3m"]]) -- Undercurl color
--- vo.cmd([[let &t_Ce = "\e[4:0m"]]) -- Reset undercurl color
 
 -- disable provider
 vim.g.loaded_perl_provider = 0

@@ -18,7 +18,7 @@ return {
           os_config = "mac"
         end
 
-        -- Find root directory (find .git directory)
+        -- Find root directory
         local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
         local root_dir = require("jdtls.setup").find_root(root_markers)
         if root_dir == "" then
@@ -26,10 +26,9 @@ return {
         end
 
         local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-        local workspace_dir = vim.fn.stdpath("data") .. "/jdtls/workspace/" .. project_name
+        local workspace_dir = vim.fn.expand("~/.cache/jdtls/workspace/") .. project_name
 
         -- Main Config
-        -- Get the mason path
         local mason_path = vim.fn.stdpath("data") .. "/mason"
         local jdtls_path = mason_path .. "/packages/jdtls"
 
@@ -39,7 +38,6 @@ return {
         }
         vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "/packages/java-test/extension/server/*.jar", 1), "\n"))
 
-        -- Find the lombok jar - adjust version as needed
         local lombok_path = vim.fn.expand(
           "$HOME/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar"
         )
@@ -59,19 +57,15 @@ return {
             "-Declipse.product=org.eclipse.jdt.ls.core.product",
             "-Dlog.protocol=true",
             "-Dlog.level=ALL",
-            "-javaagent:" .. lombok_path, -- Add Lombok support
+            "-javaagent:" .. lombok_path,
             "-Xmx1g",
             "--add-modules=ALL-SYSTEM",
-            "--add-opens",
-            "java.base/java.util=ALL-UNNAMED",
-            "--add-opens",
-            "java.base/java.lang=ALL-UNNAMED",
-            "-jar",
-            launcher_jar,
-            "-configuration",
-            jdtls_path .. "/config_" .. os_config,
-            "-data",
-            workspace_dir,
+            "--add-opens", "java.base/java.util=ALL-UNNAMED",
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/sun.nio.fs=ALL-UNNAMED",  -- Added for Java 21
+            "-jar", launcher_jar,
+            "-configuration", jdtls_path .. "/config_" .. os_config,
+            "-data", workspace_dir,
           },
           root_dir = root_dir,
           settings = {
@@ -117,81 +111,46 @@ return {
               configuration = {
                 runtimes = {
                   {
-                    name = "JavaSE-17",
-                    path = os.getenv("JAVA_HOME"),
-                  },
+                    name = "JavaSE-21",
+                    path = os.getenv("JAVA_HOME") .. "/libexec",
+                    default = true
+                  }
                 },
               },
             },
           },
           init_options = {
-            bundles = bundles,
-            extendedClientCapabilities = {
-              progressReportProvider = true,
-              classFileContentsSupport = true,
-              generateToStringPromptSupport = true,
-              hashCodeEqualsPromptSupport = true,
-              advancedExtractRefactoringSupport = true,
-              advancedOrganizeImportsSupport = true,
-              generateConstructorsPromptSupport = true,
-              generateDelegateMethodsPromptSupport = true,
-              moveRefactoringSupport = true,
-              overrideMethodsPromptSupport = true,
-              executeClientCommandSupport = true,
-            },
+            bundles = bundles
           },
+          capabilities = {
+            workspace = {
+              configuration = true
+            },
+            textDocument = {
+              completion = {
+                completionItem = {
+                  snippetSupport = true
+                }
+              }
+            }
+          }
         }
 
-        -- Register keybindings with which-key
+        -- Register keybindings
         local wk = require("which-key")
         wk.register({
           ["<leader>lyj"] = {
             name = "Java",
-            i = {
-              function()
-                require("jdtls").organize_imports()
-              end,
-              "Organize Imports",
-            },
-            t = {
-              function()
-                require("jdtls").test_class()
-              end,
-              "Test Class",
-            },
-            n = {
-              function()
-                require("jdtls").test_nearest_method()
-              end,
-              "Test Method",
-            },
+            i = { function() require("jdtls").organize_imports() end, "Organize Imports" },
+            t = { function() require("jdtls").test_class() end, "Test Class" },
+            n = { function() require("jdtls").test_nearest_method() end, "Test Method" },
             v = {
               name = "Extract Variable",
-              n = {
-                function()
-                  require("jdtls").extract_variable()
-                end,
-                "Extract Variable (normal)",
-              },
-              v = {
-                function()
-                  require("jdtls").extract_variable_all()
-                end,
-                "Extract Variable (visual)",
-              },
+              n = { function() require("jdtls").extract_variable() end, "Extract Variable (normal)" },
+              v = { function() require("jdtls").extract_variable_all() end, "Extract Variable (visual)" },
             },
-            c = {
-              function()
-                require("jdtls").extract_constant()
-              end,
-              "Extract Constant",
-            },
-            m = {
-              function()
-                require("jdtls").extract_method()
-              end,
-              "Extract Method",
-            },
+            c = { function() require("jdtls").extract_constant() end, "Extract Constant" },
+            m = { function() require("jdtls").extract_method() end, "Extract Method" },
           },
         })
 

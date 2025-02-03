@@ -57,21 +57,78 @@ return {
             "-Declipse.product=org.eclipse.jdt.ls.core.product",
             "-Dlog.protocol=true",
             "-Dlog.level=ALL",
-            "-javaagent:" .. lombok_path,
-            "-Xmx1g",
+            "-Xmx2g",
+            "-Xms100m",
+            "-XX:+UseParallelGC",
+            "-XX:GCTimeRatio=4",
+            "-XX:AdaptiveSizePolicyWeight=90",
+            "-Dsun.zip.disableMemoryMapping=true",
             "--add-modules=ALL-SYSTEM",
-            "--add-opens", "java.base/java.util=ALL-UNNAMED",
-            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-            "--add-opens", "java.base/sun.nio.fs=ALL-UNNAMED",  -- Added for Java 21
-            "-jar", launcher_jar,
-            "-configuration", jdtls_path .. "/config_" .. os_config,
-            "-data", workspace_dir,
+            "--add-opens=java.base/java.util=ALL-UNNAMED",
+            "--add-opens=java.base/java.lang=ALL-UNNAMED",
+            "--add-opens=java.base/sun.nio.fs=ALL-UNNAMED",
+            "--add-opens=java.base/java.io=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+            "-javaagent:" .. lombok_path,
+            "-jar",
+            launcher_jar,
+            "-configuration",
+            jdtls_path .. "/config_" .. os_config,
+            "-data",
+            workspace_dir,
           },
           root_dir = root_dir,
           settings = {
             java = {
-              signatureHelp = { enabled = true },
-              contentProvider = { preferred = "fernflower" },
+              eclipse = {
+                downloadSources = true,
+              },
+              configuration = {
+                updateBuildConfiguration = "interactive",
+                runtimes = {
+                  {
+                    name = "JavaSE-21",
+                    path = os.getenv("JAVA_HOME") .. "/libexec",
+                    default = true,
+                  },
+                },
+              },
+              maven = {
+                downloadSources = true,
+              },
+              implementationsCodeLens = {
+                enabled = true,
+              },
+              referencesCodeLens = {
+                enabled = true,
+              },
+              references = {
+                includeDecompiledSources = true,
+              },
+              format = {
+                enabled = true,
+                settings = {
+                  url = jdtls_path .. "/formatter.xml",
+                },
+              },
+              -- Specify Lombok support
+              lombok = {
+                enabled = true,
+              },
+              -- Enable annotation processing
+              compiler = {
+                annotationProcessing = {
+                  enabled = true,
+                },
+              },
+              -- Important completion settings
               completion = {
                 favoriteStaticMembers = {
                   "org.hamcrest.MatcherAssert.assertThat",
@@ -82,6 +139,7 @@ return {
                   "org.junit.jupiter.api.Assumptions.*",
                   "org.junit.jupiter.api.DynamicContainer.*",
                   "org.junit.jupiter.api.DynamicTest.*",
+                  "org.mockito.Mockito.*",
                   "org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
                   "org.springframework.test.web.servlet.result.MockMvcResultMatchers.*",
                 },
@@ -91,6 +149,12 @@ return {
                   "java.awt.*",
                   "jdk.*",
                   "sun.*",
+                },
+                importOrder = {
+                  "java",
+                  "javax",
+                  "com",
+                  "org",
                 },
               },
               sources = {
@@ -108,32 +172,76 @@ return {
                 },
                 useBlocks = true,
               },
-              configuration = {
-                runtimes = {
-                  {
-                    name = "JavaSE-21",
-                    path = os.getenv("JAVA_HOME") .. "/libexec",
-                    default = true
-                  }
+              -- Enable gradle
+              import = {
+                gradle = {
+                  enabled = true,
+                  wrapper = {
+                    enabled = true,
+                  },
+                  annotationProcessing = {
+                    enabled = true,
+                  },
+                },
+              },
+              -- Enable build tool support
+              project = {
+                referencedLibraries = {
+                  "lib/**/*.jar",
+                },
+                resourceFilters = {
+                  "node_modules",
+                  ".git",
+                  "build",
+                  ".gradle",
+                },
+              },
+              -- Enable null analysis
+              settings = {
+                java = {
+                  compile = {
+                    nullAnalysis = {
+                      mode = "automatic",
+                    },
+                  },
+                  saveActions = {
+                    organizeImports = true,
+                  },
+                  format = {
+                    enabled = true,
+                  },
                 },
               },
             },
           },
           init_options = {
-            bundles = bundles
+            bundles = bundles,
+            extendedClientCapabilities = {
+              progressReportProvider = true,
+              classFileContentsSupport = true,
+              generateToStringPromptSupport = true,
+              hashCodeEqualsPromptSupport = true,
+              advancedExtractRefactoringSupport = true,
+              advancedOrganizeImportsSupport = true,
+              generateConstructorsPromptSupport = true,
+              generateDelegateMethodsPromptSupport = true,
+              moveRefactoringSupport = true,
+              overrideMethodsPromptSupport = true,
+              executeClientCommandSupport = true,
+            },
           },
           capabilities = {
             workspace = {
-              configuration = true
+              configuration = true,
             },
             textDocument = {
               completion = {
                 completionItem = {
-                  snippetSupport = true
-                }
-              }
-            }
-          }
+                  snippetSupport = true,
+                },
+              },
+            },
+          },
         }
 
         -- Register keybindings
@@ -141,16 +249,51 @@ return {
         wk.register({
           ["<leader>lyj"] = {
             name = "Java",
-            i = { function() require("jdtls").organize_imports() end, "Organize Imports" },
-            t = { function() require("jdtls").test_class() end, "Test Class" },
-            n = { function() require("jdtls").test_nearest_method() end, "Test Method" },
+            i = {
+              function()
+                require("jdtls").organize_imports()
+              end,
+              "Organize Imports",
+            },
+            t = {
+              function()
+                require("jdtls").test_class()
+              end,
+              "Test Class",
+            },
+            n = {
+              function()
+                require("jdtls").test_nearest_method()
+              end,
+              "Test Method",
+            },
             v = {
               name = "Extract Variable",
-              n = { function() require("jdtls").extract_variable() end, "Extract Variable (normal)" },
-              v = { function() require("jdtls").extract_variable_all() end, "Extract Variable (visual)" },
+              n = {
+                function()
+                  require("jdtls").extract_variable()
+                end,
+                "Extract Variable (normal)",
+              },
+              v = {
+                function()
+                  require("jdtls").extract_variable_all()
+                end,
+                "Extract Variable (visual)",
+              },
             },
-            c = { function() require("jdtls").extract_constant() end, "Extract Constant" },
-            m = { function() require("jdtls").extract_method() end, "Extract Method" },
+            c = {
+              function()
+                require("jdtls").extract_constant()
+              end,
+              "Extract Constant",
+            },
+            m = {
+              function()
+                require("jdtls").extract_method()
+              end,
+              "Extract Method",
+            },
           },
         })
 

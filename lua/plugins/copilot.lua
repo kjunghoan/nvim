@@ -8,6 +8,13 @@ return {
   config = function()
     vim.keymap.set("n", "<leader>c", "<Nop>", { silent = true })
 
+    local suggestion = require("copilot.suggestion")
+    local suggestion_enabled = false
+    local function toggle_copilot_suggestions()
+      suggestion_enabled = not suggestion_enabled
+      suggestion.toggle_auto_trigger()
+      vim.notify("Copilot suggestions " .. (suggestion_enabled and "enabled" or "disabled"))
+    end
     require("copilot").setup({
       panel = {
         enabled = true,
@@ -39,7 +46,7 @@ return {
     local wk = require("which-key")
     wk.add({
       { "<leader>c", group = "Copilot" },
-      { "<leader>ct", "<cmd>Copilot toggle<cr>", desc = "Toggle Copilot" },
+      { "<leader>ct", toggle_copilot_suggestions, desc = "Toggle Copilot" },
       { "<leader>cp", "<cmd>Copilot panel<cr>", desc = "Open Panel" },
       { "<leader>cs", "<cmd>Copilot status<cr>", desc = "Check Status" },
     })

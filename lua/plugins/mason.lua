@@ -22,11 +22,8 @@ return {
       ensure_installed = {
         -- LSPs
         "lua_ls", -- for lua support
-        "ts_ls", -- for typescript support
-        "pyright", -- for python support
-        "gopls", -- for go support
-        "jdtls", -- for java support
-        "ruff", -- for ruby support
+        "bashls", -- for shell scripts
+        "yamlls", -- for yaml
       },
       automatic_installation = true,
     },

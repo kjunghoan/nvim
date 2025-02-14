@@ -21,11 +21,8 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "pyright",
-          "ts_ls",
-          "gopls",
-          "jdtls",
-          "ruff",
+          "bashls",
+          "yamlls"
         },
         automatic_installation = true,
       })

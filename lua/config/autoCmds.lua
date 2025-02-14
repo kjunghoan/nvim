@@ -7,15 +7,12 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = {
     "netrw",
-    "Jaq",
     "qf",
     "git",
     "help",
     "man",
     "lspinfo",
     "oil",
-    "spectre_panel",
-    "lir",
     "DressingSelect",
     "tsplayground",
     "",
@@ -58,17 +55,5 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { ".env", ".env.*", "*.dev.vars" },
   callback = function()
     vim.opt_local.filetype = "sh" -- This will give us basic shell script highlighting
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-  callback = function()
-    local status_ok, luasnip = pcall(require, "luasnip")
-    if not status_ok then
-      return
-    end
-    if luasnip.expand_or_jumpable() then
-      vim.cmd([[silent! lua require("luasnip").unlink_current()]])
-    end
   end,
 })

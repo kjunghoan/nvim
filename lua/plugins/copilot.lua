@@ -9,7 +9,7 @@ return {
     vim.keymap.set("n", "<leader>c", "<Nop>", { silent = true })
 
     local suggestion = require("copilot.suggestion")
-    local suggestion_enabled = false
+    local suggestion_enabled = true
     local function toggle_copilot_suggestions()
       suggestion_enabled = not suggestion_enabled
       suggestion.toggle_auto_trigger()
@@ -21,8 +21,8 @@ return {
         auto_refresh = true,
       },
       suggestion = {
-        enabled = false,
-        auto_trigger = false,
+        enabled = true,
+        auto_trigger = true,
         debounce = 75,
         keymap = {
           accept = "<M-S-j>",

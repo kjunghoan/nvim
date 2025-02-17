@@ -15,6 +15,7 @@ spec("plugins.cmp")
 spec("plugins.lsp") -- Language Server Protocol file
 
 -- Other plugins
+spec("plugins.snacks") -- Image viewer
 spec("plugins.copilot") -- Github copilot
 spec("plugins.neotest") -- Test Runner
 spec("plugins.lazygit") -- Git integrations

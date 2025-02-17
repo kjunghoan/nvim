@@ -16,6 +16,7 @@ spec("plugins.lsp") -- Language Server Protocol file
 
 -- Other plugins
 spec("plugins.gitsigns") -- Git diff on the side
+spec("plugins.none-ls") -- Language Server Protocol file
 spec("plugins.indent-blankline") -- indents blank lines when pressing tab
 spec("plugins.lualine") -- Status line
 spec("plugins.mini-icons") -- Icons for the status line

@@ -15,6 +15,8 @@ spec("plugins.cmp")
 spec("plugins.lsp") -- Language Server Protocol file
 
 -- Other plugins
+spec("plugins.snacks") -- image viewer
+spec("plugins.himalaya") -- email client
 spec("plugins.gitsigns") -- Git diff on the side
 spec("plugins.none-ls") -- Language Server Protocol file
 spec("plugins.indent-blankline") -- indents blank lines when pressing tab

@@ -72,3 +72,4 @@ vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode
 vo.undofile = true                          -- Save undo history to a file
+vo.spelllang = {"en", "ko"}

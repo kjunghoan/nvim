@@ -23,8 +23,10 @@ vim.opt.updatetime = 300          -- Faster completion
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildoptions = "pum"
 vim.opt.wildmenu = true
+
 -- Colorscheme
 vo.termguicolors = true
+vo.background = "dark" -- ensures dark theme
 vo.signcolumn = "yes" -- always show the sign column
 vo.colorcolumn = "80" -- highlight the 80th column
 vo.list = true        -- show invisible characters

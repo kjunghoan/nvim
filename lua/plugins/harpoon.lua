@@ -17,104 +17,32 @@ return {
         end,
       },
     })
-
-    -- Create a which-key prefix group for Harpoon
-    local wk = require("which-key")
-    wk.register({
-      ["<leader>h"] = { name = "Harpoon", _ = "which_key_ignore" },
-    })
-
-    -- Function to handle telescope harpoon list
-    local function toggle_telescope(harpoon_files)
-      local conf = require("telescope.config").values
-      local file_paths = {}
-      for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      require("telescope.pickers")
-        .new({}, {
-          prompt_title = "Harpoon",
-          finder = require("telescope.finders").new_table({
-            results = file_paths,
-          }),
-          previewer = conf.file_previewer({}),
-          sorter = conf.generic_sorter({}),
-          attach_mappings = function(prompt_bufnr, map)
-            local actions = require("telescope.actions")
-            local action_state = require("telescope.actions.state")
-
-            -- Delete harpoon mark
-            map("n", "d", function()
-              local selection = action_state.get_selected_entry()
-              local list = harpoon:list()
-
-              -- Find the item with matching path and remove it
-              for idx, item in ipairs(list.items) do
-                if item.value == selection.value then
-                  list:remove_at(idx)
-                  break
-                end
-              end
-
-              actions.close(prompt_bufnr)
-              -- Reopen telescope with updated list
-              toggle_telescope(list)
-            end)
-
-            return true
-          end,
-        })
-        :find()
+    
+    -- Custom function to mark file with notification
+    local function mark_file()
+      harpoon:list():add()
+      vim.notify("󱡅  Marked file")
     end
 
-    -- Register the keymaps
-    wk.register({
-      ["<leader>ha"] = {
-        function()
-          harpoon:list():add()
-        end,
-        "Harpoon Add File",
-      },
-      ["<leader>he"] = {
-        function()
-          local conf = require("telescope.config").values
-          toggle_telescope(harpoon:list())
-        end,
-        "Harpoon Quick Menu",
-      },
-      ["<leader>h1"] = {
-        function()
-          harpoon:list():select(1)
-        end,
-        "Harpoon File 1",
-      },
-      ["<leader>h2"] = {
-        function()
-          harpoon:list():select(2)
-        end,
-        "Harpoon File 2",
-      },
-      ["<leader>h3"] = {
-        function()
-          harpoon:list():select(3)
-        end,
-        "Harpoon File 3",
-      },
-      ["<leader>h4"] = {
-        function()
-          harpoon:list():select(4)
-        end,
-        "Harpoon File 4",
-      },
-    })
-
-    -- Additional navigation keymaps
-    vim.keymap.set("n", "<C-S-P>", function()
+    -- Set up keymaps
+    local keymap = vim.keymap.set
+    local opts = { noremap = true, silent = true }
+    
+    -- Mark file with Shift+M
+    keymap("n", "<S-m>", mark_file, opts)
+    
+    -- Toggle quick menu with Tab
+    keymap("n", "<TAB>", function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end, opts)
+    
+    -- Navigation keymaps - kept from your current config
+    keymap("n", "<C-S-P>", function()
       harpoon:list():prev()
-    end)
-    vim.keymap.set("n", "<C-S-N>", function()
+    end, opts)
+    
+    keymap("n", "<C-S-N>", function()
       harpoon:list():next()
-    end)
+    end, opts)
   end,
 }

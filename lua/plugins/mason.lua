@@ -24,7 +24,7 @@ return {
         "lua_ls", -- for lua support
         "bashls", -- for shell scripts
         "yamlls", -- for yaml
-        "markdown_oxide" -- for md files
+        "ltex" -- for grammar and spelling
       },
       automatic_installation = true,
     },

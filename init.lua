@@ -13,6 +13,7 @@ spec("plugins.cmp")
 -- Language Server Protocols
 
 spec("plugins.lsp") -- Language Server Protocol file
+spec("plugins.ltex") -- Grammar and spell checker
 
 -- Other plugins
 spec("plugins.snacks") -- image viewer

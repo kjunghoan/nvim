@@ -1,0 +1,3 @@
+{"rule":"TOO_LONG_SENTENCE","sentence":"^\\QAnother example of this can be seen at [0110-Balanced-Binary-Tree] where the return is based on if the current execution context's node (the argument) is a node or not (could also be null if a tree node is the leaf (or end of the branch))\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q[2025-03-02] [2025-03-04] [alki-main]\nStandups:\\E$"}
+{"rule":"MISSING_PAST_TENSE","sentence":"^\\QNo Real updates for this week and last week.\\E$"}

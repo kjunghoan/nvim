@@ -69,7 +69,6 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "markdown",
       callback = function()
-        vim.opt_local.wrap = true
         vim.opt_local.spell = true
         vim.opt_local.conceallevel = 1 -- Set conceallevel for markdown files
       end,

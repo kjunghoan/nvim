@@ -26,15 +26,19 @@ return {
               },
             },
           },
-          root_dir = require("lspconfig.util").root_pattern(
-            "pyproject.toml",
-            "setup.py",
-            "setup.cfg",
-            "requirements.txt",
-            "Pipfile",
-            "pyrightconfig.json",
-            ".git"
-          ),
+          root_dir = function(fname)
+            local util = require("lspconfig.util")
+            local project_root =
+              util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git")(fname)
+
+            if project_root == nil then
+              if fname:match("%.py$") then
+                return util.path.dirname(fname)
+              end
+            end
+
+            return project_root
+          end,
         },
 
         -- Ruff configuration
@@ -42,23 +46,38 @@ return {
           capabilities = capabilities,
           init_options = {
             settings = {
-              -- Ruff settings
               ruff = {
                 lint = {
-                  -- Enable Ruff's formatter
                   enable = true,
                 },
                 format = {
-                  -- Defer to black for formatting
-                  enable = false,
+                  -- Allow formatting even in non-project directories
+                  enable = true,
                 },
               },
             },
           },
-          on_attach = function(client, _)
-            -- Disabled formatting from ruff-lsp since we're using black
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
+          -- Also enable formatting from ruff-lsp when in non-project directories
+          on_attach = function(client, bufnr)
+            -- Remove this line to enable formatting from ruff-lsp
+            -- client.server_capabilities.documentFormattingProvider = false
+            -- client.server_capabilities.documentRangeFormattingProvider = false
+
+            vim.keymap.set("n", "<leader>lf", function()
+              vim.lsp.buf.format({ bufnr = bufnr })
+            end, { buffer = bufnr, desc = "Format buffer with LSP" })
+          end,
+          root_dir = function(fname)
+            local util = require("lspconfig.util")
+            local project_root = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git")(fname)
+
+            if project_root == nil then
+              if fname:match("%.py$") then
+                return util.path.dirname(fname)
+              end
+            end
+
+            return project_root
           end,
         },
       },

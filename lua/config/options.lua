@@ -18,16 +18,38 @@ vo.splitright = true -- Put new windows right of current
 vo.laststatus = 2 -- Always show the status line
 vo.showcmd = true -- Show the command being typed
 vo.scrolloff = 10 -- Keep 10 lines above and below the cursor
-vim.opt.clipboard = "unnamedplus" -- Use the system clipboard
-vim.opt.updatetime = 300 -- Faster completion
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildoptions = "pum"
-vim.opt.wildmenu = true
+vo.wildmode = "longest:full,full"
+vo.wildoptions = "pum"
+vo.wildmenu = true
+
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes" -- always show the sign column
 vo.colorcolumn = "80" -- highlight the 80th column
 vo.list = true -- show invisible characters
+
+-- Clipboard configuration with SSH support
+-- Check if we're in an SSH session
+local is_ssh = os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil
+
+if is_ssh then
+  -- Use OSC 52 clipboard when in SSH
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy,
+      ['*'] = require('vim.ui.clipboard.osc52').copy,
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste,
+      ['*'] = require('vim.ui.clipboard.osc52').paste,
+    },
+  }
+else
+  -- Use system clipboard normally
+  vim.opt.clipboard = "unnamedplus"
+end
+
 -- Toggle line wrapping function
 function ToggleWrap()
   if vo.wrap:get() then

@@ -21,17 +21,22 @@ return {
       return false
     end
 
-    -- Helper to check if config file exists in root
-    local function has_file(files)
+    local function has_file(files, default_value)
+      default_value = default_value or false
       return function(utils)
-        return utils.root_has_file(files)
+        local has_files = utils.root_has_file(files)
+        if has_files then
+          return true
+        else
+          return default_value
+        end
       end
     end
 
     -- Initialize sources table
     local sources = {}
 
-    -- Python Configuration
+    -- Python Configuration - now with options to work outside projects
     if is_available("ruff") then
       table.insert(sources, ruff) -- Use the imported ruff directly
     end
@@ -39,10 +44,11 @@ return {
       table.insert(
         sources,
         nb.formatting.black.with({
+          -- Always true to work in any directory with Python files
           condition = has_file({
             "pyproject.toml",
             "setup.cfg",
-          }),
+          }, true), -- Set default to true
         })
       )
     end
@@ -50,11 +56,12 @@ return {
       table.insert(
         sources,
         nb.formatting.isort.with({
+          -- Always true to work in any directory with Python files
           condition = has_file({
             "pyproject.toml",
             ".isort.cfg",
             "setup.cfg",
-          }),
+          }, true), -- Set default to true
         })
       )
     end

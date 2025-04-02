@@ -18,11 +18,12 @@ vo.splitright = true -- Put new windows right of current
 vo.laststatus = 2 -- Always show the status line
 vo.showcmd = true -- Show the command being typed
 vo.scrolloff = 10 -- Keep 10 lines above and below the cursor
-vim.opt.clipboard = "unnamedplus" -- Use the system clipboard
-vim.opt.updatetime = 300 -- Faster completion
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildoptions = "pum"
-vim.opt.wildmenu = true
+vo.clipboard = "unnamedplus" -- Use the system clipboard
+vo.updatetime = 300 -- Faster completion
+vo.wildmode = "longest:full,full"
+vo.wildoptions = "pum"
+vo.wildmenu = true
+vo.winborder = "single"
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes" -- always show the sign column

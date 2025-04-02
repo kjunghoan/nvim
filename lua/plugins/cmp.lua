@@ -1,3 +1,4 @@
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy" }
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -39,6 +40,10 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
+        window = {
+          completion = { border = vim.o.winborder or "rounded" },
+          documentation = { border = vim.o.winborder or "rounded" },
+        },
       })
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

@@ -14,19 +14,13 @@ return {
 
       -- Configure treesitter
       treesitter.setup({
-        -- Enable syntax highlighting
+        -- Enable syntax highlighting (now async by default in 0.11)
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
         },
-
-        -- Enable indentation
         indent = { enable = true },
-
-        -- Enable autotagging (w/ nvim-ts-autotag plugin)
         autotag = { enable = true },
-
-        -- Ensure these language parsers are installed
         ensure_installed = {
           "json",
           "javascript",
@@ -53,21 +47,20 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "gnn", -- set to `false` to disable one of the mappings
-            node_incremental = "grn",
+            init_selection = "gnn", 
+            node_incremental = "grn", 
             scope_incremental = "grc",
             node_decremental = "grm",
           },
         },
-
-        -- Enable nvim-ts-context-commentstring
+        
         context_commentstring = {
           enable = true,
           enable_autocmd = false,
         },
       })
 
-      -- Add which-key mappings
+      -- Which-key mappings remain the same
       local wk = require("which-key")
       wk.add({
         { "<leader>T", group = "Treesitter" },

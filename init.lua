@@ -4,6 +4,7 @@ require("config.options")
 require("config.globalKeymaps")
 require("config.autoCmds")
 
+
 spec("colorscheme.ayu") -- Your colorscheme
 
 -- Must load first
@@ -11,7 +12,7 @@ spec("plugins.mason") -- Mason needs to load first
 spec("plugins.cmp")
 
 -- Language Server Protocols
-
+spec("config.lsp_setup")
 spec("plugins.lsp") -- Language Server Protocol file
 
 -- Other plugins

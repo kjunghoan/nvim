@@ -1,3 +1,4 @@
+-- https://github.com/epwalsh/obsidian.nvim
 return {
   "epwalsh/obsidian.nvim",
   version = "*",

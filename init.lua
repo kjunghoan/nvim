@@ -12,6 +12,7 @@ spec("colorscheme.ayu") -- Your colorscheme
 spec("config.lsp_setup")
 
 -- Other plugins
+spec("plugins.blinkcmp") -- Completions written in rust
 spec("plugins.gitsigns") -- Git diff on the side
 spec("plugins.tmux-nav") -- Tmux navigation
 spec("plugins.lualine") -- Status line

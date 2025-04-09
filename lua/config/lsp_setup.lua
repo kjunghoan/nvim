@@ -32,6 +32,7 @@ return {
     vim.lsp.enable({
       'lua_ls',    -- Lua
       'pyright',   -- Python
+      'pylsp',     -- Python
       'ts_ls',     -- TypeScript/JavaScript
       'bashls',    -- Bash
       'yamlls',    -- YAML

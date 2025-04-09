@@ -6,7 +6,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
-      "windwp/nvim-ts-autotag",
+      -- "windwp/nvim-ts-autotag",
     },
     config = function()
       -- Import nvim-treesitter plugin

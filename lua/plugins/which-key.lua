@@ -23,7 +23,7 @@ return {
         g = true,
       },
     },
-    window = {
+    win = {
       border = "rounded",
       position = "bottom",
       padding = { 1, 1, 1, 1 },
@@ -36,7 +36,6 @@ return {
     wk.setup(opts)
 
     local mappings = {
-      { "<leader>T", group = "Treesitter" },
       { "<leader>a", group = "Tab" },
       { "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },
       { "<leader>ah", "<cmd>-tabmove<cr>", desc = "Move Left" },
@@ -45,12 +44,8 @@ return {
       { "<leader>ao", "<cmd>tabonly<cr>", desc = "Only" },
       { "<leader>b", group = "Buffers" },
       { "<leader>d", group = "Debug" },
-      { "<leader>f", group = "Find" },
-      { "<leader>g", group = "Git" },
       { "<leader>h", "<cmd>nohlsearch<CR>", desc = "NOHL" },
-      { "<leader>p", group = "Plugins" },
       { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
-      { "<leader>t", group = "Test" },
       { "<leader>s", group = "Split" },
     }
     wk.add(mappings)

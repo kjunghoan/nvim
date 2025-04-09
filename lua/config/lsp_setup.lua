@@ -1,9 +1,7 @@
 -- lua/config/lsp_setup.lua
 return {
   "neovim/nvim-lspconfig",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-  },
+  dependencies = {},
   config = function()
     -- Configure diagnostics
     vim.diagnostic.config({
@@ -13,18 +11,18 @@ return {
       update_in_insert = false,
       severity_sort = true,
       float = { 
-        border = vim.o.winborder or "rounded"
+        border = vim.o.winborder or "single"
       }
     })
     
     -- Set up border for floating windows
-    vim.o.winborder = "rounded"
+    vim.o.winborder = "single"
     
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if client and client:supports_method('textDocument/completion') then
-          -- set this up to test sometimes but going to generally use cmp
+          -- set this up to test sometimes but going to generally use cmp :TODO: setup blinkcmp
           vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
         end
       end,

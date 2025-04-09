@@ -10,10 +10,6 @@ km("", "<Space>", "<Nop>", opts)
 km("v", "J", ":m '>+1<CR>gv=gv")
 km("v", "K", ":m '<-2<CR>gv=gv")
 
--- Move cursor left and right in insert mode
-km("i", "<C-l>", "<Right>", opts)
-km("i", "<C-h>", "<Left>", opts)
-
 -- Resize panes with arrows
 km("n", "<C-S-Up>", ":resize +2<CR>", opts)
 km("n", "<C-S-Down>", ":resize -2<CR>", opts)

@@ -27,7 +27,7 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<leader>p", group = "Project/Plugins" },
+      { "<leader>p", group = "Oil" },
       { "<leader>pv", "<cmd>Oil<cr>", desc = "Oil Explorer" },
       { "<leader>pf", "<cmd>Oil --float<cr>", desc = "Oil Float" },
     })

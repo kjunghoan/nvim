@@ -1,22 +1,23 @@
 -- lsp/pyright.lua
+-- type checking
 return {
   cmd = { 'pyright-langserver', '--stdio' },
-  root_markers = { 
-    'pyproject.toml', 
-    'setup.py', 
-    'setup.cfg', 
-    'requirements.txt', 
-    'Pipfile', 
-    '.git' 
-  },
   filetypes = { 'python' },
+  root_markers = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    '.git'
+  },
   settings = {
     python = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = "workspace",
         useLibraryCodeForTypes = true,
-        typeCheckingMode = "basic",
+        typeCheckingMode = "standard",
       },
     },
   },

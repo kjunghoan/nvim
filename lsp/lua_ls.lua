@@ -1,12 +1,17 @@
 return {
   cmd = { "lua-language-server" },
-  root_markets = { ".git", ".luarc.json", ".luacheckrc" },
   filetypes = { "lua" },
+  root_markets = {
+    ".git",
+    ".luarc.json",
+    ".luacheckrc",
+    ".stylua.toml",
+    "stylua.toml"
+  },
   settings = {
     Lua = {
       runtime = {
         version = "LuaJIT",
-        
       },
       diagnostics = {
         globals = { "vim" },

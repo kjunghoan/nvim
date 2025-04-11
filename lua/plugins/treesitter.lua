@@ -48,13 +48,13 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "gnn", 
-            node_incremental = "grn", 
+            init_selection = "gnn",
+            node_incremental = "grn",
             scope_incremental = "grc",
             node_decremental = "grm",
           },
         },
-        
+
         context_commentstring = {
           enable = true,
           enable_autocmd = false,
@@ -64,11 +64,11 @@ return {
       -- Which-key mappings remain the same
       local wk = require("which-key")
       wk.add({
-        { "<leader>T", group = "Treesitter" },
+        { "<leader>T",  group = "Treesitter" },
         { "<leader>Ti", "<cmd>TSInstallInfo<cr>", desc = "Installation Info" },
-        { "<leader>Tu", "<cmd>TSUpdate<cr>", desc = "Update Parsers" },
-        { "<leader>Tl", ":TSInstall ", desc = "Install Language Parser" },
-        { "<leader>Ts", ":TSInstallSync ", desc = "Sync Parsers" },
+        { "<leader>Tu", "<cmd>TSUpdate<cr>",      desc = "Update Parsers" },
+        { "<leader>Tl", ":TSInstall ",            desc = "Install Language Parser" },
+        { "<leader>Ts", ":TSInstallSync ",        desc = "Sync Parsers" },
       })
     end,
   },

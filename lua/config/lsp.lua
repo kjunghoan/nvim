@@ -11,10 +11,8 @@ vim.diagnostic.config({
 
 -- Global LSP key mappings
 vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = "Open Float Diagnostic" })
-vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ direction = "prev", count = 1 }) end,
-  { desc = "Previous Diagnostic" })
-vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ direction = "next", count = 1 }) end,
-  { desc = "Next Diagnostic" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = "Diagnostic List" })
 
 -- Define autocmd group for LSP setup
@@ -54,5 +52,5 @@ vim.lsp.enable({
   'ts_ls',   -- TypeScript/JavaScript
   'bashls',  -- Bash
   'yamlls',  -- YAML
-  'jdtls',   -- Java
+  -- 'jdtls',   -- Java this is covered by plugins/jdtls as recommended by the docs
 })

@@ -3,8 +3,6 @@ return {
   filetypes = { 'sh', 'bash', 'zsh' },
   root_markers = {
     '.git',
-    '.bashrc',
-    '.bash_profile',
     'package.json',
     '.shellcheckrc',
   },
@@ -14,14 +12,15 @@ return {
       globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
       shellcheckPath = "shellcheck",
       enableShellcheckAnalysis = true,
-      includeAllWorkspaceSymbols = true,
+      includeAllWorkspaceSymbols = false,
+      shellcheckArgs = { "--external-sources", "--severity=warning", "--shell=bash" },
       explainshellEndpoint = "" -- if I want to set up an explainshell instance
     },
   },
   single_file_support = true,
   on_attach = function(client, bufnr)
     -- formatting
-    client.server_capabililies.documentFormattingProvider = true
+    client.server_capabilities.documentFormattingProvider = true
 
     vim.keymap.set('n', '<leader>lyb', function()
       vim.lsp.buf.code_action({

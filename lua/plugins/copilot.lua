@@ -1,54 +1,30 @@
+-- https://github.com/github/copilot.vim
 return {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
+  "github/copilot.vim",
   event = "InsertEnter",
-  dependencies = {
-    "zbirenbaum/copilot-cmp",
-  },
   config = function()
-    vim.keymap.set("n", "<leader>c", "<Nop>", { silent = true })
+    -- Basic settings
+    vim.g.copilot_no_tab_map = true -- Disable tab mapping
+    vim.g.copilot_assume_mapped = true
+    vim.g.copilot_tab_fallback = ""
 
-    local suggestion = require("copilot.suggestion")
-    local suggestion_enabled = true
-    local function toggle_copilot_suggestions()
-      suggestion_enabled = not suggestion_enabled
-      suggestion.toggle_auto_trigger()
-      vim.notify("Copilot suggestions " .. (suggestion_enabled and "enabled" or "disabled"))
-    end
-    require("copilot").setup({
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-      },
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        debounce = 75,
-        keymap = {
-          accept = "<M-S-j>",
-          accept_word = "<M-S-w>",
-          accept_line = "<M-S-l>",
-          next = "<M-S-]>",
-          prev = "<M-S-[>",
-          dismiss = "<M-]>",
-        },
-      },
-      filetypes = {
-        markdown = true,
-        help = false,
-        gitcommit = true,
-        gitrebase = false,
-      },
+    -- Key mappings (customize as needed)
+    vim.keymap.set("i", "<C-M-l>", 'copilot#Accept("<CR>")', {
+      expr = true,
+      silent = true,
+      replace_keycodes = false
     })
+    vim.keymap.set("i", "<M-j>", '<Plug>(copilot-next)', {})
+    vim.keymap.set("i", "<M-k>", '<Plug>(copilot-previous)', {})
 
-    require("copilot_cmp").setup()
 
+    -- Use which-key for documentation if available
     local wk = require("which-key")
     wk.add({
-      { "<leader>c", group = "Copilot" },
-      { "<leader>ct", toggle_copilot_suggestions, desc = "Toggle Copilot" },
-      { "<leader>cp", "<cmd>Copilot panel<cr>", desc = "Open Panel" },
-      { "<leader>cs", "<cmd>Copilot status<cr>", desc = "Check Status" },
+      { "<leader>c",  group = "Copilot" },
+      { "<leader>ce", "<cmd>Copilot enable<cr>",  desc = "Enable Copilot" },
+      { "<leader>cd", "<cmd>Copilot disable<cr>", desc = "Disable Copilot" },
+      { "<leader>cs", "<cmd>Copilot status<cr>",  desc = "Copilot Status" },
     })
   end,
 }

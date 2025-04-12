@@ -1,3 +1,4 @@
+-- https://github.com/Shatur/neovim-ayu
 return {
   {
     "Shatur/neovim-ayu",
@@ -5,7 +6,7 @@ return {
     priority = 1000,
     config = function()
       require("ayu").setup({
-        mirage = true, -- Set to `true` if you want to use the mirage variant
+        mirage = true,
         overrides = {
           Normal = { bg = "None" },
           NormalFloat = { bg = "none" },

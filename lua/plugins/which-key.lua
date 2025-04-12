@@ -1,3 +1,4 @@
+-- https://github.com/mbbill/undotree
 return {
   "folke/which-key.nvim",
   event = "VimEnter",
@@ -35,24 +36,33 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
 
-    local mappings = {
-      { "<leader>T", group = "Treesitter" },
-      { "<leader>a", group = "Tab" },
-      { "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },
-      { "<leader>ah", "<cmd>-tabmove<cr>", desc = "Move Left" },
-      { "<leader>al", "<cmd>+tabmove<cr>", desc = "Move Right" },
-      { "<leader>an", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
-      { "<leader>ao", "<cmd>tabonly<cr>", desc = "Only" },
-      { "<leader>b", group = "Buffers" },
-      { "<leader>d", group = "Debug" },
-      { "<leader>f", group = "Find" },
-      { "<leader>g", group = "Git" },
-      { "<leader>h", "<cmd>nohlsearch<CR>", desc = "NOHL" },
-      { "<leader>p", group = "Plugins" },
-      { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
-      { "<leader>t", group = "Test" },
-      { "<leader>s", group = "Split" },
-    }
-    wk.add(mappings)
+    -- Register the mappings
+    wk.register({
+      ["<leader>"] = {
+        T = { name = "Treesitter" },
+        a = { name = "Tab" },
+        b = { name = "Buffers" },
+        d = { name = "Debug" },
+        f = { name = "Find" },
+        g = { name = "Git" },
+        p = { name = "Plugins" },
+        s = { name = "Split" },
+        t = { name = "Test" },
+        h = { "<cmd>nohlsearch<CR>", "NOHL" },
+        q = { "<cmd>confirm q<CR>", "Quit" },
+        w = { "<cmd>set wrap!<CR>", "Toggle Wrap" },
+      },
+      ["<leader>a"] = {
+        N = { "<cmd>tabnew %<cr>", "New Tab" },
+        h = { "<cmd>-tabmove<cr>", "Move Left" },
+        l = { "<cmd>+tabmove<cr>", "Move Right" },
+        n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
+        o = { "<cmd>tabonly<cr>", "Only" },
+      },
+      ["<leader>s"] = {
+        v = { "<cmd>vsplit<CR>", "Split vertically" },
+        h = { "<cmd>split<CR>", "Split Horizontally" },
+      },
+    })
   end,
 }

@@ -1,3 +1,4 @@
+-- https://github.com/alexghergh/nvim-tmux-navigation
 return {
   "alexghergh/nvim-tmux-navigation",
   config = function()

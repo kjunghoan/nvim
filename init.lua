@@ -15,6 +15,7 @@ spec("plugins.jdtls") -- Java-specific capabilities
 spec("plugins.snacks") -- Image processor
 spec("plugins.blinkcmp") -- Completions written in rust
 spec("plugins.copilot") -- Copilot
+spec("plugins.kulala") -- REST client
 spec("plugins.ltex_extra") -- LTeX extra features
 spec("plugins.autopairs") -- Auto pairing of brackets, quotes, etc.
 spec("plugins.gitsigns") -- Git diff on the side

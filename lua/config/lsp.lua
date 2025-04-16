@@ -52,5 +52,5 @@ vim.lsp.enable({
   'bashls',   -- Bash
   'yamlls',   -- YAML
   -- 'jdtls',   -- Java this is covered by plugins/jdtls as recommended by the docs
-  'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking
+  -- 'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking (Covered by ltex_extra plugin)
 })

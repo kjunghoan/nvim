@@ -1,0 +1,2 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QYolo v10\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QYolo v10\\E$"}

@@ -31,7 +31,7 @@ return {
     notes_subdir = "notes",
     new_notes_location = "current_dir",
     completion = {
-      blink = true,     -- Enable blink.cmp integration
+      blink = true, -- Enable blink.cmp integration
       min_chars = 2,
     },
 
@@ -76,22 +76,20 @@ return {
     })
 
     local wk = require("which-key")
-    wk.register({
-      o = {
-        name = "Obsidian",
-        n = { "<cmd>ObsidianNew<cr>", "New Note" },
-        o = { "<cmd>ObsidianOpen<cr>", "Open in Obsidian" },
-        b = { "<cmd>ObsidianBacklinks<cr>", "Show Backlinks" },
-        f = { "<cmd>ObsidianQuickSwitch<cr>", "Find Note" },
-        s = { "<cmd>ObsidianSearch<cr>", "Search Notes" },
-        t = { "<cmd>ObsidianTemplate<cr>", "Insert Template" },
-        l = { "<cmd>ObsidianLink<cr>", "Link Note" },
-        L = { "<cmd>ObsidianLinkNew<cr>", "Link New Note" },
-        p = { "<cmd>ObsidianPasteImg<cr>", "Paste Image" },
-        d = { "<cmd>ObsidianToday<cr>", "Open Today Note" },
-        y = { "<cmd>ObsidianYesterday<cr>", "Open Yesterday Note" },
-        w = { "<cmd>ObsidianWorkspace<cr>", "Switch Workspace" },
-      },
-    }, { prefix = "<leader>" })
+    wk.add({
+      { "<leader>o",  group = "Obsidian" },
+      { "<leader>oL", "<cmd>ObsidianLinkNew<cr>",     desc = "Link New Note" },
+      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Show Backlinks" },
+      { "<leader>od", "<cmd>ObsidianToday<cr>",       desc = "Open Today Note" },
+      { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find Note" },
+      { "<leader>ol", "<cmd>ObsidianLink<cr>",        desc = "Link Note" },
+      { "<leader>on", "<cmd>ObsidianNew<cr>",         desc = "New Note" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>",        desc = "Open in Obsidian" },
+      { "<leader>op", "<cmd>ObsidianPasteImg<cr>",    desc = "Paste Image" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>",      desc = "Search Notes" },
+      { "<leader>ot", "<cmd>ObsidianTemplate<cr>",    desc = "Insert Template" },
+      { "<leader>ow", "<cmd>ObsidianWorkspace<cr>",   desc = "Switch Workspace" },
+      { "<leader>oy", "<cmd>ObsidianYesterday<cr>",   desc = "Open Yesterday Note" },
+    })
   end,
 }

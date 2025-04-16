@@ -2,18 +2,18 @@
 
 Place this repo in `~/.config/nvim`.
 
-This is a personal config so I implore you to read through and make changes when forking
+This is a personal config so, I implore you to read through and make changes when forking
 
-this is also meant to work with my tmux config on macos, windows, linux, and wsl so some of the binds may be a bit odd
+This is also meant to work with my tmux config on macOS, windows, Linux, and WSL so some of the binds may be a bit odd
 
 ## TODO:
 
-- figure out whats going on with lombok support(low prio)
+- figure out what's going on with Lombok support (low priority)
 - test runner (maybe)
 - make file support (maybe)
-- go lsp (probably)
-- eslint / prettier detection (basically if one or both of those files exist in
-a project root then force the lsp to follow those)
+- go LSP (probably)
+- ESLint / prettier detection (basically if one or both of those files exist in
+a project root then force the LSP to follow those)
 
 ## Dependencies
 
@@ -24,7 +24,7 @@ a project root then force the lsp to follow those)
 
 ## Features
 
-- Intuitive keymaps with which-key integration
+- Intuitive key maps with which-key integration
 - LSP configuration for multiple languages
 - Fast file navigation with Telescope, Harpoon, and Oil
 - Git integration with gitsigns

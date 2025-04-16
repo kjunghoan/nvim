@@ -1,6 +1,6 @@
--- https://github.com/epwalsh/obsidian.nvim
+-- https://github.com/obsidian-nvim/obsidian.nvim
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*",
   lazy = true,
   ft = "markdown",
@@ -25,12 +25,13 @@ return {
         padding = 1,
       },
       -- Set markdown concealment
-      conceallevel = 1, -- Set conceallevel to 1 for better readability
+      conceallevel = 1, -- Set conceallevel for better readability
     },
 
     notes_subdir = "notes",
     new_notes_location = "current_dir",
     completion = {
+      blink = true,     -- Enable blink.cmp integration
       min_chars = 2,
     },
 
@@ -69,7 +70,6 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "markdown",
       callback = function()
-        vim.opt_local.wrap = true
         vim.opt_local.spell = true
         vim.opt_local.conceallevel = 1 -- Set conceallevel for markdown files
       end,

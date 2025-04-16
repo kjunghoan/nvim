@@ -77,7 +77,7 @@ return {
 
   -- Disable formatting via ts_ls if you prefer to use other formatters
   -- like prettier via null-ls/conform
-  on_attach = function(client, bufnr)
+  on_attach = function(_, bufnr) -- change _ to client if you want to use the client object
     -- Disable tsserver formatting if you plan to use other formatters
     -- client.server_capabilities.documentFormattingProvider = false
     -- client.server_capabilities.documentRangeFormattingProvider = false

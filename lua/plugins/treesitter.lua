@@ -66,7 +66,6 @@ return {
       -- Which-key mappings remain the same
       local wk = require("which-key")
       wk.add({
-        { "<leader>T",  group = "Treesitter" },
         { "<leader>Ti", "<cmd>TSInstallInfo<cr>", desc = "Installation Info" },
         { "<leader>Tu", "<cmd>TSUpdate<cr>",      desc = "Update Parsers" },
         { "<leader>Tl", ":TSInstall ",            desc = "Install Language Parser" },

@@ -24,11 +24,6 @@ return {
         g = true,
       },
     },
-    window = {
-      border = "rounded",
-      position = "bottom",
-      padding = { 1, 1, 1, 1 },
-    },
     show_help = false,
     show_keys = false,
   },
@@ -37,32 +32,24 @@ return {
     wk.setup(opts)
 
     -- Register the mappings
-    wk.register({
-      ["<leader>"] = {
-        T = { name = "Treesitter" },
-        a = { name = "Tab" },
-        b = { name = "Buffers" },
-        d = { name = "Debug" },
-        f = { name = "Find" },
-        g = { name = "Git" },
-        p = { name = "Plugins" },
-        s = { name = "Split" },
-        t = { name = "Test" },
-        h = { "<cmd>nohlsearch<CR>", "NOHL" },
-        q = { "<cmd>confirm q<CR>", "Quit" },
-        w = { "<cmd>set wrap!<CR>", "Toggle Wrap" },
-      },
-      ["<leader>a"] = {
-        N = { "<cmd>tabnew %<cr>", "New Tab" },
-        h = { "<cmd>-tabmove<cr>", "Move Left" },
-        l = { "<cmd>+tabmove<cr>", "Move Right" },
-        n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
-        o = { "<cmd>tabonly<cr>", "Only" },
-      },
-      ["<leader>s"] = {
-        v = { "<cmd>vsplit<CR>", "Split vertically" },
-        h = { "<cmd>split<CR>", "Split Horizontally" },
-      },
+    wk.add({
+      { "<leader>T",  group = "Treesitter" },
+      { "<leader>a",  group = "Tab" },
+      { "<leader>aN", "<cmd>tabnew %<cr>",   desc = "New Tab" },
+      { "<leader>ah", "<cmd>-tabmove<cr>",   desc = "Move Left" },
+      { "<leader>al", "<cmd>+tabmove<cr>",   desc = "Move Right" },
+      { "<leader>an", "<cmd>$tabnew<cr>",    desc = "New Empty Tab" },
+      { "<leader>ao", "<cmd>tabonly<cr>",    desc = "Only" },
+      { "<leader>f",  group = "Find" },
+      { "<leader>g",  group = "Git" },
+      { "<leader>h",  "<cmd>nohlsearch<CR>", desc = "NOHL" },
+      { "<leader>p",  group = "Oil" },
+      { "<leader>q",  "<cmd>confirm q<CR>",  desc = "Quit" },
+      { "<leader>s",  group = "Split" },
+      { "<leader>sh", "<cmd>split<CR>",      desc = "Split Horizontally" },
+      { "<leader>sv", "<cmd>vsplit<CR>",     desc = "Split vertically" },
+      { "<leader>t",  group = "Test" },
+      { "<leader>w",  "<cmd>set wrap!<CR>",  desc = "Toggle Wrap" },
     })
   end,
 }

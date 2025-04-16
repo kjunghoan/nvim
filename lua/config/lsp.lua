@@ -28,29 +28,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Buffer local mappings using which-key
     local wk = require('which-key')
-    wk.register({
-      ["<leader>l"] = {
-        name = "LSP",
-        D = { vim.lsp.buf.declaration, "Go to Declaration" },
-        d = { vim.lsp.buf.definition, "Go to Definition" },
-        i = { vim.lsp.buf.implementation, "Go to Implementation" },
-        r = { vim.lsp.buf.references, "Find References" },
-        t = { vim.lsp.buf.type_definition, "Type Definition" },
-        k = { vim.lsp.buf.hover, "Hover Documentation" },
-        K = { vim.lsp.buf.signature_help, "Signature Help" },
-        n = { vim.lsp.buf.rename, "Rename" },
-        a = { vim.lsp.buf.code_action, "Code Action" },
-        f = { function() vim.lsp.buf.format({ async = true }) end, "Format" },
-      }
+    wk.add({
+      { "<leader>l",  group = "LSP" },
+      { "<leader>lD", vim.lsp.buf.declaration,                        desc = "Go to Declaration" },
+      { "<leader>ld", vim.lsp.buf.definition,                         desc = "Go to Definition" },
+      { "<leader>li", vim.lsp.buf.implementation,                     desc = "Go to Implementation" },
+      { "<leader>lr", vim.lsp.buf.references,                         desc = "Find References" },
+      { "<leader>lt", vim.lsp.buf.type_definition,                    desc = "Type Definition" },
+      { "<leader>lk", vim.lsp.buf.hover,                              desc = "Hover Documentation" },
+      { "<leader>lK", vim.lsp.buf.signature_help,                     desc = "Signature Help" },
+      { "<leader>ln", vim.lsp.buf.rename,                             desc = "Rename" },
+      { "<leader>la", vim.lsp.buf.code_action,                        desc = "Code Action" },
+      { "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
     }, { buffer = bufnr })
   end,
 })
 
 vim.lsp.enable({
-  'lua_ls',  -- Lua
-  'pyright', -- Python
-  'ts_ls',   -- TypeScript/JavaScript
-  'bashls',  -- Bash
-  'yamlls',  -- YAML
+  'lua_ls',   -- Lua
+  'pyright',  -- Python
+  'json-lsp', -- Json
+  'ts_ls',    -- TypeScript/JavaScript
+  'bashls',   -- Bash
+  'yamlls',   -- YAML
   -- 'jdtls',   -- Java this is covered by plugins/jdtls as recommended by the docs
+  'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking
 })

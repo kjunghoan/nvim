@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 -- Set filetype for .env and .dev.vars files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { ".env", ".env.*", "*.dev.vars" },
+  pattern = { ".env", ".env.*", "*.dev.vars", "config" },
   callback = function()
     vim.opt_local.filetype = "sh" -- This will give us basic shell script highlighting
   end,

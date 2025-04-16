@@ -30,9 +30,6 @@ return {
         highlight_grey = "Comment"
       },
     })
-    -- Skip integration with cmp since we're using blink.cmp
-    -- blink.cmp doesn't have the same event API as hrsh7th/nvim-cmp
-    -- If needed, we can add compatibility later
   end
 }
 

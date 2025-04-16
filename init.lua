@@ -12,6 +12,7 @@ spec("plugins.mason")
 
 -- Other plugins
 spec("plugins.jdtls") -- Java-specific capabilities
+spec("plugins.snacks") -- Image processor
 spec("plugins.blinkcmp") -- Completions written in rust
 spec("plugins.copilot") -- Copilot
 spec("plugins.ltex_extra") -- LTeX extra features

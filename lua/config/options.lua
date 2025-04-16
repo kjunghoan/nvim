@@ -27,7 +27,7 @@ vo.winborder = "single"
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes" -- always show the sign column
-vo.colorcolumn = "80" -- highlight the 80th column
+vo.colorcolumn = "100" -- highlight the 80th column
 vo.list = true -- show invisible characters
 -- Toggle line wrapping function
 function ToggleWrap()

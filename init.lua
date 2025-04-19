@@ -23,6 +23,7 @@ spec("plugins.tmux-nav") -- Tmux navigation
 spec("plugins.lualine") -- Status line
 spec("plugins.harpoon") -- File navigation
 spec("plugins.mini-icons") -- Icons for the status line
+spec("plugins.nvim-ts-autotag") -- auto pairs
 spec("plugins.nvim-web-devicons") -- webdev icons
 spec("plugins.obsidian") -- Markdown viewer for obsidian vault
 spec("plugins.oil") -- File tree

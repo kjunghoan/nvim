@@ -21,7 +21,6 @@ return {
           additional_vim_regex_highlighting = false,
         },
         indent = { enable = true },
-        autotag = { enable = true },
 
         -- Ensure these language parsers are installed
         ensure_installed = {

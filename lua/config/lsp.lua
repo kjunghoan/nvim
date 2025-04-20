@@ -45,12 +45,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.lsp.enable({
-  'lua_ls',   -- Lua
-  'pyright',  -- Python
-  'json-lsp', -- Json
-  'ts_ls',    -- TypeScript/JavaScript
-  'bashls',   -- Bash
-  'yamlls',   -- YAML
-  -- 'jdtls',   -- Java this is covered by plugins/jdtls as recommended by the docs
+  'bashls',      -- Bash
+  'css-lsp',       -- CSS
+  'json-lsp',    -- Json
+  'lua_ls',      -- Lua
+  'pyright',     -- Python
+  'tailwindcss', -- Tailwind CSS
+  'ts_ls',       -- TypeScript/JavaScript
+  'yamlls',      -- YAML
+  -- 'jdtls',    -- Java this is covered by plugins/jdtls as recommended by the docs
   -- 'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking (Covered by ltex_extra plugin)
 })

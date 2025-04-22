@@ -49,6 +49,7 @@ vim.lsp.enable({
   'css-lsp',       -- CSS
   'json-lsp',    -- Json
   'lua_ls',      -- Lua
+  'markdown-oxide', -- markdown
   'pyright',     -- Python
   'tailwindcss', -- Tailwind CSS
   'ts_ls',       -- TypeScript/JavaScript

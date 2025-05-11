@@ -30,6 +30,8 @@ spec("plugins.oil")               -- File tree
 spec("plugins.telescope")         -- Fuzzy finder
 spec("plugins.treesitter")        -- Syntax highlighting
 spec("plugins.undotree")          -- Undo tree
+spec("plugins.vim-helm")          -- Helm syntax highlighting
+spec("plugins.vim-kubernetes")    -- Kubernetes quick commands
 spec("plugins.which-key")         -- Keybinding visualizer
 
 require("config.lazy")

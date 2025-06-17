@@ -56,12 +56,49 @@ return {
       time_format = "%H:%M",
     },
 
-    follow_url_func = function(url)
-      vim.fn.jobstart({ "open", url }) -- Mac OS
-    end,
+    -- New API for handling obsidian:// URIs
+    open = {
+      func = function(uri)
+        -- Cross-platform URI opening for obsidian:// links
+        if vim.fn.has("mac") == 1 then
+          vim.ui.open(uri, { cmd = { "open", "-a", "/Applications/Obsidian.app" } })
+        elseif vim.fn.has("unix") == 1 then
+          -- On Linux, try common Obsidian installation paths
+          local obsidian_paths = {
+            "/usr/bin/obsidian",
+            "/opt/Obsidian/obsidian",
+            "obsidian" -- fallback to PATH
+          }
+          local obsidian_cmd = nil
+          for _, path in ipairs(obsidian_paths) do
+            if vim.fn.executable(path) == 1 then
+              obsidian_cmd = path
+              break
+            end
+          end
+          if obsidian_cmd then
+            vim.fn.jobstart({ obsidian_cmd, uri })
+          else
+            -- Fallback to xdg-open if Obsidian not found
+            vim.ui.open(uri, { cmd = { "xdg-open" } })
+          end
+        elseif vim.fn.has("win32") == 1 then
+          vim.ui.open(uri, { cmd = { "start" } })
+        end
+      end,
+      app_foreground = false,
+    },
 
-    use_advanced_uri = false,
-    open_app_foreground = false,
+    -- Handle regular URLs (non-obsidian:// URIs)
+    follow_url_func = function(url)
+      if vim.fn.has("mac") == 1 then
+        vim.fn.jobstart({ "open", url })
+      elseif vim.fn.has("unix") == 1 then
+        vim.fn.jobstart({ "xdg-open", url })
+      elseif vim.fn.has("win32") == 1 then
+        vim.fn.jobstart({ "start", url })
+      end
+    end,
   },
   config = function(_, opts)
     require("obsidian").setup(opts)

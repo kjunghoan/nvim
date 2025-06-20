@@ -13,7 +13,7 @@ This is also meant to work with my tmux config on macOS, windows, Linux, and WSL
 - make file support (maybe)
 - go LSP (probably)
 - ESLint / prettier detection (basically if one or both of those files exist in
-a project root then force the LSP to follow those)
+  a project root then force the LSP to follow those)
 
 ## Dependencies
 
@@ -34,6 +34,7 @@ a project root then force the LSP to follow those)
 ## Language Support
 
 ### Configured LSP Servers
+
 - TypeScript/JavaScript (typescript-language-server)
 - Python (pyright)
 - Python linting (ruff-lsp)
@@ -43,12 +44,13 @@ a project root then force the LSP to follow those)
 - YAML (yaml-language-server)
 
 ### Utilities
+
 - Git integration
 - File browser (oil.nvim)
 - Fuzzy finding (telescope)
 - Completion (nvim-cmp)
 - Obsidian vault integration
-- Undo history visualization (undotree)
+- Undo history visualization (undo tree)
 
 ## Installation
 
@@ -56,7 +58,7 @@ a project root then force the LSP to follow those)
 2. Launch Neovim to automatically install plugins
 3. Run `:Mason` to install language servers
 
-## Keymaps
+## Key maps
 
 - `<leader>f` - Find (Telescope)
 - `<leader>p` - Project (Oil file browser)
@@ -65,5 +67,4 @@ a project root then force the LSP to follow those)
 - `<leader>h` - Clear search highlighting
 - `<leader>q` - Quit
 
-For a complete list of keymaps, press `<leader>` and wait for which-key popup.
-
+For a complete list of key maps, press `<leader>` and wait for which-key popup.

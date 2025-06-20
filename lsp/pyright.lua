@@ -1,5 +1,4 @@
 -- lsp/pyright.lua
--- type checking
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },
@@ -17,8 +16,20 @@ return {
         autoSearchPaths = true,
         diagnosticMode = "workspace",
         useLibraryCodeForTypes = true,
-        typeCheckingMode = "standard",
+        typeCheckingMode = "strict",
+        autoImportCompletions = true,
+        indexing = true,
+        packageIndexDepths = {
+          torch = 3,
+          transformers = 3,
+          numpy = 2,
+          pandas = 2,
+        },
       },
+      -- pythonPath = vim.fn.expand("~/.config/nvim/venv/neovim/bin/python3"),
     },
   },
+  -- on_attach = function(client, bufnr)
+  -- end,
+  single_file_support = true,
 }

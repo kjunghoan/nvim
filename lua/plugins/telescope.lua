@@ -61,16 +61,15 @@ return {
       })
 
       require("telescope").load_extension("fzf")
-      require("telescope").load_extension("project")
 
       local wk = require("which-key")
       wk.add({
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-        { "<leader>ft", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
-        { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-        { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
-        { "<leader>fp", "<cmd>Telescope project<cr>", desc = "Projects" },
-        { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+        { "<leader>ft", "<cmd>Telescope live_grep<cr>",   desc = "Live Grep" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>",     desc = "Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Help Tags" },
+        { "<leader>fp", "<cmd>Telescope project<cr>",     desc = "Projects" },
+        { "<leader>fr", "<cmd>Telescope oldfiles<cr>",    desc = "Recent Files" },
         { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Find String" },
       })
     end,

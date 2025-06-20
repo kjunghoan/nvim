@@ -30,30 +30,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local wk = require('which-key')
     wk.add({
       { "<leader>l",  group = "LSP" },
-      { "<leader>lD", vim.lsp.buf.declaration,                        desc = "Go to Declaration" },
-      { "<leader>ld", vim.lsp.buf.definition,                         desc = "Go to Definition" },
-      { "<leader>li", vim.lsp.buf.implementation,                     desc = "Go to Implementation" },
-      { "<leader>lr", vim.lsp.buf.references,                         desc = "Find References" },
-      { "<leader>lt", vim.lsp.buf.type_definition,                    desc = "Type Definition" },
-      { "<leader>lk", vim.lsp.buf.hover,                              desc = "Hover Documentation" },
-      { "<leader>lK", vim.lsp.buf.signature_help,                     desc = "Signature Help" },
-      { "<leader>ln", vim.lsp.buf.rename,                             desc = "Rename" },
-      { "<leader>la", vim.lsp.buf.code_action,                        desc = "Code Action" },
+      { "<leader>lD", vim.lsp.buf.declaration,                             desc = "Go to Declaration" },
+      { "<leader>ld", vim.lsp.buf.definition,                              desc = "Go to Definition" },
+      { "<leader>li", vim.lsp.buf.implementation,                          desc = "Go to Implementation" },
+      { "<leader>lr", vim.lsp.buf.references,                              desc = "Find References" },
+      { "<leader>lt", vim.lsp.buf.type_definition,                         desc = "Type Definition" },
+      { "<leader>lk", vim.lsp.buf.hover,                                   desc = "Hover Documentation" },
+      { "<leader>lK", vim.lsp.buf.signature_help,                          desc = "Signature Help" },
+      { "<leader>ln", vim.lsp.buf.rename,                                  desc = "Rename" },
+      { "<leader>la", vim.lsp.buf.code_action,                             desc = "Code Action" },
       { "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
     }, { buffer = bufnr })
   end,
 })
 
 vim.lsp.enable({
-  'bashls',      -- Bash
-  'css-lsp',       -- CSS
-  'json-lsp',    -- Json
-  'lua_ls',      -- Lua
+  'bashls',         -- Bash
+  'css-lsp',        -- CSS
+  'json-lsp',       -- Json
+  'lua_ls',         -- Lua
   'markdown-oxide', -- markdown
-  'pyright',     -- Python
-  'tailwindcss', -- Tailwind CSS
-  'ts_ls',       -- TypeScript/JavaScript
-  'yamlls',      -- YAML
+  'pyright',        -- Python
+  'ruff',           -- Python
+  'tailwindcss',    -- Tailwind CSS
+  'ts_ls',          -- TypeScript/JavaScript
+  'yamlls',         -- YAML
   -- 'jdtls',    -- Java this is covered by plugins/jdtls as recommended by the docs
   -- 'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking (Covered by ltex_extra plugin)
 })

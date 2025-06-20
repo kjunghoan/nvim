@@ -1,5 +1,6 @@
+-- lsp/ruff.lua - Updated for modern ruff server
 return {
-  cmd = { 'ruff-lsp' },
+  cmd = { 'ruff', 'server', '--preview' }, -- Changed from 'ruff-lsp'
   filetypes = { 'python' },
   root_markers = {
     'pyproject.toml',
@@ -12,23 +13,10 @@ return {
     '.git',
   },
   settings = {
-    ruff = {
-      path = "",
-      format = {
-        enabled = true,
-      },
-      lint = {
-        explanations = {
-          enabled = true,
-        },
-        args = {}
-      },
-    },
-    organizeImports = true,
-    lineLength = 88,
+    -- Ruff server settings (simplified compared to ruff-lsp)
   },
   on_attach = function(client, bufnr)
-    -- disables existing formatter so we use ruff
+    -- Enable formatting capabilities
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
 
@@ -42,4 +30,5 @@ return {
       })
     end, { buffer = bufnr, desc = "Organize Imports" })
   end,
+  single_file_support = true,
 }

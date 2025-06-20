@@ -38,10 +38,6 @@ function ToggleWrap()
   end
 end
 
--- TODO: remove once validated
--- passing python through
--- vim.g.python3_host_prog = vim.fn.expand("~/.config/nvim/venv/neovim/bin/python3")
-
 -- Indentation and Tab Settings
 vo.autoindent = true  -- Automatically indent new lines to the same level as the previous line
 vo.smartindent = true -- Automatically insert indentation in some cases (e.g., after `{`)
@@ -89,7 +85,7 @@ local function find_project_venv()
   -- First check exact common venv directory names
   local exact_names = {
     "venv",
-    ".venv", 
+    ".venv",
     "env",
     ".env",
     "virtualenv",
@@ -128,7 +124,7 @@ local function find_project_venv()
   -- Check parent directories (useful for nested project structures)
   local parent = vim.fn.fnamemodify(cwd, ':h')
   while parent ~= '/' and parent ~= vim.fn.expand('~') do
-    for _, name in ipairs(exact_names) do  -- Fixed: was venv_names, now exact_names
+    for _, name in ipairs(exact_names) do -- Fixed: was venv_names, now exact_names
       local venv_path = parent .. "/" .. name .. "/bin/python3"
       if vim.fn.executable(venv_path) == 1 then
         return venv_path

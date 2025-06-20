@@ -60,6 +60,12 @@ if ! command -v unzip &> /dev/null; then
     tools_to_install+=("unzip")
 fi
 
+# Check for ImageMagick (needed for image.nvim)
+if ! command -v convert &> /dev/null || ! command -v identify &> /dev/null; then
+    echo "ImageMagick not found, will install..."
+    tools_to_install+=("imagemagick")
+fi
+
 # Install tools if any are missing
 if [ ${#tools_to_install[@]} -gt 0 ]; then
     echo "Installing: ${tools_to_install[*]}"
@@ -72,7 +78,7 @@ fi
 echo "Checking for Mason in PATH..."
 if [[ ":$PATH:" != *":$HOME/.local/share/nvim/mason/bin:"* ]]; then
     echo "Mason not found in PATH. Adding to shell config..."
-    
+
     # Check for zshrc first
     if [[ -f "$HOME/.zshrc" ]]; then
         echo "Adding Mason to .zshrc..."
@@ -112,7 +118,7 @@ VENV_DIR="$HOME/.config/nvim/venv/neovim"
 # Check if venv directory already exists
 if [ -d "$VENV_DIR" ]; then
     echo "Neovim Python virtual environment already exists."
-    
+
     # Check if pynvim is installed and working
     if ! "$VENV_DIR/bin/python3" -c "import pynvim" 2>/dev/null; then
         echo "pynvim not found or broken in existing venv. Reinstalling..."
@@ -126,10 +132,10 @@ else
     # Create directory if it doesn't exist
     echo "Creating Neovim Python virtual environment..."
     mkdir -p "$HOME/.config/nvim/venv"
-    
+
     # Create virtual environment and install pynvim
     python3 -m venv "$VENV_DIR" && "$VENV_DIR/bin/pip" install --upgrade pip pynvim
-    
+
     if [ $? -eq 0 ]; then
         echo "Successfully created Python virtual environment and installed pynvim."
     else
@@ -148,6 +154,7 @@ echo "- fd: $(fd --version | head -1)"
 echo "- grpcurl: $(grpcurl --version 2>&1 | head -1 || echo 'installed')"
 echo "- websocat: $(websocat --version 2>&1 | head -1 || echo 'installed')"
 echo "- unzip: $(unzip -v | head -1 | awk '{print $2}' || echo 'installed')"
+echo "- ImageMagick: $(convert -version | head -1 | awk '{print $3}' || echo 'installed')"
 echo "- Node.js: $(node --version)"
 echo "- Python (venv): $("$VENV_DIR/bin/python3" --version)"
 echo ""

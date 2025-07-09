@@ -80,3 +80,25 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.bo.filetype = "helm"
   end
 })
+
+-- Makefile support
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "Makefile", "makefile", "*.mk", "*.make" },
+  callback = function()
+    vim.bo.filetype = "make"
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+
+    -- Quick make commands
+    local wk = require("which-key")
+    wk.add({
+      { "<leader>m",  group = "Make" },
+      { "<leader>mm", ":!make<CR>",         desc = "Make" },
+      { "<leader>mc", ":!make clean<CR>",   desc = "Make Clean" },
+      { "<leader>mt", ":!make test<CR>",    desc = "Make Test" },
+      { "<leader>mr", ":!make run<CR>",     desc = "Make Run" },
+      { "<leader>mi", ":!make install<CR>", desc = "Make Install" },
+      { "<leader>mb", ":!make build<CR>",   desc = "Make Build" },
+    }, { buffer = vim.api.nvim_get_current_buf() })
+  end,
+})

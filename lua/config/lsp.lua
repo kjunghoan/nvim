@@ -46,7 +46,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.lsp.enable({
   'bashls',         -- Bash
+  'pbls',           -- Buf LSP for Protocol Buffers
   'css-lsp',        -- CSS
+  'gopls',          -- Go
   'json-lsp',       -- Json
   'lua_ls',         -- Lua
   'markdown-oxide', -- markdown

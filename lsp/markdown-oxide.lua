@@ -1,3 +1,4 @@
+-- disable temporarily to see what is through obsidian.nvim
 return {
   cmd = { "markdown-oxide", "--stdio" },
   filetypes = { "markdown" },

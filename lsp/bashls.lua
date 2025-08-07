@@ -3,7 +3,6 @@ return {
   filetypes = { 'sh', 'bash', 'zsh' },
   root_markers = {
     '.git',
-    'package.json',
     '.shellcheckrc',
   },
   settings = {
@@ -18,16 +17,8 @@ return {
     },
   },
   single_file_support = true,
-  on_attach = function(client, bufnr)
-    -- formatting
-    client.server_capabilities.documentFormattingProvider = true
-
-    vim.keymap.set('n', '<leader>lyb', function()
-      vim.lsp.buf.code_action({
-        context = {
-          diagnostics = vim.diagnostic.get(bufnr)
-        },
-      })
-    end, { buffer = bufnr, desc = "Bash Code Actions" })
-  end
+  -- on_attach = function(client)
+  --   -- formatting
+  --   client.server_capabilities.documentFormattingProvider = true
+  -- end
 }

@@ -106,65 +106,7 @@ return {
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
-    -- Go-specific keymaps using which-key
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>lyg",  group = "Go" },
-      {
-        "<leader>lygi",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { "source.organizeImports" },
-              diagnostics = vim.diagnostic.get(bufnr)
-            },
-            apply = true,
-          })
-        end,
-        desc = "Organize Imports"
-      },
-      {
-        "<leader>lygt",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { "source.test" },
-              diagnostics = {}
-            },
-            apply = true,
-          })
-        end,
-        desc = "Generate Tests"
-      },
-      {
-        "<leader>lygf",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { "source.fillstruct" },
-              diagnostics = {}
-            },
-            apply = true,
-          })
-        end,
-        desc = "Fill Struct"
-      },
-      {
-        "<leader>lygs",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { "source.switch" },
-              diagnostics = {}
-            },
-            apply = true,
-          })
-        end,
-        desc = "Switch if/else"
-      },
-      { "<leader>lygv", ":!go mod vendor<CR>", desc = "Go Mod Vendor" },
-      { "<leader>lygm", ":!go mod tidy<CR>",   desc = "Go Mod Tidy" },
-    }, { buffer = bufnr })
+    -- Go-specific actions available through general code actions (gra / <leader>la)
   end,
 
   single_file_support = true,

@@ -64,5 +64,18 @@ return {
         implementation = "prefer_rust_with_warning"
       }
     })
+
+    -- Luasnip cleanup autocmd
+    -- vim.api.nvim_create_autocmd({ "CursorHold" }, {
+    --   callback = function()
+    --     local status_ok, luasnip = pcall(require, "luasnip")
+    --     if not status_ok then
+    --       return
+    --     end
+    --     if luasnip.expand_or_jumpable() then
+    --       vim.cmd([[silent! lua require("luasnip").unlink_current()]])
+    --     end
+    --   end,
+    -- })
   end,
 }

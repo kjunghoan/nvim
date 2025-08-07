@@ -75,23 +75,10 @@ return {
     },
   },
 
-  -- Disable formatting via ts_ls if you prefer to use other formatters
-  -- like prettier via null-ls/conform
-  on_attach = function(_, bufnr) -- change _ to client if you want to use the client object
-    -- Disable tsserver formatting if you plan to use other formatters
-    -- client.server_capabilities.documentFormattingProvider = false
-    -- client.server_capabilities.documentRangeFormattingProvider = false
-
-    -- Add shortcut for organizing imports
-    vim.keymap.set('n', '<leader>lyo', function()
-      vim.lsp.buf.code_action({
-        context = {
-          only = { "source.organizeImports" },
-          diagnostics = vim.diagnostic.get(bufnr)
-        },
-        apply = true,
-      })
-    end, { buffer = bufnr, desc = "Organize Imports" })
+  on_attach = function(client)
+    -- Disable formatting - will be handled by conform.nvim
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end,
 
   -- Support single files without a project

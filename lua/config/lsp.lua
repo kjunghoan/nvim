@@ -13,6 +13,8 @@ vim.diagnostic.config({
 vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = "Open Float Diagnostic" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+-- vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous Diagnostic" })
+-- vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next Diagnostic" })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = "Diagnostic List" })
 
 -- Define autocmd group for LSP setup
@@ -30,20 +32,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local wk = require('which-key')
     wk.add({
       { "<leader>l",  group = "LSP" },
-      { "<leader>lD", vim.lsp.buf.declaration,                             desc = "Go to Declaration" },
-      { "<leader>ld", vim.lsp.buf.definition,                              desc = "Go to Definition" },
-      { "<leader>li", vim.lsp.buf.implementation,                          desc = "Go to Implementation" },
-      { "<leader>lr", vim.lsp.buf.references,                              desc = "Find References" },
-      { "<leader>lt", vim.lsp.buf.type_definition,                         desc = "Type Definition" },
-      { "<leader>lk", vim.lsp.buf.hover,                                   desc = "Hover Documentation" },
-      { "<leader>lK", vim.lsp.buf.signature_help,                          desc = "Signature Help" },
-      { "<leader>ln", vim.lsp.buf.rename,                                  desc = "Rename" },
-      { "<leader>la", vim.lsp.buf.code_action,                             desc = "Code Action" },
+      { "<leader>ld", vim.lsp.buf.declaration,              desc = "Go to Declaration" },
+      -- { "<leader>ld", vim.lsp.buf.definition,               desc = "Go to Definition" }, -- gd
+      { "<leader>li", vim.lsp.buf.implementation,           desc = "Go to Implementation" }, --gri
+      { "<leader>lr", vim.lsp.buf.references,               desc = "Find References" }, -- grr
+      { "<leader>lt", vim.lsp.buf.type_definition,          desc = "Type Definition" },
+      { "<leader>lk", vim.lsp.buf.hover,                    desc = "Hover Documentation" },
+      { "<leader>lK", vim.lsp.buf.signature_help,           desc = "Signature Help" },
+      { "<leader>ln", vim.lsp.buf.rename,                   desc = "Rename" }, --grn
+      { "<leader>la", vim.lsp.buf.code_action,              desc = "Code Action" }, --gra
       { "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
     }, { buffer = bufnr })
   end,
 })
 
+-- Temporarily disabled for lspconfig testing
+--[[
 vim.lsp.enable({
   'bashls',         -- Bash
   'pbls',           -- Buf LSP for Protocol Buffers
@@ -60,3 +64,4 @@ vim.lsp.enable({
   -- 'jdtls',    -- Java this is covered by plugins/jdtls as recommended by the docs
   -- 'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking (Covered by ltex_extra plugin)
 })
+--]]

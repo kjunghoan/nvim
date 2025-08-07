@@ -135,23 +135,12 @@ return {
       numhl = ''
     })
 
-    -- Which-key mappings for debugging
+    -- Go-specific debugging keybindings (keep minimal, general debug actions via standard DAP)
     local wk = require("which-key")
     wk.add({
-      { "<leader>d",  group = "Debug" },
-      { "<leader>db", function() dap.toggle_breakpoint() end,                                    desc = "Toggle Breakpoint" },
-      { "<leader>dB", function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Conditional Breakpoint" },
-      { "<leader>dc", function() dap.continue() end,                                             desc = "Continue" },
-      { "<leader>dC", function() dap.run_to_cursor() end,                                        desc = "Run to Cursor" },
-      { "<leader>di", function() dap.step_into() end,                                            desc = "Step Into" },
-      { "<leader>do", function() dap.step_over() end,                                            desc = "Step Over" },
-      { "<leader>dO", function() dap.step_out() end,                                             desc = "Step Out" },
-      { "<leader>dr", function() dap.repl.toggle() end,                                          desc = "Toggle REPL" },
-      { "<leader>dl", function() dap.run_last() end,                                             desc = "Run Last" },
-      { "<leader>du", function() dapui.toggle() end,                                             desc = "Toggle UI" },
-      { "<leader>dt", function() require("dap-go").debug_test() end,                             desc = "Debug Test",            ft = "go" },
-      { "<leader>dT", function() require("dap-go").debug_last_test() end,                        desc = "Debug Last Test",       ft = "go" },
-      { "<leader>dx", function() dap.terminate() end,                                            desc = "Terminate" },
-    })
+      { "<leader>Gd",  group = "Debug Go" },
+      { "<leader>Gdt", function() require("dap-go").debug_test() end,      desc = "Debug Test" },
+      { "<leader>GdT", function() require("dap-go").debug_last_test() end, desc = "Debug Last Test" },
+    }, { buffer = true, filetype = "go" })
   end,
 }

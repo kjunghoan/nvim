@@ -30,13 +30,6 @@ vo.signcolumn = "yes"  -- always show the sign column
 vo.colorcolumn = "100" -- highlight the 80th column
 vo.list = true         -- show invisible characters
 -- Toggle line wrapping function
-function ToggleWrap()
-  if vo.wrap:get() then
-    vo.wrap = false
-  else
-    vo.wrap = true
-  end
-end
 
 -- Indentation and Tab Settings
 vo.autoindent = true  -- Automatically indent new lines to the same level as the previous line
@@ -71,12 +64,6 @@ vo.timeoutlen = 300 -- Time in milliseconds to wait for a key code
 -- General
 vo.backspace = { "start", "eol", "indent" } -- Allow backspacing over everything in insert mode
 vo.undofile = true                          -- Save undo history to a file
-
--- disable provider
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.rocks_nvim = false
-vim.g.loaded_rocks = 1
 
 -- Auto-detect Python virtual environments
 local function find_project_venv()
@@ -144,7 +131,5 @@ vim.g.python3_host_prog = find_project_venv()
 vim.api.nvim_create_autocmd("DirChanged", {
   callback = function()
     vim.g.python3_host_prog = find_project_venv()
-    -- Optionally notify about the change
-    -- vim.notify("Python venv: " .. vim.g.python3_host_prog, vim.log.levels.INFO)
   end,
 })

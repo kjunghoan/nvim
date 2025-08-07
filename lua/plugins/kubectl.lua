@@ -22,7 +22,7 @@ return {
 
         k("n", "8", "<Plug>(kubectl.view_events)", opts)
         -- k("n", "9", "<Plug>(kubectl.view_pv)", opts)
-        k("n", "0", "<Plug>(kubectl.view_helm)", opts)
+        -- k("n", "0", "<Plug>(kubectl.view_helm)", opts)
 
         k("n", "<F2>", "<Plug>(kubectl.view_api_resources)", opts)
         k("n", "<F3>", "<Plug>(kubectl.view_crds)", opts)

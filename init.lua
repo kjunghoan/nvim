@@ -3,17 +3,20 @@ require("config.launch")
 require("config.options")
 require("config.globalKeymaps")
 require("config.autoCmds")
+require("config.filetypes")
 
 spec("colorscheme.ayu") -- Your colorscheme
 
 -- Language Server Protocols
 require("config.lsp")
+spec("plugins.lspconfig")         -- LSP configurations
 spec("plugins.mason")
 
 -- Other plugins
 spec("plugins.jdtls")             -- Java-specific capabilities
 spec("plugins.snacks")            -- Image processor
 spec("plugins.blinkcmp")          -- Completions written in rust
+spec("plugins.conform")           -- Formatting
 spec("plugins.copilot")           -- Copilot
 spec("plugins.kulala")            -- REST client
 spec("plugins.ltex_extra")        -- LTeX extra features

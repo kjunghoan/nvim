@@ -24,12 +24,13 @@ return {
           transformers = 3,
           numpy = 2,
           pandas = 2,
+          datatets = 2,
+          tokenizers = 2,
+          accelerate = 2,
         },
       },
       -- pythonPath = vim.fn.expand("~/.config/nvim/venv/neovim/bin/python3"),
     },
   },
-  -- on_attach = function(client, bufnr)
-  -- end,
   single_file_support = true,
 }

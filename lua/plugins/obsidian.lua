@@ -8,6 +8,7 @@ return {
     "nvim-lua/plenary.nvim",
   },
   opts = {
+    legacy_commands = false,
     workspaces = {
       {
         name = "primary",
@@ -115,18 +116,18 @@ return {
     local wk = require("which-key")
     wk.add({
       { "<leader>o",  group = "Obsidian" },
-      { "<leader>oL", "<cmd>ObsidianLinkNew<cr>",     desc = "Link New Note" },
-      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Show Backlinks" },
-      { "<leader>od", "<cmd>ObsidianToday<cr>",       desc = "Open Today Note" },
-      { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find Note" },
-      { "<leader>ol", "<cmd>ObsidianLink<cr>",        desc = "Link Note" },
-      { "<leader>on", "<cmd>ObsidianNew<cr>",         desc = "New Note" },
-      { "<leader>oo", "<cmd>ObsidianOpen<cr>",        desc = "Open in Obsidian" },
-      { "<leader>op", "<cmd>ObsidianPasteImg<cr>",    desc = "Paste Image" },
-      { "<leader>os", "<cmd>ObsidianSearch<cr>",      desc = "Search Notes" },
-      { "<leader>ot", "<cmd>ObsidianTemplate<cr>",    desc = "Insert Template" },
-      { "<leader>ow", "<cmd>ObsidianWorkspace<cr>",   desc = "Switch Workspace" },
-      { "<leader>oy", "<cmd>ObsidianYesterday<cr>",   desc = "Open Yesterday Note" },
+      { "<leader>oL", "<cmd>Obsidian link new<cr>",     desc = "Link New Note" },
+      { "<leader>ob", "<cmd>Obsidian backlinks<cr>",    desc = "Show Backlinks" },
+      { "<leader>od", "<cmd>Obsidian today<cr>",        desc = "Open Today Note" },
+      { "<leader>of", "<cmd>Obsidian quick switch<cr>", desc = "Find Note" },
+      { "<leader>ol", "<cmd>Obsidian link<cr>",         desc = "Link Note" },
+      { "<leader>on", "<cmd>Obsidian new<cr>",          desc = "New Note" },
+      { "<leader>oo", "<cmd>Obsidian open<cr>",         desc = "Open in Obsidian" },
+      { "<leader>op", "<cmd>Obsidian paste img<cr>",    desc = "Paste Image" },
+      { "<leader>os", "<cmd>Obsidian search<cr>",       desc = "Search Notes" },
+      { "<leader>ot", "<cmd>Obsidian template<cr>",     desc = "Insert Template" },
+      { "<leader>ow", "<cmd>Obsidian workspace<cr>",    desc = "Switch Workspace" },
+      { "<leader>oy", "<cmd>Obsidian yesterday<cr>",    desc = "Open Yesterday Note" },
     })
   end,
 }

@@ -13,27 +13,17 @@ vim.diagnostic.config({
 vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = "Open Float Diagnostic" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
--- vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous Diagnostic" })
--- vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next Diagnostic" })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = "Diagnostic List" })
-
--- Define autocmd group for LSP setup
 local lsp_group = vim.api.nvim_create_augroup('UserLspConfig', {})
--- Set up buffer-local mappings when an LSP attaches
 vim.api.nvim_create_autocmd('LspAttach', {
   group = lsp_group,
   callback = function(ev)
-    -- Keeping the reference in case we need client-specific settings later
     local bufnr = ev.buf
-    -- Enable completion triggered by <c-x><c-o>
     vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings using which-key
     local wk = require('which-key')
     wk.add({
       { "<leader>l",  group = "LSP" },
       { "<leader>ld", vim.lsp.buf.declaration,              desc = "Go to Declaration" },
-      -- { "<leader>ld", vim.lsp.buf.definition,               desc = "Go to Definition" }, -- gd
       { "<leader>li", vim.lsp.buf.implementation,           desc = "Go to Implementation" }, --gri
       { "<leader>lr", vim.lsp.buf.references,               desc = "Find References" }, -- grr
       { "<leader>lt", vim.lsp.buf.type_definition,          desc = "Type Definition" },
@@ -45,23 +35,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     }, { buffer = bufnr })
   end,
 })
-
--- Temporarily disabled for lspconfig testing
---[[
-vim.lsp.enable({
-  'bashls',         -- Bash
-  'pbls',           -- Buf LSP for Protocol Buffers
-  'css-lsp',        -- CSS
-  'gopls',          -- Go
-  'json-lsp',       -- Json
-  'lua_ls',         -- Lua
-  'markdown-oxide', -- markdown
-  'pyright',        -- Python
-  'ruff',           -- Python
-  'tailwindcss',    -- Tailwind CSS
-  'ts_ls',          -- TypeScript/JavaScript
-  'yamlls',         -- YAML
-  -- 'jdtls',    -- Java this is covered by plugins/jdtls as recommended by the docs
-  -- 'ltex_ls',  -- LTeX for LaTeX/Markdown grammar checking (Covered by ltex_extra plugin)
-})
---]]

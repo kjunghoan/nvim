@@ -4,6 +4,11 @@ return {
   event = "BufReadPre",
   config = function()
     require("mason").setup({
+      ensure_installed = {
+        -- Debuggers
+        "debugpy",            -- Python
+        "java-debug-adapter", -- Java
+      },
       ui = {
         border = "rounded",
         icons = {

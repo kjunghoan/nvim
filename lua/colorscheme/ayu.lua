@@ -14,7 +14,7 @@ return {
           Folded = { bg = "None" },
           FoldColumn = { bg = "None" },
           CursorColumn = { bg = "None" },
-        }, -- You can add any overrides here
+        },
       })
       vim.cmd("colorscheme ayu")
     end,

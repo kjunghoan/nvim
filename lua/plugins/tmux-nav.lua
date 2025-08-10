@@ -12,11 +12,8 @@ return {
         up = "<C-k>",
         right = "<C-l>",
       },
-      -- Set the tmux prefix
       tmux_prefix = "<C-s>",
     })
-
-    -- Register keybindings with which-key
     local wk = require("which-key")
     wk.add({
       {

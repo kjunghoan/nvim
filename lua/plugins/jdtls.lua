@@ -143,7 +143,7 @@ return {
       -- Configuration for nvim-jdtls
       local config = {
         cmd = {
-          "java",
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
           unpack(java_args),
           "-jar", launcher_jar,
           "-configuration", jdtls_path .. "/config_" .. os_config,

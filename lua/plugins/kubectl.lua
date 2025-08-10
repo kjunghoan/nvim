@@ -21,7 +21,7 @@ return {
         k("n", "7", "<Plug>(kubectl.view_nodes)", opts)
 
         k("n", "8", "<Plug>(kubectl.view_events)", opts)
-        -- k("n", "9", "<Plug>(kubectl.view_pv)", opts)
+        k("n", "9", "<Plug>(kubectl.view_pv)", opts)
         -- k("n", "0", "<Plug>(kubectl.view_helm)", opts)
 
         k("n", "<F2>", "<Plug>(kubectl.view_api_resources)", opts)
@@ -29,7 +29,7 @@ return {
         k("n", "<F4>", "<Plug>(kubectl.view_cronjobs)", opts)
         k("n", "<F5>", "<Plug>(kubectl.view_pvc)", opts)
         -- k("n", "9", "<Plug>(kubectl.view_sa)", opts)
-        k("n", "9", "<Plug>(kubectl.view_overview)", opts)
+        -- k("n", "9", "<Plug>(kubectl.view_overview)", opts)
       end
     })
   end,

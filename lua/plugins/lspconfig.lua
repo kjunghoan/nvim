@@ -3,14 +3,12 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "saghen/blink.cmp", -- for capabilities
+    "mason.nvim",
   },
   config = function()
     local lspconfig = require("lspconfig")
-    
-    -- Get capabilities from blink.cmp
-    local capabilities = vim.g.blink_cmp_capabilities or vim.lsp.protocol.make_client_capabilities()
-    
+    local capabilities = require("config.capabilities")[1]()
+
     -- Basic server configurations
     local servers = {
       bashls = {},
@@ -43,7 +41,7 @@ return {
       terraformls = {},
       tflint = {},
     }
-    
+
     -- Setup each server
     for server, config in pairs(servers) do
       config.capabilities = capabilities

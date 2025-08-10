@@ -9,7 +9,7 @@ spec("colorscheme.ayu") -- Your colorscheme
 
 -- Language Server Protocols
 require("config.lsp")
-spec("plugins.lspconfig")         -- LSP configurations
+spec("plugins.lspconfig") -- LSP configurations
 spec("plugins.mason")
 
 -- Other plugins
@@ -25,9 +25,10 @@ spec("plugins.gitsigns")          -- Git diff on the side
 spec("plugins.tmux-nav")          -- Tmux navigation
 spec("plugins.lualine")           -- Status line
 spec("plugins.harpoon")           -- File navigation
--- spec("plugins.image")             -- Image viewer
-spec("plugins.go-debug")          -- Go debugging support
-spec("plugins.go-tools")          -- Go tools and testing
+spec("plugins.dap")
+spec("plugins.dap.go")            -- Go debugging support
+spec("plugins.dap.python")        -- Python debugging support
+spec("plugins.dap.java")          -- Java debugging support
 spec("plugins.mini-icons")        -- Icons for the status line
 spec("plugins.nvim-ts-autotag")   -- auto pairs
 spec("plugins.nvim-web-devicons") -- webdev icons

@@ -66,8 +66,6 @@ return {
           enable_autocmd = false,
         },
       })
-
-      -- Which-key mappings remain the same
       local wk = require("which-key")
       wk.add({
         { "<leader>Ti", "<cmd>TSInstallInfo<cr>", desc = "Installation Info" },

@@ -10,6 +10,9 @@ return {
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
 
+        -- GraphQL
+        graphql = { "prettier" },
+
         -- Styling
         css = { "prettier" },
         scss = { "prettier" },

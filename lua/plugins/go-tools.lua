@@ -64,36 +64,36 @@ return {
 
       -- Testing (Go-specific functionality)
       { "<leader>Gt",  group = "Test" },
-      { "<leader>Gtr", ":GoTest<CR>",             desc = "Run Tests" },
-      { "<leader>GtR", ":GoTestFunc<CR>",         desc = "Test Function" },
-      { "<leader>Gtf", ":GoTestFile<CR>",         desc = "Test File" },
-      { "<leader>Gta", ":GoAddTest<CR>",          desc = "Add Test" },
-      { "<leader>Gtc", ":GoCoverage<CR>",         desc = "Coverage" },
-      { "<leader>GtC", ":GoCoverageClear<CR>",    desc = "Clear Coverage" },
-      { "<leader>Gtv", ":GoVet<CR>",              desc = "Go Vet" },
+      { "<leader>Gtr", ":GoTest<CR>",          desc = "Run Tests" },
+      { "<leader>GtR", ":GoTestFunc<CR>",      desc = "Test Function" },
+      { "<leader>Gtf", ":GoTestFile<CR>",      desc = "Test File" },
+      { "<leader>Gta", ":GoAddTest<CR>",       desc = "Add Test" },
+      { "<leader>Gtc", ":GoCoverage<CR>",      desc = "Coverage" },
+      { "<leader>GtC", ":GoCoverageClear<CR>", desc = "Clear Coverage" },
+      { "<leader>Gtv", ":GoVet<CR>",           desc = "Go Vet" },
 
       -- Build and Run (Go-specific)
       { "<leader>Gb",  group = "Build" },
-      { "<leader>Gbr", ":GoBuild<CR>",            desc = "Build" },
-      { "<leader>GbR", ":GoRun<CR>",              desc = "Run" },
-      { "<leader>Gbi", ":GoInstall<CR>",          desc = "Install" },
+      { "<leader>Gbr", ":GoBuild<CR>",         desc = "Build" },
+      { "<leader>GbR", ":GoRun<CR>",           desc = "Run" },
+      { "<leader>Gbi", ":GoInstall<CR>",       desc = "Install" },
 
       -- Go-specific code generation
       { "<leader>Gg",  group = "Generate" },
-      { "<leader>Ggt", ":GoAddTag<CR>",           desc = "Add Tags" },
-      { "<leader>GgT", ":GoRmTag<CR>",            desc = "Remove Tags" },
-      { "<leader>Gge", ":GoIfErr<CR>",            desc = "If Err" },
-      { "<leader>Ggf", ":GoFillStruct<CR>",       desc = "Fill Struct" },
-      { "<leader>GgS", ":GoFillSwitch<CR>",       desc = "Fill Switch" },
+      { "<leader>Ggt", ":GoAddTag<CR>",        desc = "Add Tags" },
+      { "<leader>GgT", ":GoRmTag<CR>",         desc = "Remove Tags" },
+      { "<leader>Gge", ":GoIfErr<CR>",         desc = "If Err" },
+      { "<leader>Ggf", ":GoFillStruct<CR>",    desc = "Fill Struct" },
+      { "<leader>GgS", ":GoFillSwitch<CR>",    desc = "Fill Switch" },
 
       -- Module and Dependencies (Go-specific)
       { "<leader>Gm",  group = "Module" },
-      { "<leader>Gmt", ":GoModTidy<CR>",          desc = "Mod Tidy" },
-      { "<leader>Gmv", ":GoModVendor<CR>",        desc = "Mod Vendor" },
-      { "<leader>Gmi", ":GoModInit<CR>",          desc = "Mod Init" },
+      { "<leader>Gmt", ":GoModTidy<CR>",       desc = "Mod Tidy" },
+      { "<leader>Gmv", ":GoModVendor<CR>",     desc = "Mod Vendor" },
+      { "<leader>Gmi", ":GoModInit<CR>",       desc = "Mod Init" },
 
       -- Alternative files (Go-specific test/impl switching)
-      { "<leader>Ga", ":GoAlt<CR>",              desc = "Alternative File" },
+      { "<leader>Ga",  ":GoAlt<CR>",           desc = "Alternative File" },
     })
   end,
   event = { "CmdlineEnter" },

@@ -52,12 +52,9 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
   end,
 })
-
--- Set filetype for .env and .dev.vars files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { ".env", ".env.*", "*.dev.vars", "config" },
   callback = function()
     vim.opt_local.filetype = "sh"
   end,
 })
-

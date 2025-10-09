@@ -1,4 +1,3 @@
--- nvim-lspconfig for LSP management
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -6,10 +5,8 @@ return {
     "mason.nvim",
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local capabilities = require("config.capabilities")[1]()
 
-    -- Basic server configurations
     local servers = {
       bashls = {},
       gopls = {},
@@ -42,10 +39,10 @@ return {
       tflint = {},
     }
 
-    -- Setup each server
     for server, config in pairs(servers) do
       config.capabilities = capabilities
-      lspconfig[server].setup(config)
+      vim.lsp.config[server] = config
+      vim.lsp.enable(server)
     end
   end,
 }

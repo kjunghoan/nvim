@@ -4,6 +4,7 @@ require("config.options")
 require("config.globalKeymaps")
 require("config.autoCmds")
 require("config.filetypes")
+require("config.lemonade")
 
 spec("colorscheme.ayu") -- Your colorscheme
 

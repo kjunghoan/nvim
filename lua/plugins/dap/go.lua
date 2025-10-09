@@ -22,10 +22,21 @@ return {
     local wk = require("which-key")
     wk.add({
       { "<leader>d",  group = "Debug" },
-      { "<leader>df", function() require('dap').run({ type = 'go', name = 'Debug File', request = 'launch', program =
-        '${file}' }) end,                                                                                                               desc = "Debug File" },
-      { "<leader>dt", function() require("dap-go").debug_test() end,                                                                    desc = "Debug Test (Nearest)" },
-      { "<leader>dT", function() require("dap-go").debug_last_test() end,                                                               desc = "Debug Last Test" },
+      {
+        "<leader>df",
+        function()
+          require('dap').run({
+            type = 'go',
+            name = 'Debug File',
+            request = 'launch',
+            program =
+            '${file}'
+          })
+        end,
+        desc = "Debug File"
+      },
+      { "<leader>dt", function() require("dap-go").debug_test() end,      desc = "Debug Test (Nearest)" },
+      { "<leader>dT", function() require("dap-go").debug_last_test() end, desc = "Debug Last Test" },
     }, { buffer = true, filetype = "go" })
   end,
 }

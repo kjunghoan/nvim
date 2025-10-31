@@ -19,7 +19,6 @@ vo.laststatus = 2            -- Always show the status line
 vo.showcmd = true            -- Show the command being typed
 vo.scrolloff = 10            -- Keep 10 lines above and below the cursor
 vim.g.clipboard = "tmux"
--- vim.opt.clipboard = "tmux"
 vo.clipboard = "unnamedplus"
 vo.updatetime = 300          -- Faster completion
 vo.wildmode = "longest:full,full"

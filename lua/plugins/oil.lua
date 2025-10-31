@@ -1,8 +1,8 @@
 -- https://github.com/stevearc/oil.nvim
 return {
   "stevearc/oil.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {},
+  lazy = false,
+  dependencies = { "nvim-mini/mini.icons" },
   config = function()
     require("oil").setup({
       default_file_explorer = true,
@@ -19,17 +19,15 @@ return {
       float = {
         max_width = 80,
         max_height = 20,
-        border = vim.o.winborder or "rounded",
+        border = "rounded",
       },
-      preview = {
-        border = vim.o.winborder or "rounded",
+      preview_win = {
+        border = "rounded",
       }
     })
 
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>pv", "<cmd>Oil<cr>",         desc = "Oil Explorer" },
-      { "<leader>pf", "<cmd>Oil --float<cr>", desc = "Oil Float" },
-    })
+    -- Plugin-specific keymaps
+    vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>", { noremap = true, silent = true, desc = "Oil Explorer" })
+    vim.keymap.set("n", "<leader>pf", "<cmd>Oil --float<cr>", { noremap = true, silent = true, desc = "Oil Float" })
   end,
 }

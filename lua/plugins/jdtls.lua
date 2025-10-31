@@ -1,266 +1,243 @@
+-- https://github.com/mfussenegger/nvim-jdtls
 return {
   "mfussenegger/nvim-jdtls",
-  ft = { "java" },
-  dependencies = {},
+  ft = "java",
   config = function()
-    local function jdtls_setup()
-      local jdtls = require("jdtls")
-      local wk = require("which-key")
+    local jdtls = require("jdtls")
 
-      -- Get the current OS
-      local os_config = "linux"
-      if vim.fn.has("mac") == 1 then
-        os_config = "mac"
+    -- Function to find Java home
+    local function find_java_home()
+      -- Try JAVA_HOME first
+      local java_home = os.getenv("JAVA_HOME")
+      if java_home then
+        return java_home
       end
 
-      -- Find root directory
-      local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-      local root_dir = require("jdtls.setup").find_root(root_markers)
-      if not root_dir then
-        return
-      end
-
-      local function find_java_home()
-        local java_home = os.getenv("JAVA_HOME")
-
-        -- Check if JAVA_HOME is valid
-        if java_home and vim.fn.isdirectory(java_home) == 1 then
-          return java_home
+      -- Try linuxbrew Java installation
+      local handle = io.popen("ls -d /home/linuxbrew/.linuxbrew/Cellar/openjdk@*/*/libexec/openjdk.jdk/Contents/Home 2>/dev/null | head -1")
+      if handle then
+        local result = handle:read("*a")
+        handle:close()
+        if result and result ~= "" then
+          return result:gsub("%s+", "")
         end
-
-        -- Based on your specific setup
-        local homebrew_path = "/home/linuxbrew/.linuxbrew/Cellar/openjdk@21/21.0.6/libexec"
-        if vim.fn.isdirectory(homebrew_path) == 1 then
-          return homebrew_path
-        end
-
-        -- Fallback to whatever JAVA_HOME is, even if invalid
-        return java_home or ""
       end
 
-      local java_home = find_java_home()
-      -- print("Using Java home: " .. java_home)
+      -- Fallback to system java
+      return "/usr/lib/jvm/default-java"
+    end
 
-      local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-      local workspace_dir = vim.fn.expand("~/.cache/jdtls/workspace/") .. project_name
+    -- Function to find Lombok jar
+    local function find_lombok_jar()
+      local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+      local lombok_path = mason_path .. "/lombok.jar"
 
-      -- Main Config
-      local mason_path = vim.fn.stdpath("data") .. "/mason"
-      local jdtls_path = mason_path .. "/packages/jdtls"
+      -- Check if lombok.jar exists in mason's jdtls directory
+      if vim.fn.filereadable(lombok_path) == 1 then
+        return lombok_path
+      end
 
-      -- Get bundles for debugging and testing support
-      local bundles = {
-        vim.fn.glob(mason_path .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
-          true),
-      }
-      vim.list_extend(bundles,
-        vim.split(vim.fn.glob(mason_path .. "/packages/java-test/extension/server/*.jar", true), "\n"))
+      -- Try to find it in the system
+      local handle = io.popen("find ~/.m2 -name 'lombok*.jar' 2>/dev/null | head -1")
+      if handle then
+        local result = handle:read("*a")
+        handle:close()
+        if result and result ~= "" then
+          return result:gsub("%s+", "")
+        end
+      end
 
-      -- Additional JVM args (declare this FIRST)
-      local java_args = {
+      -- If not found, download it
+      vim.notify("Lombok not found, downloading...", vim.log.levels.INFO)
+      vim.fn.system(string.format(
+        "curl -L https://projectlombok.org/downloads/lombok.jar -o %s",
+        lombok_path
+      ))
+      return lombok_path
+    end
+
+    local java_home = find_java_home()
+    local lombok_jar = find_lombok_jar()
+
+    -- Get workspace directory
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+    local workspace_dir = vim.fn.stdpath("data") .. "/eclipse-workspace/" .. project_name
+
+    -- Find jdtls installation
+    local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+    local jdtls_bin = mason_path .. "/bin/jdtls"
+
+    -- Get DAP bundles
+    local bundles = {}
+
+    -- Add java-debug-adapter
+    local java_debug_path = vim.fn.stdpath("data") .. "/mason/packages/java-debug-adapter/extension/server"
+    if vim.fn.isdirectory(java_debug_path) == 1 then
+      vim.list_extend(
+        bundles,
+        vim.split(vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin-*.jar"), "\n")
+      )
+    end
+
+    -- Add java-test
+    local java_test_path = vim.fn.stdpath("data") .. "/mason/packages/java-test/extension/server"
+    if vim.fn.isdirectory(java_test_path) == 1 then
+      vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/*.jar"), "\n"))
+    end
+
+    local config = {
+      cmd = {
+        java_home .. "/bin/java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         "-Dosgi.bundles.defaultStartLevel=4",
         "-Declipse.product=org.eclipse.jdt.ls.core.product",
         "-Dlog.protocol=true",
         "-Dlog.level=ALL",
-        "-Xmx2g",
+        "-javaagent:" .. lombok_jar,
+        "-Xms1g",
         "--add-modules=ALL-SYSTEM",
-        "--add-opens", "java.base/java.util=ALL-UNNAMED",
-        "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-      }
-
-      -- Find Lombok jar with improved logic for Gradle projects
-      local project_lombok_paths = {
-        -- Check the project's Gradle cache first
-        root_dir .. "/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/*/lombok-*.jar",
-        -- Check for Gradle build folder
-        root_dir .. "/build/dependencies/lombok-*.jar",
-        -- Check in project libs directory
-        root_dir .. "/lib/lombok*.jar",
-        root_dir .. "/libs/lombok*.jar",
-        -- Check for Maven local repository paths
-        vim.fn.expand("$HOME/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/*/lombok-*.jar"),
-        vim.fn.expand("$HOME/.m2/repository/org/projectlombok/lombok/*/lombok-*.jar"),
-        -- Explicitly check for a specific version as fallback
-        vim.fn.expand("$HOME/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"),
-        -- Check in a globally available location
-        "/usr/local/share/lombok/lombok.jar",
-        "/usr/share/lombok/lombok.jar",
-      }
-
-      local lombok_path = ""
-      for _, path in ipairs(project_lombok_paths) do
-        local found_path = vim.fn.glob(path)
-        if found_path ~= "" then
-          lombok_path = found_path
-          break
-        end
-      end
-
-      if lombok_path == "" then
-        -- If no lombok jar found, attempt to download one
-        -- print("Lombok JAR not found. Attempting to download...")
-
-        -- Create directory if needed
-        local lombok_dir = vim.fn.expand("~/.local/share/lombok")
-        if vim.fn.isdirectory(lombok_dir) == 0 then
-          vim.fn.mkdir(lombok_dir, "p")
-        end
-
-        -- Attempt to download the lombok jar if it doesn't exist
-        local download_path = lombok_dir .. "/lombok.jar"
-        if vim.fn.filereadable(download_path) == 0 then
-          local cmd = "curl -s -L https://projectlombok.org/downloads/lombok.jar -o " .. download_path
-          vim.fn.system(cmd)
-
-          -- Check if download was successful
-          if vim.fn.filereadable(download_path) == 1 then
-            lombok_path = download_path
-            -- print("Downloaded Lombok JAR to: " .. lombok_path)
-          else
-            -- print("Failed to download Lombok JAR.")
-            -- print("Lombok features may not work correctly.")
-            -- print("You may need to build your project first to download dependencies.")
-          end
-        else
-          lombok_path = download_path
-          -- print("Using previously downloaded Lombok JAR: " .. lombok_path)
-        end
-      end
-
-      if lombok_path ~= "" then
-        -- print("Using Lombok JAR: " .. lombok_path)
-        table.insert(java_args, "-javaagent:" .. lombok_path)
-      end
-
-      local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
-
-      if launcher_jar == "" then
-        -- print("Failed to find JDTLS launcher jar. Please check your installation.")
-        return
-      end
-
-      -- Configuration for nvim-jdtls
-      local config = {
-        cmd = {
-          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
-          unpack(java_args),
-          "-jar", launcher_jar,
-          "-configuration", jdtls_path .. "/config_" .. os_config,
-          "-data", workspace_dir,
-        },
-        root_dir = root_dir,
-        settings = {
-          java = {
-            eclipse = { downloadSources = true },
-            configuration = {
-              updateBuildConfiguration = "interactive",
-              runtimes = {
-                {
-                  name = "JavaSE-21",
-                  path = java_home,
-                  default = true,
-                },
-              },
-            },
-            maven = { downloadSources = true },
-            implementationsCodeLens = { enabled = true },
-            referencesCodeLens = { enabled = true },
-            format = { enabled = true },
-            signatureHelp = { enabled = true },
-            contentProvider = { preferred = "fernflower" },
-            -- Lombok configuration at root level of java settings
-            lombok = {
-              enabled = true,
-            },
-            -- Enable annotation processing
-            compiler = {
-              annotationProcessing = {
-                enabled = true,
-              },
-            },
-            completion = {
-              favoriteStaticMembers = {
-                "org.junit.Assert.*",
-                "org.junit.Assume.*",
-                "org.junit.jupiter.api.Assertions.*",
-                "org.junit.jupiter.api.Assumptions.*",
-                "org.junit.jupiter.api.DynamicContainer.*",
-                "org.junit.jupiter.api.DynamicTest.*",
-                "org.mockito.Mockito.*",
-              },
-              importOrder = { "java", "javax", "com", "org" },
-            },
-            sources = {
-              organizeImports = {
-                starThreshold = 9999,
-                staticStarThreshold = 9999,
-              },
+        "--add-opens",
+        "java.base/java.util=ALL-UNNAMED",
+        "--add-opens",
+        "java.base/java.lang=ALL-UNNAMED",
+        "-jar",
+        vim.fn.glob(mason_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+        "-configuration",
+        mason_path .. "/config_linux",
+        "-data",
+        workspace_dir,
+      },
+      root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
+      settings = {
+        java = {
+          eclipse = {
+            downloadSources = true,
+          },
+          configuration = {
+            updateBuildConfiguration = "interactive",
+          },
+          maven = {
+            downloadSources = true,
+          },
+          implementationsCodeLens = {
+            enabled = true,
+          },
+          referencesCodeLens = {
+            enabled = true,
+          },
+          references = {
+            includeDecompiledSources = true,
+          },
+          format = {
+            enabled = true,
+            settings = {
+              url = vim.fn.stdpath("config") .. "/lang-servers/intellij-java-google-style.xml",
+              profile = "GoogleStyle",
             },
           },
-        },
-        init_options = {
-          bundles = bundles,
-        },
-        on_attach = function(_, bufnr)
-          -- Register keybindings after the LSP attaches
-          wk.register({
-            ["<leader>lyj"] = {
-              name = "Java",
-              i = { function() jdtls.organize_imports() end, "Organize Imports" },
-              t = { function() jdtls.test_class() end, "Test Class" },
-              n = { function() jdtls.test_nearest_method() end, "Test Method" },
-              v = {
-                name = "Extract Variable",
-                n = { function() jdtls.extract_variable() end, "Extract Variable (normal)" },
-                v = { function() jdtls.extract_variable_all() end, "Extract Variable (visual)" },
-              },
-              c = { function() jdtls.extract_constant() end, "Extract Constant" },
-              m = { function() jdtls.extract_method() end, "Extract Method" },
+          signatureHelp = { enabled = true },
+          completion = {
+            favoriteStaticMembers = {
+              "org.hamcrest.MatcherAssert.assertThat",
+              "org.hamcrest.Matchers.*",
+              "org.hamcrest.CoreMatchers.*",
+              "org.junit.jupiter.api.Assertions.*",
+              "java.util.Objects.requireNonNull",
+              "java.util.Objects.requireNonNullElse",
+              "org.mockito.Mockito.*",
             },
-          }, { buffer = bufnr })
+            filteredTypes = {
+              "com.sun.*",
+              "io.micrometer.shaded.*",
+              "java.awt.*",
+              "jdk.*",
+              "sun.*",
+            },
+          },
+          sources = {
+            organizeImports = {
+              starThreshold = 9999,
+              staticStarThreshold = 9999,
+            },
+          },
+          codeGeneration = {
+            toString = {
+              template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+            },
+            useBlocks = true,
+          },
+        },
+      },
+      flags = {
+        allow_incremental_sync = true,
+      },
+      init_options = {
+        bundles = bundles,
+      },
+    }
 
-          -- print("JDTLS attached to buffer: " .. bufnr)
-        end,
-      }
+    -- Setup capabilities for LSP
+    config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Special handling for Neovim 0.11
-      -- This ensures nvim-jdtls doesn't interfere with vim.lsp.enable()
-      vim.schedule(function()
-        -- Get the current buffer number
-        local current_buf = vim.api.nvim_get_current_buf()
-        -- print("JDTLS setup for buffer: " .. current_buf)
-
-        -- Check if JDTLS is already attached by vim.lsp.enable()
-        local clients = vim.lsp.get_clients({ bufnr = current_buf, name = "jdtls" })
-        if #clients > 0 then
-          -- If already attached, stop the client before reattaching
-          -- print("Found existing JDTLS client(s). Stopping before reattaching...")
-          for _, client in ipairs(clients) do
-            client:stop()
-          end
-        end
-
-        -- Start nvim-jdtls with enhanced configuration
-        -- print("Starting JDTLS for Java file...")
-        jdtls.start_or_attach(config)
-
-        -- Verify attachment after a short delay
-        vim.defer_fn(function()
-          local attached_clients = vim.lsp.get_clients({ bufnr = current_buf })
-          local client_names = {}
-          for _, client in ipairs(attached_clients) do
-            table.insert(client_names, client.name)
-          end
-          -- print("Attached LSP clients: " .. table.concat(client_names, ", "))
-        end, 1000)
-      end)
+    -- Handle Neovim 0.11+ multiple client attachment issue
+    local function stop_existing_jdtls_clients()
+      local clients = vim.lsp.get_clients({ name = "jdtls" })
+      for _, client in ipairs(clients) do
+        vim.lsp.stop_client(client.id)
+      end
     end
 
-    -- Set up autocommand to attach JDTLS
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "java",
-      callback = jdtls_setup,
-    })
+    -- Stop any existing jdtls clients before starting
+    stop_existing_jdtls_clients()
+
+    -- Wait a bit for clients to fully stop
+    vim.defer_fn(function()
+      jdtls.start_or_attach(config)
+
+      -- Java-specific keybindings (buffer-local)
+      vim.keymap.set("n", "<leader>lo", function()
+        require("jdtls").organize_imports()
+      end, { buffer = true, desc = "Organize Imports" })
+
+      vim.keymap.set("n", "<leader>lv", function()
+        require("jdtls").extract_variable()
+      end, { buffer = true, desc = "Extract Variable" })
+
+      vim.keymap.set("v", "<leader>lv", function()
+        require("jdtls").extract_variable(true)
+      end, { buffer = true, desc = "Extract Variable" })
+
+      vim.keymap.set("n", "<leader>lc", function()
+        require("jdtls").extract_constant()
+      end, { buffer = true, desc = "Extract Constant" })
+
+      vim.keymap.set("v", "<leader>lc", function()
+        require("jdtls").extract_constant(true)
+      end, { buffer = true, desc = "Extract Constant" })
+
+      vim.keymap.set("v", "<leader>lm", function()
+        require("jdtls").extract_method(true)
+      end, { buffer = true, desc = "Extract Method" })
+
+      vim.keymap.set("n", "<leader>df", function()
+        require("jdtls").test_nearest_method()
+      end, { buffer = true, desc = "Debug Method" })
+
+      vim.keymap.set("n", "<leader>dT", function()
+        require("jdtls").test_class()
+      end, { buffer = true, desc = "Debug Class" })
+
+      vim.keymap.set("n", "<leader>ru", function()
+        require("jdtls").update_project_config()
+      end, { buffer = true, desc = "Update Project Config" })
+
+      vim.keymap.set("n", "<leader>tc", function()
+        require("jdtls").test_class()
+      end, { buffer = true, desc = "Test Class" })
+
+      vim.keymap.set("n", "<leader>tm", function()
+        require("jdtls").test_nearest_method()
+      end, { buffer = true, desc = "Test Method" })
+    end, 100)
   end,
 }

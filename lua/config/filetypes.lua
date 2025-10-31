@@ -1,7 +1,10 @@
--- Set filetype for helm templates
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*/templates/*.yaml", "*/templates/*.tpl", "*.gotmpl", "helmfile*.yaml" },
-  callback = function()
-    vim.bo.filetype = "helm"
-  end
+-- Custom filetype detection
+vim.filetype.add({
+  extension = {
+    rest = "http", -- Treat .rest files as http filetype
+    sh = "bash",   -- Treat .sh files as bash filetype
+  },
+  pattern = {
+    ["Dockerfile.*"] = "dockerfile",   -- Treat files starting with Dockerfile as dockerfile filetype
+  },
 })

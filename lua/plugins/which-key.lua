@@ -1,11 +1,7 @@
--- https://github.com/mbbill/undotree
+-- https://github.com/folke/which-key.nvim
 return {
   "folke/which-key.nvim",
-  event = "VimEnter",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
+  event = "VeryLazy",
   opts = {
     plugins = {
       marks = true,
@@ -46,10 +42,7 @@ return {
       { "<leader>p",  group = "Oil" },
       { "<leader>q",  "<cmd>confirm q<CR>",  desc = "Quit" },
       { "<leader>s",  group = "Split" },
-      { "<leader>sh", "<cmd>split<CR>",      desc = "Split Horizontally" },
-      { "<leader>sv", "<cmd>vsplit<CR>",     desc = "Split vertically" },
       { "<leader>t",  group = "Test" },
-      { "<leader>w",  "<cmd>set wrap!<CR>",  desc = "Toggle Wrap" },
     })
   end,
 }

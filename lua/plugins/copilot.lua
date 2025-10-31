@@ -1,30 +1,58 @@
--- https://github.com/github/copilot.vim
+-- https://github.com/zbirenbaum/copilot.lua
 return {
-  "github/copilot.vim",
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
   event = "InsertEnter",
   config = function()
-    -- Basic settings
-    vim.g.copilot_no_tab_map = true -- Disable tab mapping
-    vim.g.copilot_assume_mapped = true
-    vim.g.copilot_tab_fallback = ""
-
-    -- Key mappings (customize as needed)
-    vim.keymap.set("i", "<C-M-l>", 'copilot#Accept("<CR>")', {
-      expr = true,
-      silent = true,
-      replace_keycodes = false
+    require("copilot").setup({
+      panel = {
+        enabled = true,
+        auto_refresh = false,
+        keymap = {
+          jump_prev = "[[",
+          jump_next = "]]",
+          accept = "<CR>",
+          refresh = "gr",
+          open = "<M-CR>",
+        },
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        hide_during_completion = true,
+        debounce = 75,
+        keymap = {
+          accept = "<M-l>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-j>",
+          prev = "<M-k>",
+          dismiss = "<C-]>",
+        },
+      },
+      filetypes = {
+        yaml = false,
+        markdown = false,
+        help = false,
+        gitcommit = false,
+        gitrebase = false,
+        hgcommit = false,
+        svn = false,
+        cvs = false,
+        ["."] = false,
+      },
+      copilot_node_command = "node", -- Node.js version must be > 18.x
+      server_opts_overrides = {},
     })
-    vim.keymap.set("i", "<M-j>", '<Plug>(copilot-next)', {})
-    vim.keymap.set("i", "<M-k>", '<Plug>(copilot-previous)', {})
 
+    -- Your original keymaps (for reference):
+    -- accept = "<C-M-l>" (you had Ctrl+Alt+l)
+    -- next = "<M-j>"
+    -- prev = "<M-k>"
 
-    -- Use which-key for documentation if available
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>c",  group = "Copilot" },
-      { "<leader>ce", "<cmd>Copilot enable<cr>",  desc = "Enable Copilot" },
-      { "<leader>cd", "<cmd>Copilot disable<cr>", desc = "Disable Copilot" },
-      { "<leader>cs", "<cmd>Copilot status<cr>",  desc = "Copilot Status" },
-    })
+    -- Keymaps for toggling copilot
+    vim.keymap.set("n", "<leader>ce", "<cmd>Copilot enable<cr>", { noremap = true, silent = true, desc = "Enable Copilot" })
+    vim.keymap.set("n", "<leader>cd", "<cmd>Copilot disable<cr>", { noremap = true, silent = true, desc = "Disable Copilot" })
+    vim.keymap.set("n", "<leader>cs", "<cmd>Copilot status<cr>", { noremap = true, silent = true, desc = "Copilot Status" })
   end,
 }

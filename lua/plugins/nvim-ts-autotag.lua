@@ -1,28 +1,8 @@
+-- https://github.com/windwp/nvim-ts-autotag
 return {
   "windwp/nvim-ts-autotag",
-  dependencies = "nvim-treesitter/nvim-treesitter",
-  event = "InsertEnter",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
-    require("nvim-ts-autotag").setup({
-      filetypes = {
-        "html",
-        "xml",
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "svelte",
-        "vue",
-        "tsx",
-        "jsx",
-        "rescript",
-        "markdown",
-        "php",
-        "astro",
-        "handlebars",
-        "hbs",
-        "eruby"
-      },
-    })
+    require("nvim-ts-autotag").setup()
   end,
 }

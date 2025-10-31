@@ -2,41 +2,22 @@
 return {
   "leoluz/nvim-dap-go",
   ft = "go",
-  dependencies = {
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-    "theHamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
-  },
+  optional = true,
   config = function()
-    require("dap-go").setup({
-      dap_configurations = {
-        {
-          type = "go",
-          name = "Debug File",
-          request = "launch",
-          program = "${file}"
-        },
-      }
+    require("dap-go").setup()
+
+    -- Go-specific debug keybindings (buffer-local, only in Go files)
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "go",
+      callback = function(args)
+        vim.keymap.set("n", "<leader>df", function()
+          require("dap-go").debug_test()
+        end, { buffer = args.buf, desc = "Debug Test" })
+
+        vim.keymap.set("n", "<leader>dL", function()
+          require("dap-go").debug_last_test()
+        end, { buffer = args.buf, desc = "Debug Last Test" })
+      end,
     })
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>d",  group = "Debug" },
-      {
-        "<leader>df",
-        function()
-          require('dap').run({
-            type = 'go',
-            name = 'Debug File',
-            request = 'launch',
-            program =
-            '${file}'
-          })
-        end,
-        desc = "Debug File"
-      },
-      { "<leader>dt", function() require("dap-go").debug_test() end,      desc = "Debug Test (Nearest)" },
-      { "<leader>dT", function() require("dap-go").debug_last_test() end, desc = "Debug Last Test" },
-    }, { buffer = true, filetype = "go" })
   end,
 }

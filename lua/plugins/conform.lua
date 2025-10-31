@@ -1,5 +1,7 @@
+-- https://github.com/stevearc/conform.nvim
 return {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
+  event = { "BufWritePre" },
   cmd = { "ConformInfo", "Format" },
   config = function()
     require("conform").setup({
@@ -29,16 +31,22 @@ return {
         -- Lua
         lua = { "stylua" },
 
-        -- Python (ruff handles this via LSP)
-        -- Go (gopls handles this via LSP)
-        -- Shell scripts (could add shfmt if needed)
+        -- Python
+        python = { "black" },
+
+        -- Shell
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+
+        -- Go (gopls handles formatting via LSP)
+        -- Java (google-java-format via LSP)
       },
 
       -- Configure formatters
       formatters = {
         prettier = {
           -- Only run prettier if config file exists
-          condition = function(ctx)
+          condition = function(self, ctx)
             return vim.fs.find({
               ".prettierrc",
               ".prettierrc.json",
@@ -51,10 +59,15 @@ return {
           end,
         },
         stylua = {
-          condition = function(ctx)
+          condition = function(self, ctx)
             return vim.fs.find({ "stylua.toml", ".stylua.toml" }, { path = ctx.filename, upward = true })[1]
           end,
         },
+      },
+
+      -- Default format options
+      default_format_opts = {
+        lsp_format = "fallback",
       },
     })
 
@@ -68,7 +81,7 @@ return {
           ["end"] = { args.line2, end_line:len() },
         }
       end
-      require("conform").format({ async = true, lsp_fallback = true, range = range })
+      require("conform").format({ async = true, lsp_format = "fallback", range = range })
     end, { range = true })
   end,
 }

@@ -50,6 +50,10 @@ vo.wrapscan = true                                         -- Searches wrap arou
 vo.wildignore:append({ ".git", "node_modules", "vendor" }) -- Ignore these directories when searching
 vo.path:append("**")                                       -- Search in the current directory and its subdirectories
 
+-- Spell Checking
+vo.spell = true           -- Enable spell checking
+vo.spelllang = "en_us"    -- Set spell check language to US English
+
 -- Backup and Swap Files
 vo.backup = false      -- Don't create backup files
 vo.writebackup = false -- Don't create a backup before overwriting a file

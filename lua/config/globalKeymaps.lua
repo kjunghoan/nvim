@@ -1,10 +1,8 @@
 local opts = { noremap = true, silent = true }
 local km = vim.keymap.set
 
--- Leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-km("", "<Space>", "<Nop>", opts)
+-- Leader key is set in init.lua before this file loads
+-- No need to remap space to Nop when using it as leader
 
 -- Move text up and down
 km("v", "J", ":m '>+1<CR>gv=gv")
@@ -22,3 +20,6 @@ km("n", "<leader>sh", ":split<CR>", { noremap = true, silent = true, desc = "Spl
 
 -- Wrap lines toggle
 km("n", "<leader>w", ":set wrap!<CR>", { noremap = true, silent = true, desc = "Toggle Wrap" })
+
+-- Clear search highlight
+km("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true, desc = "Clear Search Highlight" })

@@ -1,4 +1,4 @@
--- lua/plugins/ltex_extra.lua
+-- https://github.com/barreiroleo/ltex_extra.nvim
 return {
   "barreiroleo/ltex_extra.nvim",
   ft = { "markdown", "tex", "latex", "text" },
@@ -27,3 +27,4 @@ return {
     }
   end
 }
+

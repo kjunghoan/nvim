@@ -1,78 +1,62 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/playground",
-      "windwp/nvim-ts-autotag",
-    },
-    config = function()
-      -- Import nvim-treesitter plugin
-      local treesitter = require("nvim-treesitter.configs")
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      -- Your languages
+      ensure_installed = {
+        -- Core
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
 
-      -- Configure treesitter
-      treesitter.setup({
-        -- Enable syntax highlighting (now async by default in 0.11)
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
+        -- Your stack
+        "javascript",
+        "typescript",
+        "tsx",
+        "python",
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+        "java",
 
-        -- Ensure these language parsers are installed
-        ensure_installed = {
-          "json",
-          "javascript",
-          "typescript",
-          "tsx",
-          "yaml",
-          "html",
-          "css",
-          "java",
-          "python",
-          "lua",
-          "go",
-          "gomod",
-          "gowork",
-          "proto",
-          "gotmpl",
-          "markdown",
-          "markdown_inline",
-          "make",
-          "bash",
-          "vim",
-          "dockerfile",
-          "gitignore",
-          "query",
-          "ini",
-          "toml",
-        },
+        -- DevOps/Config
+        "yaml",
+        "json",
+        "toml",
+        "hcl",
+        "dockerfile",
+        "proto",
 
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
+        -- Markup/Web
+        "markdown",
+        "markdown_inline",
+        "html",
+        "css",
 
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
-      })
-      local wk = require("which-key")
-      wk.add({
-        { "<leader>Ti", "<cmd>TSInstallInfo<cr>", desc = "Installation Info" },
-        { "<leader>Tu", "<cmd>TSUpdate<cr>",      desc = "Update Parsers" },
-        { "<leader>Tl", ":TSInstall ",            desc = "Install Language Parser" },
-        { "<leader>Ts", ":TSInstallSync ",        desc = "Sync Parsers" },
-      })
-    end,
-  },
+        -- Utilities
+        "bash",
+        "make",
+        "gitignore",
+        "ini",
+      },
+
+      -- Auto-install missing parsers
+      auto_install = true,
+
+      -- Treesitter-based syntax highlighting
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+
+      -- Treesitter-based indentation
+      indent = {
+        enable = true,
+      },
+    })
+  end,
 }

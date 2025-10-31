@@ -1,1 +1,0 @@
-- hey I'm starting a new nvim config to be inline for version 0.11.4 please act as a nitpicky friend that loves to verify everything with docs to help set this up

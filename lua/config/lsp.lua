@@ -9,7 +9,6 @@ vim.lsp.config("*", {
 -- LspAttach autocmd for keybindings and per-buffer setup
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
     local bufnr = args.buf
 
     -- Neovim 0.11+ provides these by default:
@@ -28,7 +27,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = bufnr, noremap = true, silent = true }
 
     -- Go to definition
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+    vim.keymap.set(
+      "n",
+      "gd",
+      vim.lsp.buf.definition,
+      vim.tbl_extend("force", opts, { desc = "Go to definition" })
+    )
 
     -- Go to declaration
     vim.keymap.set(
@@ -46,23 +50,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.signature_help,
       vim.tbl_extend("force", opts, { desc = "Signature help" })
     )
-
-    -- Workspace folders
-    vim.keymap.set(
-      "n",
-      "<leader>wa",
-      vim.lsp.buf.add_workspace_folder,
-      vim.tbl_extend("force", opts, { desc = "Add workspace folder" })
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>wr",
-      vim.lsp.buf.remove_workspace_folder,
-      vim.tbl_extend("force", opts, { desc = "Remove workspace folder" })
-    )
-    vim.keymap.set("n", "<leader>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, vim.tbl_extend("force", opts, { desc = "List workspace folders" }))
 
     -- Diagnostics
     -- Note: ]d, [d, ]D, [D, and <C-w>d are built-in defaults in 0.11+
@@ -103,5 +90,16 @@ for type, icon in pairs(signs) do
 end
 
 -- Enable LSP servers
--- Server configs are in lsp/*.lua files
-vim.lsp.enable({ "lua_ls", "ts_ls", "pyright", "gopls", "jdtls", "tofu_ls", "yamlls", "ruby_lsp", "bashls" })
+vim.lsp.enable({
+  "lua_ls",
+  "ts_ls",
+  "pyright",
+  "gopls",
+  "jdtls",
+  "tofu_ls",
+  "yamlls",
+  "ruby_lsp",
+  "bashls",
+  "jsonls",
+  "pbls",
+})

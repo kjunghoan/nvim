@@ -67,6 +67,11 @@ if ! command -v convert &>/dev/null || ! command -v identify &>/dev/null; then
   tools_to_install+=("imagemagick")
 fi
 
+if ! command -v tree-sitter &>/dev/null; then
+  echo "tree-sitter CLI not found, will install..."
+  tools_to_install+=("tree-sitter-cli")
+fi
+
 # Install tools if any are missing
 if [ ${#tools_to_install[@]} -gt 0 ]; then
   echo "Installing: ${tools_to_install[*]}"
@@ -159,6 +164,7 @@ echo "- fd: $(fd --version | head -1)"
 echo "- uv: $(uv --version 2>&1 || echo 'installed')"
 echo "- ImageMagick: $(convert -version | head -1 | awk '{print $3}' || echo 'installed')"
 echo "- unzip: $(unzip -v | head -1 | awk '{print $2}' || echo 'installed')"
+echo "- tree-sitter: $(tree-sitter --version 2>&1 || echo 'installed')"
 echo "- Node.js: $(node --version)"
 echo "- Python (venv): $("$VENV_DIR/bin/python3" --version)"
 echo ""

@@ -6,15 +6,26 @@ return {
   },
   config = function()
     local null_ls = require("null-ls")
+    local b = null_ls.builtins
 
     null_ls.setup({
-      diagnostics_format = "[#{s}] #{m}",
-    })
+      sources = {
+        -- Formatters
+        b.formatting.prettier,
+        b.formatting.stylua,
+        b.formatting.black,
+        b.formatting.shfmt,
+        b.formatting.gofumpt,
+        b.formatting.mdformat,
 
-    require("mason-null-ls").setup({
-      ensure_installed = nil, -- Use mason-tool-installer instead
-      automatic_installation = false,
-      automatic_setup = true, -- Automatically setup all installed sources
+        -- Linters
+        b.diagnostics.yamllint,
+        b.diagnostics.markdownlint,
+        b.diagnostics.golangci_lint,
+        b.diagnostics.buf,
+        b.diagnostics.protolint,
+      },
+      diagnostics_format = "[#{s}] #{m}",
     })
   end,
 }

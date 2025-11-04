@@ -13,8 +13,8 @@ require("config.lsp")
 spec("colorscheme")
 
 -- plugins
--- spec("plugins.which-key") -- Commented out, trying mini.clue instead
 spec("plugins.mini-icons")
+spec("plugins.mini-ai")
 spec("plugins.mini-clue")
 spec("plugins.mini-statusline")
 spec("plugins.mini-git")
@@ -37,7 +37,6 @@ spec("plugins.nvim-lspconfig")
 spec("plugins.mason-lspconfig")
 spec("plugins.mason-tool-installer")
 spec("plugins.none-ls")
-spec("plugins.conform")
 spec("plugins.dap")
 spec("plugins.jdtls")
 spec("plugins.image")

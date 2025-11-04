@@ -11,7 +11,6 @@ return {
       diagnostics_format = "[#{s}] #{m}",
     })
 
-    -- Auto-setup all installed Mason tools with none-ls
     require("mason-null-ls").setup({
       ensure_installed = nil, -- Use mason-tool-installer instead
       automatic_installation = false,

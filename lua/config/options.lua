@@ -1,5 +1,9 @@
 local vo = vim.opt
 
+-- Disable unused providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 vim.scriptencoding = "utf-8"
 vo.encoding = "utf-8"
 vo.fileencoding = "utf-8"

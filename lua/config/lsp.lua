@@ -53,7 +53,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Diagnostics
     -- Note: ]d, [d, ]D, [D, and <C-w>d are built-in defaults in 0.11+
-    -- Only adding supplementary keybindings here
+    -- Explicitly setting them here for consistency and to ensure they work
+    vim.keymap.set(
+      "n",
+      "[d",
+      vim.diagnostic.goto_prev,
+      vim.tbl_extend("force", opts, { desc = "Previous diagnostic" })
+    )
+    vim.keymap.set(
+      "n",
+      "]d",
+      vim.diagnostic.goto_next,
+      vim.tbl_extend("force", opts, { desc = "Next diagnostic" })
+    )
     vim.keymap.set(
       "n",
       "<leader>ld",

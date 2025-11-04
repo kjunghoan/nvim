@@ -5,17 +5,6 @@ return {
   config = function()
     require("mason-tool-installer").setup({
       ensure_installed = {
-        -- LSP servers
-        "lua-language-server",
-        "typescript-language-server",
-        "pyright",
-        "gopls",
-        "jdtls",
-        "tofu-ls",
-        "yaml-language-server",
-        "ruby-lsp",
-        "bash-language-server",
-
         -- Formatters
         "stylua",
         "prettier",
@@ -23,6 +12,7 @@ return {
         "gofumpt",
         "google-java-format",
         "shfmt",
+        "mdformat",
 
         -- Debuggers
         "debugpy",

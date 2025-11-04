@@ -1,8 +1,11 @@
 -- https://github.com/stevearc/conform.nvim
 return {
   "stevearc/conform.nvim",
-  event = { "BufWritePre" },
+  event = { "BufWritePre", "VeryLazy" },
   cmd = { "ConformInfo", "Format" },
+  keys = {
+    { "<leader>lf", "<cmd>Format<cr>", desc = "Format buffer", mode = { "n", "v" } },
+  },
   config = function()
     require("conform").setup({
       formatters_by_ft = {
@@ -26,7 +29,7 @@ return {
         yaml = { "prettier" },
 
         -- Documentation
-        markdown = { "prettier" },
+        markdown = { "mdformat" },
 
         -- Lua
         lua = { "stylua" },

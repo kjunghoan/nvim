@@ -20,8 +20,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- gO   - document symbols
     -- K    - hover
 
-    -- Set formatexpr to use LSP formatting with gq
-    vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
+    -- Don't set formatexpr - let conform handle gq formatting
+    -- vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
 
     -- Additional keybindings
     local opts = { buffer = bufnr, noremap = true, silent = true }
@@ -82,24 +82,30 @@ vim.diagnostic.config({
   },
 })
 
--- Diagnostic signs
-local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- Diagnostic signs (using modern vim.diagnostic.config API)
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✘",
+      [vim.diagnostic.severity.WARN] = "▲",
+      [vim.diagnostic.severity.HINT] = "⚑",
+      [vim.diagnostic.severity.INFO] = "»",
+    },
+  },
+})
 
 -- Enable LSP servers
-vim.lsp.enable({
-  "lua_ls",
-  "ts_ls",
-  "pyright",
-  "gopls",
-  "jdtls",
-  "tofu_ls",
-  "yamlls",
-  "ruby_lsp",
-  "bashls",
-  "jsonls",
-  "pbls",
-})
+-- Now handled by mason-lspconfig (see lua/plugins/mason-lspconfig.lua)
+-- vim.lsp.enable({
+--   "lua_ls",
+--   "ts_ls",
+--   "pyright",
+--   "gopls",
+--   "jdtls",
+--   "tofu_ls",
+--   "yamlls",
+--   "ruby_lsp",
+--   "bashls",
+--   "jsonls",
+--   "pbls",
+-- })

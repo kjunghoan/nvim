@@ -15,6 +15,16 @@ return {
         "mdformat",
         "luacheck",
 
+        -- Linters
+        "flake8",
+        "luacheck",
+        "eslint_d",
+        "yamllint",
+        "markdownlint",
+        "golangci-lint",
+        "buf",
+        "protolint",
+
         -- Debuggers
         "debugpy",
         "java-debug-adapter",

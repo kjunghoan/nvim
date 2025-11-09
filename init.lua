@@ -39,7 +39,7 @@ spec("plugins.mason-tool-installer")
 spec("plugins.conform")
 spec("plugins.nvim-lint")
 spec("plugins.dap")
-spec("plugins.jdtls")
+-- spec("plugins.jdtls")
 spec("plugins.image")
 spec("plugins.render-markdown")
 

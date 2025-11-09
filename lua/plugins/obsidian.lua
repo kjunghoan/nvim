@@ -4,7 +4,7 @@ return {
   version = "*",
   lazy = false,
   opts = {
-    legacy_commands = false, -- Use new command format (Obsidian <subcommand>)
+    legacy_commands = false,
     workspaces = {
       {
         name = "primary",

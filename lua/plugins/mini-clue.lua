@@ -60,7 +60,7 @@ return {
       },
 
       window = {
-        delay = 300, -- Match your timeoutlen
+        delay = 300,
         config = {
           width = "auto",
         },

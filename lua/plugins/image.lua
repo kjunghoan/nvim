@@ -5,7 +5,7 @@ return {
   build = false,
   opts = {
     backend = "kitty",
-    processor = "magick_cli", -- Uses ImageMagick CLI (simpler setup)
+    processor = "magick_cli",
     integrations = {
       markdown = {
         enabled = true,

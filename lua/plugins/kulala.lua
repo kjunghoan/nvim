@@ -1,7 +1,7 @@
 -- https://github.com/mistweaverco/kulala.nvim
 return {
   "mistweaverco/kulala.nvim",
-  ft = { "http", "rest" }, -- Only load for .http and .rest files
+  ft = { "http", "rest" },
   config = function()
     require("kulala").setup({
       -- Display responses in floating window
@@ -11,7 +11,6 @@ return {
       debug = false,
     })
 
-    -- Keymaps for HTTP requests (only in http/rest buffers)
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "http", "rest" },
       callback = function()

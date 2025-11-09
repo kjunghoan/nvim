@@ -9,8 +9,7 @@ return {
   },
   config = function()
     require("kubectl").setup({
-      -- Use default kubectl from PATH
-      namespace = "All", -- Start with all namespaces
+      namespace = "All",
     })
 
     -- Smart helm path detection

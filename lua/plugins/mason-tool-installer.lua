@@ -22,7 +22,7 @@ return {
       },
       auto_update = false,
       run_on_start = true,
-      start_delay = 3000, -- 3 second delay to not slow down startup
+      start_delay = 3000,
     })
   end,
 }

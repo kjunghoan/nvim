@@ -49,7 +49,7 @@ return {
       formatters = {
         prettier = {
           -- Only run prettier if config file exists
-          condition = function(self, ctx)
+          condition = function(_, ctx)
             return vim.fs.find({
               ".prettierrc",
               ".prettierrc.json",
@@ -62,7 +62,7 @@ return {
           end,
         },
         stylua = {
-          condition = function(self, ctx)
+          condition = function(_, ctx)
             return vim.fs.find({ "stylua.toml", ".stylua.toml" }, { path = ctx.filename, upward = true })[1]
           end,
         },

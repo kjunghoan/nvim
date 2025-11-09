@@ -51,8 +51,17 @@ return {
     -- prev = "<M-k>"
 
     -- Keymaps for toggling copilot
-    vim.keymap.set("n", "<leader>ce", "<cmd>Copilot enable<cr>", { noremap = true, silent = true, desc = "Enable Copilot" })
-    vim.keymap.set("n", "<leader>cd", "<cmd>Copilot disable<cr>", { noremap = true, silent = true, desc = "Disable Copilot" })
-    vim.keymap.set("n", "<leader>cs", "<cmd>Copilot status<cr>", { noremap = true, silent = true, desc = "Copilot Status" })
+    vim.keymap.set("n", "<leader>ce",
+      "<cmd>Copilot enable<cr>",
+      { noremap = true, silent = true, desc = "Enable Copilot" }
+    )
+    vim.keymap.set("n", "<leader>cd",
+      "<cmd>Copilot disable<cr>",
+      { noremap = true, silent = true, desc = "Disable Copilot" }
+    )
+    vim.keymap.set("n", "<leader>cs",
+      "<cmd>Copilot status<cr>",
+      { noremap = true, silent = true, desc = "Copilot Status" }
+    )
   end,
 }

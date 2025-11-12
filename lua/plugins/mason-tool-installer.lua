@@ -13,6 +13,7 @@ return {
         "google-java-format",
         "shfmt",
         "mdformat",
+        "luacheck",
 
         -- Debuggers
         "debugpy",

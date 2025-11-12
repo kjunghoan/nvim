@@ -16,10 +16,8 @@ return {
         "gopls",
         "jdtls",
         "yamlls",
-        "ruby_lsp",
         "bashls",
         "jsonls",
-        "pbls",
       },
       -- Auto-enable installed servers (this replaces vim.lsp.enable)
       handlers = {

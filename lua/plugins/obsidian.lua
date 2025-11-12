@@ -1,8 +1,10 @@
 -- https://github.com/obsidian-nvim/obsidian.nvim
 return {
-  "obsidian-nvim/obsidian.nvim",
+  "epwalsh/obsidian.nvim",
   version = "*",
   lazy = false,
+  -- ft = { "markdown" },
+  dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     legacy_commands = false,
     workspaces = {
@@ -84,17 +86,17 @@ return {
       vim.keymap.set("n", keys, cmd, { noremap = true, silent = true, desc = desc })
     end
 
-    map("<leader>on", "<cmd>Obsidian new<cr>", "New Note")
-    map("<leader>of", "<cmd>Obsidian quick_switch<cr>", "Find Note")
-    map("<leader>os", "<cmd>Obsidian search<cr>", "Search Notes")
-    map("<leader>oo", "<cmd>Obsidian open<cr>", "Open in Obsidian")
-    map("<leader>ob", "<cmd>Obsidian backlinks<cr>", "Show Backlinks")
-    map("<leader>ol", "<cmd>Obsidian link<cr>", "Link Note")
-    map("<leader>oL", "<cmd>Obsidian link new<cr>", "Link New Note")
-    map("<leader>ot", "<cmd>Obsidian template<cr>", "Insert Template")
-    map("<leader>od", "<cmd>Obsidian today<cr>", "Open Today Note")
-    map("<leader>oy", "<cmd>Obsidian yesterday<cr>", "Open Yesterday Note")
-    map("<leader>ow", "<cmd>Obsidian workspace<cr>", "Switch Workspace")
-    map("<leader>op", "<cmd>Obsidian paste img<cr>", "Paste Image")
+    map("<leader>on", "<cmd>ObsidianNew<cr>", "New Note")
+    map("<leader>of", "<cmd>ObsidianQuickSwitch<cr>", "Find Note")
+    map("<leader>os", "<cmd>ObsidianSearch<cr>", "Search Notes")
+    map("<leader>oo", "<cmd>ObsidianOpen<cr>", "Open in Obsidian")
+    map("<leader>ob", "<cmd>ObsidianBacklinks<cr>", "Show Backlinks")
+    map("<leader>ol", "<cmd>ObsidianLink<cr>", "Link Note")
+    map("<leader>oL", "<cmd>ObsidianLinkNew<cr>", "Link New Note")
+    map("<leader>ot", "<cmd>ObsidianTemplate<cr>", "Insert Template")
+    map("<leader>od", "<cmd>ObsidianToday<cr>", "Open Today Note")
+    map("<leader>oy", "<cmd>ObsidianYesterday<cr>", "Open Yesterday Note")
+    map("<leader>ow", "<cmd>ObsidianWorkspace<cr>", "Switch Workspace")
+    map("<leader>op", "<cmd>ObsidianPasteImg<cr>", "Paste Image")
   end,
 }

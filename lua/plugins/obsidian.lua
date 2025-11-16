@@ -3,7 +3,6 @@ return {
   "epwalsh/obsidian.nvim",
   version = "*",
   lazy = false,
-  -- ft = { "markdown" },
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     legacy_commands = false,
@@ -86,17 +85,23 @@ return {
       vim.keymap.set("n", keys, cmd, { noremap = true, silent = true, desc = desc })
     end
 
+    local vmap = function(keys, cmd, desc)
+      vim.keymap.set("v", keys, cmd, { noremap = true, silent = true, desc = desc })
+    end
+
     map("<leader>on", "<cmd>ObsidianNew<cr>", "New Note")
     map("<leader>of", "<cmd>ObsidianQuickSwitch<cr>", "Find Note")
     map("<leader>os", "<cmd>ObsidianSearch<cr>", "Search Notes")
     map("<leader>oo", "<cmd>ObsidianOpen<cr>", "Open in Obsidian")
     map("<leader>ob", "<cmd>ObsidianBacklinks<cr>", "Show Backlinks")
-    map("<leader>ol", "<cmd>ObsidianLink<cr>", "Link Note")
-    map("<leader>oL", "<cmd>ObsidianLinkNew<cr>", "Link New Note")
     map("<leader>ot", "<cmd>ObsidianTemplate<cr>", "Insert Template")
     map("<leader>od", "<cmd>ObsidianToday<cr>", "Open Today Note")
     map("<leader>oy", "<cmd>ObsidianYesterday<cr>", "Open Yesterday Note")
     map("<leader>ow", "<cmd>ObsidianWorkspace<cr>", "Switch Workspace")
     map("<leader>op", "<cmd>ObsidianPasteImg<cr>", "Paste Image")
+
+    vmap("<leader>ol", ":ObsidianLink<cr>", "Link Selection")
+    vmap("<leader>oL", ":ObsidianLinkNew<cr>", "Link New from Selection")
+    vmap("<leader>ox", ":ObsidianExtractNote<cr>", "Extract to New Note")
   end,
 }

@@ -50,6 +50,7 @@ return {
         { mode = "n", keys = "<Leader>d", desc = "+Debug" },
         { mode = "n", keys = "<Leader>g", desc = "+Git" },
         { mode = "n", keys = "<Leader>l", desc = "+LSP" },
+        { mode = "n", keys = "<Leader>L", desc = "+LaTeX" },
         { mode = "n", keys = "<Leader>o", desc = "+Obsidian" },
         { mode = "n", keys = "<Leader>p", desc = "+Oil" },
         { mode = "n", keys = "<Leader>r", desc = "+Refactor" },

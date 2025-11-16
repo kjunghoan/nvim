@@ -2,6 +2,14 @@
 
 # This is a script that will set up the environment for Neovim 0.11.4 config
 
+# Parse flags
+INSTALL_MAC_EXTRAS=false
+for arg in "$@"; do
+  if [[ "$arg" == "-mac" || "$arg" == "--mac" ]]; then
+    INSTALL_MAC_EXTRAS=true
+  fi
+done
+
 # Ask if user has read the setup file
 read -p "Have you read the contents of this setup file? (y/n) [n]: " read_file
 if [[ -z "$read_file" || "$read_file" =~ ^[Nn]$ ]]; then
@@ -70,6 +78,30 @@ fi
 if ! command -v tree-sitter &>/dev/null; then
   echo "tree-sitter CLI not found, will install..."
   tools_to_install+=("tree-sitter-cli")
+fi
+
+# macOS-specific tools (LaTeX) - only if -mac or --mac flag is provided
+if [ "$INSTALL_MAC_EXTRAS" = true ]; then
+  echo "macOS extras enabled. Checking for LaTeX tools..."
+  casks_to_install=()
+
+  if ! command -v pdflatex &>/dev/null && ! command -v latexmk &>/dev/null; then
+    echo "LaTeX distribution not found, will install MacTeX (~3GB)..."
+    casks_to_install+=("mactex-no-gui")
+  fi
+
+  if ! [ -d "/Applications/Skim.app" ]; then
+    echo "Skim PDF viewer not found, will install..."
+    casks_to_install+=("skim")
+  fi
+
+  # Install casks if any are queued
+  if [ ${#casks_to_install[@]} -gt 0 ]; then
+    echo "Installing macOS extras: ${casks_to_install[*]}"
+    brew install --cask "${casks_to_install[@]}"
+  else
+    echo "All macOS extras already installed!"
+  fi
 fi
 
 # Install tools if any are missing
@@ -167,6 +199,10 @@ echo "- unzip: $(unzip -v | head -1 | awk '{print $2}' || echo 'installed')"
 echo "- tree-sitter: $(tree-sitter --version 2>&1 || echo 'installed')"
 echo "- Node.js: $(node --version)"
 echo "- Python (venv): $("$VENV_DIR/bin/python3" --version)"
+if [ "$INSTALL_MAC_EXTRAS" = true ]; then
+  echo "- LaTeX: $(pdflatex --version 2>&1 | head -1 || echo 'not installed')"
+  echo "- Skim: $([ -d "/Applications/Skim.app" ] && echo 'installed' || echo 'not installed')"
+fi
 echo ""
 echo "Next steps:"
 echo "1. Start Neovim with: nvim"

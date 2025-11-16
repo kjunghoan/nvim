@@ -42,6 +42,7 @@ spec("plugins.dap")
 -- spec("plugins.jdtls")
 spec("plugins.image")
 spec("plugins.render-markdown")
+spec("plugins.vimtex")
 spec("plugins.nomad")
 spec("plugins.triforce")
 

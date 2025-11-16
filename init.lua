@@ -41,5 +41,6 @@ spec("plugins.nvim-lint")
 spec("plugins.dap")
 spec("plugins.jdtls")
 spec("plugins.image")
+spec("plugins.render-markdown")
 
 require("config.lazy")

@@ -9,22 +9,22 @@ return {
     integrations = {
       markdown = {
         enabled = true,
-        clear_in_insert_mode = false,
+        clear_in_insert_mode = true,
         download_remote_images = true,
         only_render_image_at_cursor = false,
         filetypes = { "markdown", "vimwiki" },
       },
       neorg = {
-        enabled = false,
+        enabled = true,
       },
       typst = {
-        enabled = false,
+        enabled = true,
       },
       html = {
-        enabled = false,
+        enabled = true,
       },
       css = {
-        enabled = false,
+        enabled = true,
       },
     },
     max_width = nil,

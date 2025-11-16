@@ -16,7 +16,7 @@ return {
 
     -- UI options
     ui = {
-      enable = true,
+      enable = false,
       update_debounce = 200,
       bullets = {
         char = "•",

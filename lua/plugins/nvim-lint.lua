@@ -11,7 +11,6 @@ return {
       javascript = { "eslint" },
       typescript = { "eslint" },
       yaml = { "yamllint" },
-      markdown = { "markdownlint" },
       go = { "golangcilint" },
       proto = { "buf_lint", "protolint" },
     }

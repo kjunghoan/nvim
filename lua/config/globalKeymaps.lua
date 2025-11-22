@@ -18,8 +18,11 @@ km("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)
 km("n", "<leader>sv", ":vsplit<CR>", { noremap = true, silent = true, desc = "Split vertically" })
 km("n", "<leader>sh", ":split<CR>", { noremap = true, silent = true, desc = "Split Horizontally" })
 
--- Wrap lines toggle
-km("n", "<leader>w", ":set wrap!<CR>", { noremap = true, silent = true, desc = "Toggle Wrap" })
+-- Toggle wrap with linebreak
+km("n", "<leader>w", function()
+  vim.opt.wrap = not vim.opt.wrap:get()
+  vim.opt.linebreak = not vim.opt.linebreak:get()
+end, { noremap = true, silent = true, desc = "Toggle Wrap at Words" })
 
 -- Clear search highlight
 km("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true, desc = "Clear Search Highlight" })

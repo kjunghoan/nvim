@@ -5,3 +5,4 @@ venv
 CLAUDE.md
 CLAUDE.md
 .harper-dictionary.txt
+lua/local-config.lua

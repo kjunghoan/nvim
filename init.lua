@@ -2,6 +2,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 require("config.launch")
+pcall(require, "local-config") -- Load local config if it exists
 require("config.options")
 require("config.filetypes")
 require("config.globalKeymaps")

@@ -1,6 +1,6 @@
 return {
   "lervag/vimtex",
-  ft = { "tex" },
+  lazy = false,
   config = function()
     vim.g.vimtex_view_method = "skim"
     vim.g.vimtex_compiler_latexmk = {
@@ -23,6 +23,6 @@ return {
     map("<leader>Lc", "<cmd>VimtexClean<cr>", "Clean")
     map("<leader>Le", "<cmd>VimtexErrors<cr>", "Errors")
     map("<leader>Lk", "<cmd>VimtexStop<cr>", "Stop")
-    map("<leader>Lt", "<cmd>VimtexToc<cr>", "TOC")
+    map("<leader>Lt", "<cmd>VimtexTocToggle<cr>", "TOC")
   end,
 }

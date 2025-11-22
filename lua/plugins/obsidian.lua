@@ -4,14 +4,19 @@ return {
   version = "*",
   lazy = false,
   dependencies = { "nvim-lua/plenary.nvim" },
-  opts = {
-    legacy_commands = false,
-    workspaces = {
-      {
-        name = "primary",
-        path = "~/notes",
-      },
-    },
+  opts = function()
+    local default_workspaces = {}
+
+    -- Check if local-config was loaded (by init.lua)
+    local local_config = package.loaded["local-config"]
+    local workspaces = default_workspaces
+    if local_config and local_config.obsidian_workspaces then
+      workspaces = local_config.obsidian_workspaces
+    end
+
+    return {
+      legacy_commands = false,
+      workspaces = workspaces,
 
     -- UI options
     ui = {
@@ -60,16 +65,21 @@ return {
       time_format = "%H:%M",
     },
 
-    -- Use default vim.ui.open for opening URIs
-    -- (won't work on headless, but graceful fallback)
     open = {
       func = vim.ui.open,
       app_foreground = false,
     },
-  },
+    }
+  end,
 
   config = function(_, opts)
-    require("obsidian").setup(opts)
+    -- Only setup if we have workspaces configured
+    if opts.workspaces and #opts.workspaces > 0 then
+      require("obsidian").setup(opts)
+    else
+      vim.notify("No Obsidian workspaces configured. Create local-config.lua to add workspaces.", vim.log.levels.WARN)
+      return
+    end
 
     -- Markdown file settings
     vim.api.nvim_create_autocmd("FileType", {

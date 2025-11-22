@@ -59,10 +59,6 @@ vo.wildignore:append({ -- Ignore these directories when searching
   "vendor"
 })
 
--- Spell Checking
-vo.spell = true           -- Enable spell checking
-vo.spelllang = "en_us"    -- Set spellcheck language
-
 -- Backup and Swap Files
 vo.backup = false      -- Don't create backup files
 vo.writebackup = false -- Don't create a backup before overwriting a file

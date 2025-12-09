@@ -1,6 +1,6 @@
 -- https://github.com/bash-lsp/bash-language-server
 return {
   cmd = { "bash-language-server", "start" },
-  filetypes = { "sh", "bash" },
+  filetypes = { "sh", "bash", "ghostty" },
   root_markers = { ".git" },
 }

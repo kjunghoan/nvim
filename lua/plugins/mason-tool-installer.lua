@@ -1,39 +1,39 @@
 -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-return {
-  "WhoIsSethDaniel/mason-tool-installer.nvim",
-  dependencies = { "mason-org/mason.nvim" },
-  config = function()
-    require("mason-tool-installer").setup({
-      ensure_installed = {
-        -- Formatters
-        "stylua",
-        "prettier",
-        "black",
-        "gofumpt",
-        "google-java-format",
-        "shfmt",
-        "mdformat",
-        "luacheck",
-
-        -- Linters
-        "flake8",
-        "luacheck",
-        "eslint_d",
-        "yamllint",
-        "markdownlint",
-        "golangci-lint",
-        "buf",
-        "protolint",
-
-        -- Debuggers
-        "debugpy",
-        "java-debug-adapter",
-        "delve",
-        "js-debug-adapter",
-      },
-      auto_update = false,
-      run_on_start = true,
-      start_delay = 3000,
-    })
-  end,
-}
+-- return {
+--   "WhoIsSethDaniel/mason-tool-installer.nvim",
+--   dependencies = { "mason-org/mason.nvim" },
+--   config = function()
+--     require("mason-tool-installer").setup({
+--       ensure_installed = {
+--         -- Formatters
+--         "stylua",
+--         "prettier",
+--         "black",
+--         "gofumpt",
+--         "google-java-format",
+--         "shfmt",
+--         "mdformat",
+--         "luacheck",
+--
+--         -- Linters
+--         "flake8",
+--         "luacheck",
+--         "eslint_d",
+--         "yamllint",
+--         "markdownlint",
+--         "golangci-lint",
+--         "buf",
+--         "protolint",
+--
+--         -- Debuggers
+--         "debugpy",
+--         "java-debug-adapter",
+--         "delve",
+--         "js-debug-adapter",
+--       },
+--       auto_update = false,
+--       run_on_start = true,
+--       start_delay = 3000,
+--     })
+--   end,
+-- }

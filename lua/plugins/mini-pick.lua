@@ -3,7 +3,13 @@ return {
   "nvim-mini/mini.pick",
   version = false,
   config = function()
-    require("mini.pick").setup()
+    require("mini.pick").setup({
+      mappings = {
+        choose_in_split = "<M-s>",
+        move_down = "<C-j>",
+        move_up = "<C-k>",
+      }
+    })
 
     -- Plugin-specific keymaps
     vim.keymap.set("n", "<leader>ff", function()

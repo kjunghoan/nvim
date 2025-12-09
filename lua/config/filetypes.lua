@@ -1,10 +1,11 @@
 -- Custom filetype detection
 vim.filetype.add({
   extension = {
-    rest = "http", -- Treat .rest files as http filetype
-    sh = "bash",   -- Treat .sh files as bash filetype
+    rest = "http",
+    sh = "bash",
+    ghostty = "config",
   },
   pattern = {
-    ["Dockerfile.*"] = "dockerfile",   -- Treat files starting with Dockerfile as dockerfile filetype
+    ["Dockerfile.*"] = "dockerfile", -- Treat files starting with Dockerfile as Dockerfile filetype
   },
 })

@@ -22,7 +22,7 @@ return {
         hide_during_completion = true,
         debounce = 75,
         keymap = {
-          accept = "<M-l>",
+          accept = "<C-M-l>",
           accept_word = false,
           accept_line = false,
           next = "<M-j>",
@@ -51,15 +51,21 @@ return {
     -- prev = "<M-k>"
 
     -- Keymaps for toggling copilot
-    vim.keymap.set("n", "<leader>ce",
+    vim.keymap.set(
+      "n",
+      "<leader>ce",
       "<cmd>Copilot enable<cr>",
       { noremap = true, silent = true, desc = "Enable Copilot" }
     )
-    vim.keymap.set("n", "<leader>cd",
+    vim.keymap.set(
+      "n",
+      "<leader>cd",
       "<cmd>Copilot disable<cr>",
       { noremap = true, silent = true, desc = "Disable Copilot" }
     )
-    vim.keymap.set("n", "<leader>cs",
+    vim.keymap.set(
+      "n",
+      "<leader>cs",
       "<cmd>Copilot status<cr>",
       { noremap = true, silent = true, desc = "Copilot Status" }
     )

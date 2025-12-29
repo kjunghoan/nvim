@@ -6,7 +6,11 @@ return {
     require("mini.diff").setup({
       view = {
         style = "sign", -- Show diff signs in gutter
-        signs = { add = "▎", change = "▎", delete = "▎" },
+        signs = {
+          add = "+",
+          change = "~",
+          delete = "-",
+        },
       },
       mappings = {
         -- Disable defaults, we'll use leader mappings instead
@@ -18,6 +22,7 @@ return {
         goto_next = "",
         goto_last = "",
       },
+      wrap_goto = true,
     })
 
     -- Custom <leader>g mappings for git operations

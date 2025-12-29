@@ -32,7 +32,7 @@ vo.winborder = "single"
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes"  -- Always show the sign column
-vo.colorcolumn = "100" -- Highlight the 80th column
+vo.colorcolumn = "80" -- Highlight the 80th column
 vo.list = true         -- Show invisible characters
 -- Toggle line wrapping function
 

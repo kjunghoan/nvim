@@ -12,7 +12,8 @@ return {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<M-CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "hide", "fallback" },
-        ["<C-K>"] = { "show_signature", "hide_signature", "fallback" },
+        ["<C-S-K>"] = { "show_signature", "hide_signature", "fallback" },
+        ["<C-J>"] = { "show_documentation", "hide_documentation", "fallback" },
       },
       appearance = {
         nerd_font_variant = "normal",

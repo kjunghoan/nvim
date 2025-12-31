@@ -1,11 +1,10 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPost", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter.configs").setup({
-      -- Your languages
+    require("nvim-treesitter").setup({
       ensure_installed = {
         -- Core
         "lua",
@@ -13,7 +12,7 @@ return {
         "vimdoc",
         "query",
 
-        -- Your stack
+        -- languages
         "javascript",
         "typescript",
         "tsx",

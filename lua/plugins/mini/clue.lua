@@ -1,12 +1,13 @@
--- https://github.com/nvim-mini/mini.clue
 return {
   "nvim-mini/mini.clue",
-  version = false,
+  version = "*",
   config = function()
     local miniclue = require("mini.clue")
     miniclue.setup({
       triggers = {
-        -- Leader triggers
+        { mode = "n", keys = "[" },
+        { mode = "n", keys = "]" },
+
         { mode = "n", keys = "<Leader>" },
         { mode = "x", keys = "<Leader>" },
 
@@ -59,7 +60,6 @@ return {
         { mode = "n", keys = "<Leader>f", desc = "+Picker" },
         { mode = "n", keys = "<Leader>c", desc = "+Copilot" },
       },
-
       window = {
         delay = 300,
         config = {

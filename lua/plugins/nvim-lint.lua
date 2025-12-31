@@ -13,6 +13,7 @@ return {
       yaml = { "yamllint" },
       go = { "golangcilint" },
       proto = { "buf_lint", "protolint" },
+      tofu = { "tofu" },
     }
 
     -- Create autocmd to trigger linting

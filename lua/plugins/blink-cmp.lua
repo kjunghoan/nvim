@@ -1,7 +1,10 @@
 -- https://github.com/Saghen/blink.cmp
 return {
   "saghen/blink.cmp",
-  dependencies = { "rafamadriz/friendly-snippets" },
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "budimanjojo/k8s-snippets",
+  },
   version = "1.*",
   config = function()
     local blink = require("blink.cmp")
@@ -12,8 +15,6 @@ return {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<M-CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "hide", "fallback" },
-        ["<C-S-K>"] = { "show_signature", "hide_signature", "fallback" },
-        ["<C-J>"] = { "show_documentation", "hide_documentation", "fallback" },
       },
       appearance = {
         nerd_font_variant = "normal",

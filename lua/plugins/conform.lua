@@ -4,7 +4,8 @@ return {
   event = { "BufWritePre", "VeryLazy" },
   cmd = { "ConformInfo", "Format" },
   keys = {
-    { "<leader>lf", "<cmd>Format<cr>", desc = "Format buffer", mode = { "n", "v" } },
+    { "<leader>lf", "<cmd>Format<cr>", desc = "Format buffer", mode = { "n" } },
+    { "=", "<cmd>Format<cr>", mode = { "v" } },
   },
   config = function()
     require("conform").setup({
@@ -29,7 +30,7 @@ return {
         yaml = { "prettier" },
 
         -- Documentation
-        markdown = { "mdformat" },
+        markdown = { "prettier" },
 
         -- Lua
         lua = { "stylua" },
@@ -47,23 +48,12 @@ return {
 
       -- Configure formatters
       formatters = {
-        prettier = {
-          -- Only run prettier if config file exists
-          condition = function(_, ctx)
-            return vim.fs.find({
-              ".prettierrc",
-              ".prettierrc.json",
-              ".prettierrc.yml",
-              ".prettierrc.yaml",
-              ".prettierrc.js",
-              "prettier.config.js",
-              "package.json", -- May contain prettier config
-            }, { path = ctx.filename, upward = true })[1]
-          end,
-        },
         stylua = {
           condition = function(_, ctx)
-            return vim.fs.find({ "stylua.toml", ".stylua.toml" }, { path = ctx.filename, upward = true })[1]
+            return vim.fs.find(
+              { "stylua.toml", ".stylua.toml" },
+              { path = ctx.filename, upward = true }
+            )[1]
           end,
         },
       },
@@ -78,7 +68,8 @@ return {
     vim.api.nvim_create_user_command("Format", function(args)
       local range = nil
       if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+        local end_line =
+          vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
         range = {
           start = { args.line1, 0 },
           ["end"] = { args.line2, end_line:len() },

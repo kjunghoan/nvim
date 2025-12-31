@@ -38,5 +38,6 @@ spec("plugins.vimtex")
 -- spec("plugins.nomad")
 spec("plugins.typstPreview")
 spec("plugins.harpoon")
+spec("plugins.kubernetes")
 
 require("config.lazy")

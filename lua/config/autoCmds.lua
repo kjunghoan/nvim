@@ -1,61 +1,61 @@
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+local augroup = vim.api.nvim_create_augroup("UserAutoCmds", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = augroup,
   callback = function()
     vim.opt.formatoptions:remove("cro")
   end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
   pattern = {
     "netrw",
-    "Jaq",
     "qf",
     "git",
     "help",
     "man",
     "lspinfo",
     "oil",
-    "spectre_panel",
-    "lir",
-    "DressingSelect",
-    "tsplayground",
-    "",
   },
   callback = function()
-    vim.cmd([[
-      nnoremap <silent> <buffer> q :close<CR>
-      set nobuflisted
-      ]])
+    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = true, silent = true })
+    vim.opt_local.buflisted = false
   end,
 })
 
-vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
+vim.api.nvim_create_autocmd("CmdWinEnter", {
+  group = augroup,
   callback = function()
     vim.cmd("quit")
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+vim.api.nvim_create_autocmd("VimResized", {
+  group = augroup,
   callback = function()
     vim.cmd("tabdo wincmd =")
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  pattern = { "*" },
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = augroup,
   callback = function()
     vim.cmd("checktime")
   end,
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup,
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
   end,
 })
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { ".env", ".env.*", "*.dev.vars", "config" },
+  group = augroup,
+  pattern = { ".env", ".env.*", "*.dev.vars" },
   callback = function()
     vim.opt_local.filetype = "sh"
   end,
 })
-

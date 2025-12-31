@@ -43,17 +43,11 @@ return {
         "gitignore",
         "ini",
       },
-
-      -- Auto-install missing parsers
       auto_install = true,
-
-      -- Treesitter-based syntax highlighting
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
       },
-
-      -- Treesitter-based indentation
       indent = {
         enable = true,
       },

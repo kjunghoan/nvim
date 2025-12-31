@@ -23,11 +23,21 @@ return {
       },
       preview_win = {
         border = "rounded",
-      }
+      },
     })
 
     -- Plugin-specific keymaps
-    vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>", { noremap = true, silent = true, desc = "Oil Explorer" })
-    vim.keymap.set("n", "<leader>pf", "<cmd>Oil --float<cr>", { noremap = true, silent = true, desc = "Oil Float" })
+    vim.keymap.set(
+      "n",
+      "<leader>pv",
+      "<cmd>Oil<cr>",
+      { noremap = true, silent = true, desc = "Oil Explorer" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>pf",
+      "<cmd>Oil --float<cr>",
+      { noremap = true, silent = true, desc = "Oil Float" }
+    )
   end,
 }

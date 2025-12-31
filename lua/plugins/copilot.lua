@@ -31,24 +31,13 @@ return {
         },
       },
       filetypes = {
-        yaml = false,
-        markdown = false,
-        help = false,
         gitcommit = false,
         gitrebase = false,
-        hgcommit = false,
-        svn = false,
         cvs = false,
-        ["."] = false,
       },
-      copilot_node_command = "node", -- Node.js version must be > 18.x
+      copilot_node_command = "node",
       server_opts_overrides = {},
     })
-
-    -- Your original keymaps (for reference):
-    -- accept = "<C-M-l>" (you had Ctrl+Alt+l)
-    -- next = "<M-j>"
-    -- prev = "<M-k>"
 
     -- Keymaps for toggling copilot
     vim.keymap.set(

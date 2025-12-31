@@ -52,7 +52,7 @@ return {
               local idx = tonumber(selected:match("^(%d+):"))
               if idx then
                 local pick = require("mini.pick")
-                pick.stop()  -- Close picker first
+                pick.stop()
                 vim.schedule(function()
                   harp:list():select(idx)
                 end)
@@ -102,7 +102,6 @@ return {
     vks("n", "<C-S-P>", function() harp:list():prev() end, opts)
     vks("n", "<C-S-N>", function() harp:list():next() end, opts)
 
-    -- Direct access to first 4 marks
     vks("n", "<leader>1", function() harp:list():select(1) end, ext_opts("Harpoon 1"))
     vks("n", "<leader>2", function() harp:list():select(2) end, ext_opts("Harpoon 2"))
     vks("n", "<leader>3", function() harp:list():select(3) end, ext_opts("Harpoon 3"))

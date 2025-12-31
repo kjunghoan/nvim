@@ -1,7 +1,6 @@
 -- https://github.com/Ramilito/kubectl.nvim
 return {
   "Ramilito/kubectl.nvim",
-  version = "2.*",
   dependencies = { "saghen/blink.download" },
   cmd = { "Kubectl", "Kubectx", "Kubens" },
   keys = {

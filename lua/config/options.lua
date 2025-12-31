@@ -28,13 +28,12 @@ vo.updatetime = 300
 vo.wildmode = "longest:full,full"
 vo.wildoptions = "pum"
 vo.wildmenu = true
-vo.winborder = "single"
+vo.winborder = "rounded"
 -- Colorscheme
 vo.termguicolors = true
 vo.signcolumn = "yes"
 vo.colorcolumn = "80"
 vo.list = true         -- Show invisible characters
--- Toggle line wrapping function
 
 -- Indentation and Tab Settings
 vo.autoindent = true  -- Automatically indent new lines to the same level as the previous line

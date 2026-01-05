@@ -66,21 +66,21 @@ vim.diagnostic.config({
   },
 })
 
-local lsp_configs = {
-  "ts_ls",
-  "pyright",
-  "gopls",
-  "lua_ls",
-  "jdtls",
-  "yamlls",
-  "bashls",
-  "tofu_ls",
-  "ruby_lsp",
-  "ltex",
-}
-for _, server in ipairs(lsp_configs) do
-  local ok, config = pcall(require, "lsp." .. server)
-  if ok then
-    vim.lsp.config(server, config)
-  end
-end
+-- local lsp_configs = {
+--   "ts_ls",
+--   "pyright",
+--   "gopls",
+--   "lua_ls",
+--   "jdtls",
+--   "yamlls",
+--   "bashls",
+--   "tofu_ls",
+--   "ruby_lsp",
+--   "ltex",
+-- }
+-- for _, server in ipairs(lsp_configs) do
+--   local ok, config = pcall(require, "lsp." .. server)
+--   if ok then
+--     vim.lsp.config(server, config)
+--   end
+-- end

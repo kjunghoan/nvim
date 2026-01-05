@@ -5,7 +5,11 @@ vim.filetype.add({
     sh = "bash",
     ghostty = "config",
   },
+  filename = {
+    [".env"] = "sh"
+  },
   pattern = {
     ["Dockerfile.*"] = "dockerfile", -- Treat files starting with Dockerfile as Dockerfile filetype
+    ["%.env.*"] = "config"
   },
 })

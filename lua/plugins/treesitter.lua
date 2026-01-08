@@ -4,53 +4,60 @@ return {
   lazy = false,
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter").setup({
-      ensure_installed = {
-        -- Core
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
+    -- Install parsers
+    local languages = {
+      -- Core
+      "lua",
+      "vim",
+      "vimdoc",
+      "query",
 
-        -- languages
-        "javascript",
-        "typescript",
-        "tsx",
-        "python",
-        "go",
-        "gomod",
-        "gowork",
-        "gotmpl",
-        "java",
+      -- languages
+      "javascript",
+      "typescript",
+      "tsx",
+      "python",
+      "go",
+      "gomod",
+      "gowork",
+      "gotmpl",
+      "java",
+      "http",
 
-        -- DevOps/Config
-        "yaml",
-        "json",
-        "toml",
-        "hcl",
-        "dockerfile",
-        "proto",
+      -- DevOps/Config
+      "yaml",
+      "json",
+      "toml",
+      "hcl",
+      "dockerfile",
+      "proto",
 
-        -- Markup/Web
-        "markdown",
-        "markdown_inline",
-        "html",
-        "css",
+      -- Markup/Web
+      "markdown",
+      "markdown_inline",
+      "html",
+      "css",
 
-        -- Utilities
-        "bash",
-        "make",
-        "gitignore",
-        "ini",
-      },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = {
-        enable = true,
-      },
+      -- Utilities
+      "bash",
+      "make",
+      "gitignore",
+      "ini",
+    }
+
+    -- Install missing parsers
+    local installed = require('nvim-treesitter.config').get_installed()
+    for _, lang in ipairs(languages) do
+      if not vim.list_contains(installed, lang) then
+        vim.cmd("TSInstall " .. lang)
+      end
+    end
+
+    -- Enable treesitter highlighting for all filetypes
+    vim.api.nvim_create_autocmd('FileType', {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
     })
   end,
 }

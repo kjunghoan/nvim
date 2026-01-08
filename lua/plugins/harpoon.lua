@@ -20,7 +20,7 @@ return {
     end
 
     -- Add file to harpoon
-    vks("n", "<leader>a", function()
+    vks("n", "m", function()
       harp:list():add()
       vim.notify("File Marked", vim.log.levels.INFO)
     end, ext_opts("Harpoon Add File"))

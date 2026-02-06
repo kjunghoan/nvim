@@ -54,7 +54,7 @@ return {
         { mode = "n", keys = "<Leader>L", desc = "+LaTeX" },
         { mode = "n", keys = "<Leader>o", desc = "+Obsidian" },
         { mode = "n", keys = "<Leader>p", desc = "+Oil" },
-        { mode = "n", keys = "<Leader>r", desc = "+Refactor" },
+        { mode = "n", keys = "<Leader>r", desc = "+REST" },
         { mode = "n", keys = "<Leader>s", desc = "+Split" },
         { mode = "n", keys = "<Leader>t", desc = "+Test" },
         { mode = "n", keys = "<Leader>f", desc = "+Picker" },

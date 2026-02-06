@@ -46,9 +46,9 @@ return {
     }
 
     -- Install missing parsers
-    local installed = require('nvim-treesitter.config').get_installed()
     for _, lang in ipairs(languages) do
-      if not vim.list_contains(installed, lang) then
+      local ok = pcall(vim.treesitter.language.inspect, lang)
+      if not ok then
         vim.cmd("TSInstall " .. lang)
       end
     end

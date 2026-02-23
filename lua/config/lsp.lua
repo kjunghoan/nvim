@@ -32,6 +32,51 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.tbl_extend("force", opts, { desc = "Signature help" })
     )
 
+    -- Go to implementation
+    vim.keymap.set(
+      "n",
+      "gi",
+      vim.lsp.buf.implementation,
+      vim.tbl_extend("force", opts, { desc = "Go to implementation" })
+    )
+
+    -- Go to type definition
+    vim.keymap.set(
+      "n",
+      "gT",
+      vim.lsp.buf.type_definition,
+      vim.tbl_extend("force", opts, { desc = "Go to type definition" })
+    )
+
+    -- Type definition in floating window (peek)
+    vim.keymap.set("n", "gt", function()
+      local client = vim.lsp.get_clients({ bufnr = bufnr })[1]
+      if not client then
+        vim.notify("No LSP client attached", vim.log.levels.INFO)
+        return
+      end
+      local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+      vim.lsp.buf_request(0, "textDocument/typeDefinition", params, function(err, result)
+        if err or not result or vim.tbl_isempty(result) then
+          vim.notify("No type definition found", vim.log.levels.INFO)
+          return
+        end
+        local location = vim.islist(result) and result[1] or result
+        local uri = location.uri or location.targetUri
+        local range = location.range or location.targetSelectionRange
+        local target_bufnr = vim.uri_to_bufnr(uri)
+        vim.fn.bufload(target_bufnr)
+        local start_line = range.start.line
+        local lines =
+          vim.api.nvim_buf_get_lines(target_bufnr, start_line, start_line + 15, false)
+        local buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+        local ft = vim.bo[target_bufnr].filetype
+        vim.bo[buf].filetype = ft
+        vim.lsp.util.open_floating_preview(lines, ft, { border = "rounded" })
+      end)
+    end, vim.tbl_extend("force", opts, { desc = "Type definition (float)" }))
+
     vim.keymap.set(
       "n",
       "<leader>ld",
@@ -65,22 +110,3 @@ vim.diagnostic.config({
     source = true,
   },
 })
-
--- local lsp_configs = {
---   "ts_ls",
---   "pyright",
---   "gopls",
---   "lua_ls",
---   "jdtls",
---   "yamlls",
---   "bashls",
---   "tofu_ls",
---   "ruby_lsp",
---   "ltex",
--- }
--- for _, server in ipairs(lsp_configs) do
---   local ok, config = pcall(require, "lsp." .. server)
---   if ok then
---     vim.lsp.config(server, config)
---   end
--- end

@@ -6,7 +6,7 @@ return {
 
     -- Configure linters by filetype
     lint.linters_by_ft = {
-      python = { "flake8" },
+      python = { "ruff" },
       lua = { "luacheck" },
       javascript = { "eslint" },
       typescript = { "eslint" },

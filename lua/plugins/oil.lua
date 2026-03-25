@@ -6,6 +6,7 @@ return {
   config = function()
     require("oil").setup({
       default_file_explorer = true,
+      watch_for_changes = true,
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",

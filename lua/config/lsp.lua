@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.notify("No LSP client attached", vim.log.levels.INFO)
         return
       end
-      local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+      local params = vim.lsp.util.make_position_params(0)
       vim.lsp.buf_request(0, "textDocument/typeDefinition", params, function(err, result)
         if err or not result or vim.tbl_isempty(result) then
           vim.notify("No type definition found", vim.log.levels.INFO)

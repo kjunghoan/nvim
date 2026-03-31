@@ -166,7 +166,7 @@ return {
     local function stop_existing_jdtls_clients()
       local clients = vim.lsp.get_clients({ name = "jdtls" })
       for _, client in ipairs(clients) do
-        vim.lsp.stop_client(client.id)
+        client:stop()
       end
     end
 

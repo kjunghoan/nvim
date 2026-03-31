@@ -3,7 +3,7 @@ vim.filetype.add({
   extension = {
     rest = "http",
     sh = "bash",
-    ghostty = "config",
+    ghostty = "bash",
     gotmpl = "gotmpl",
     tmpl = "gotmpl",
     templ = "templ",
@@ -11,6 +11,7 @@ vim.filetype.add({
   filename = {
     [".env"] = "sh",
     ["go.work"] = "gowork",
+    ["config"] = "bash",
   },
   pattern = {
     ["Dockerfile.*"] = "dockerfile", -- Treat files starting with Dockerfile as Dockerfile filetype

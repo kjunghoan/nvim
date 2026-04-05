@@ -16,7 +16,25 @@ if vim.fn.filereadable(dict_path) == 1 then
 end
 
 return {
-  filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text", "changelog" },
+  filetypes = {
+    "bib",
+    "gitcommit",
+    "markdown",
+    "org",
+    "plaintex",
+    "rst",
+    "rnoweb",
+    "tex",
+    "pandoc",
+    "quarto",
+    "rmd",
+    "context",
+    "html",
+    "xhtml",
+    "mail",
+    "text",
+    "changelog",
+  },
   root_markers = { ".git" },
   settings = {
     ltex = {

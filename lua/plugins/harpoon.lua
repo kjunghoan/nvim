@@ -11,8 +11,8 @@ return {
         sync_on_ui_close = true,
         key = function()
           return vim.fn.getcwd()
-        end
-      }
+        end,
+      },
     })
     local opts = { noremap = true, silent = true }
     local function ext_opts(desc)
@@ -99,12 +99,24 @@ return {
     end, ext_opts("Harpoon Quick Menu (mini.pick)"))
 
     -- Navigate through marks
-    vks("n", "<C-S-P>", function() harp:list():prev() end, opts)
-    vks("n", "<C-S-N>", function() harp:list():next() end, opts)
+    vks("n", "<C-S-P>", function()
+      harp:list():prev()
+    end, opts)
+    vks("n", "<C-S-N>", function()
+      harp:list():next()
+    end, opts)
 
-    vks("n", "<leader>1", function() harp:list():select(1) end, ext_opts("Harpoon 1"))
-    vks("n", "<leader>2", function() harp:list():select(2) end, ext_opts("Harpoon 2"))
-    vks("n", "<leader>3", function() harp:list():select(3) end, ext_opts("Harpoon 3"))
-    vks("n", "<leader>4", function() harp:list():select(4) end, ext_opts("Harpoon 4"))
-  end
+    vks("n", "<leader>1", function()
+      harp:list():select(1)
+    end, ext_opts("Harpoon 1"))
+    vks("n", "<leader>2", function()
+      harp:list():select(2)
+    end, ext_opts("Harpoon 2"))
+    vks("n", "<leader>3", function()
+      harp:list():select(3)
+    end, ext_opts("Harpoon 3"))
+    vks("n", "<leader>4", function()
+      harp:list():select(4)
+    end, ext_opts("Harpoon 4"))
+  end,
 }

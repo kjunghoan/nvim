@@ -7,22 +7,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local opts = { buffer = bufnr, noremap = true, silent = true }
 
-    -- Go to definition
-    vim.keymap.set(
-      "n",
-      "gd",
-      vim.lsp.buf.definition,
-      vim.tbl_extend("force", opts, { desc = "Go to definition" })
-    )
-
-    -- Go to declaration
-    vim.keymap.set(
-      "n",
-      "gD",
-      vim.lsp.buf.declaration,
-      vim.tbl_extend("force", opts, { desc = "Go to declaration" })
-    )
-
     -- Signature help in insert mode
     -- Note: <C-S> is the default, but conflicts with tmux prefix
     vim.keymap.set(
@@ -30,14 +14,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "<C-k>",
       vim.lsp.buf.signature_help,
       vim.tbl_extend("force", opts, { desc = "Signature help" })
-    )
-
-    -- Go to implementation
-    vim.keymap.set(
-      "n",
-      "gi",
-      vim.lsp.buf.implementation,
-      vim.tbl_extend("force", opts, { desc = "Go to implementation" })
     )
 
     -- Go to type definition
@@ -55,7 +31,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.notify("No LSP client attached", vim.log.levels.INFO)
         return
       end
-      local params = vim.lsp.util.make_position_params(0)
+      local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
       vim.lsp.buf_request(0, "textDocument/typeDefinition", params, function(err, result)
         if err or not result or vim.tbl_isempty(result) then
           vim.notify("No type definition found", vim.log.levels.INFO)

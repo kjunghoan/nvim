@@ -10,7 +10,9 @@ return {
         return java_home
       end
 
-      local handle = io.popen("ls -d /home/linuxbrew/.linuxbrew/Cellar/openjdk@*/*/libexec/openjdk.jdk/Contents/Home 2>/dev/null | head -1")
+      local handle = io.popen(
+        "ls -d /home/linuxbrew/.linuxbrew/Cellar/openjdk@*/*/libexec/openjdk.jdk/Contents/Home 2>/dev/null | head -1"
+      )
       if handle then
         local result = handle:read("*a")
         handle:close()
@@ -40,10 +42,12 @@ return {
       end
 
       vim.notify("Lombok not found, downloading...", vim.log.levels.INFO)
-      vim.fn.system(string.format(
-        "curl -L https://projectlombok.org/downloads/lombok.jar -o %s",
-        lombok_path
-      ))
+      vim.fn.system(
+        string.format(
+          "curl -L https://projectlombok.org/downloads/lombok.jar -o %s",
+          lombok_path
+        )
+      )
       return lombok_path
     end
 
@@ -57,15 +61,20 @@ return {
 
     local bundles = {}
 
-    local java_debug_path = vim.fn.stdpath("data") .. "/mason/packages/java-debug-adapter/extension/server"
+    local java_debug_path = vim.fn.stdpath("data")
+      .. "/mason/packages/java-debug-adapter/extension/server"
     if vim.fn.isdirectory(java_debug_path) == 1 then
       vim.list_extend(
         bundles,
-        vim.split(vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin-*.jar"), "\n")
+        vim.split(
+          vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin-*.jar"),
+          "\n"
+        )
       )
     end
 
-    local java_test_path = vim.fn.stdpath("data") .. "/mason/packages/java-test/extension/server"
+    local java_test_path = vim.fn.stdpath("data")
+      .. "/mason/packages/java-test/extension/server"
     if vim.fn.isdirectory(java_test_path) == 1 then
       vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/*.jar"), "\n"))
     end
@@ -92,7 +101,13 @@ return {
         "-data",
         workspace_dir,
       },
-      root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
+      root_dir = jdtls.setup.find_root({
+        ".git",
+        "mvnw",
+        "gradlew",
+        "pom.xml",
+        "build.gradle",
+      }),
       settings = {
         java = {
           eclipse = {
@@ -116,7 +131,8 @@ return {
           format = {
             enabled = true,
             settings = {
-              url = vim.fn.stdpath("config") .. "/lang-servers/intellij-java-google-style.xml",
+              url = vim.fn.stdpath("config")
+                .. "/lang-servers/intellij-java-google-style.xml",
               profile = "GoogleStyle",
             },
           },

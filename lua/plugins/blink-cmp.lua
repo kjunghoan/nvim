@@ -11,8 +11,6 @@ return {
     blink.setup({
       keymap = {
         preset = "default",
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
         ["<M-CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "hide", "fallback" },
       },
@@ -35,9 +33,6 @@ return {
           "snippets",
           "buffer",
         },
-      },
-      fuzzy = {
-        implementation = "prefer_rust_with_warning",
       },
     })
   end,

@@ -11,12 +11,12 @@ vo.fileencoding = "utf-8"
 -- UI settings
 vo.number = true
 vo.relativenumber = true
-vo.cursorline = true         -- Highlight the line where the cursor is
+vo.cursorline = true -- Highlight the line where the cursor is
 vo.wrap = false
 vo.breakindent = true
-vo.cmdheight = 2             -- Height of the command line
-vo.pumheight = 10            -- Height of the popup menu
-vo.splitkeep = "cursor"      -- Keep the cursor in the same position when splitting windows
+vo.cmdheight = 2 -- Height of the command line
+vo.pumheight = 10 -- Height of the popup menu
+vo.splitkeep = "cursor" -- Keep the cursor in the same position when splitting windows
 vo.splitbelow = true
 vo.splitright = true
 vo.laststatus = 2
@@ -33,16 +33,16 @@ vo.winborder = "rounded"
 vo.termguicolors = true
 vo.signcolumn = "yes"
 vo.colorcolumn = "80"
-vo.list = true         -- Show invisible characters
+vo.list = true -- Show invisible characters
 
 -- Indentation and Tab Settings
-vo.autoindent = true  -- Automatically indent new lines to the same level as the previous line
+vo.autoindent = true -- Automatically indent new lines to the same level as the previous line
 vo.smartindent = true -- Automatically insert indentation in some cases (e.g., after `{`)
-vo.expandtab = true   -- Convert tabs to spaces
-vo.tabstop = 2        -- Number of spaces that a <Tab> in the file counts for
-vo.softtabstop = 2    -- Number of spaces that a <Tab> key press counts as in insert mode
-vo.shiftwidth = 2     -- Number of spaces to use for each step of (auto)indent
-vo.smarttab = true    -- Insert 'tabstop' number of spaces when pressing <Tab> in front of a line
+vo.expandtab = true -- Convert tabs to spaces
+vo.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+vo.softtabstop = 2 -- Number of spaces that a <Tab> key press counts as in insert mode
+vo.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vo.smarttab = true -- Insert 'tabstop' number of spaces when pressing <Tab> in front of a line
 
 -- Search Settings
 vo.hlsearch = true
@@ -55,7 +55,7 @@ vo.path:append("**")
 vo.wildignore:append({
   ".git",
   "node_modules",
-  "vendor"
+  "vendor",
 })
 
 -- Backup and Swap Files
@@ -85,7 +85,7 @@ local function find_project_venv()
     "env",
     ".env",
     "virtualenv",
-    ".virtualenv"
+    ".virtualenv",
   }
 
   -- Check for exact matches first
@@ -118,15 +118,15 @@ local function find_project_venv()
   end
 
   -- Check parent directories (useful for nested project structures)
-  local parent = vim.fn.fnamemodify(cwd, ':h')
-  while parent ~= '/' and parent ~= vim.fn.expand('~') do
+  local parent = vim.fn.fnamemodify(cwd, ":h")
+  while parent ~= "/" and parent ~= vim.fn.expand("~") do
     for _, name in ipairs(exact_names) do
       local venv_path = parent .. "/" .. name .. "/bin/python3"
       if vim.fn.executable(venv_path) == 1 then
         return venv_path
       end
     end
-    parent = vim.fn.fnamemodify(parent, ':h')
+    parent = vim.fn.fnamemodify(parent, ":h")
   end
 
   -- Fallback to the default nvim venv
@@ -136,9 +136,4 @@ end
 -- Set the Python host program
 vim.g.python3_host_prog = find_project_venv()
 
--- Also set it up to re-detect when changing directories
-vim.api.nvim_create_autocmd("DirChanged", {
-  callback = function()
-    vim.g.python3_host_prog = find_project_venv()
-  end,
-})
+return { find_project_venv = find_project_venv }

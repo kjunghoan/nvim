@@ -60,3 +60,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("DirChanged", {
+  group = augroup,
+  callback = function()
+    vim.g.python3_host_prog = require("config.options").find_project_venv()
+  end,
+})

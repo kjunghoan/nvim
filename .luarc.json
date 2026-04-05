@@ -1,9 +1,3 @@
 {
-  "diagnostics.globals": [
-    "vim",
-    "spec",
-    "globals",
-    "read_globals",
-    "ignore"
-  ]
+  "diagnostics.globals": ["vim", "spec", "globals", "read_globals", "ignore"]
 }

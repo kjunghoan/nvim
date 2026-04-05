@@ -12,5 +12,5 @@ read_globals = {
 }
 
 ignore = {
-  "122"
+  "122",
 }

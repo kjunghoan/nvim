@@ -7,6 +7,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local opts = { buffer = bufnr, noremap = true, silent = true }
 
+    -- Go to definition
+    vim.keymap.set(
+      "n",
+      "gd",
+      vim.lsp.buf.definition,
+      vim.tbl_extend("force", opts, { desc = "Go to definition" })
+    )
+
     -- Signature help in insert mode
     -- Note: <C-S> is the default, but conflicts with tmux prefix
     vim.keymap.set(

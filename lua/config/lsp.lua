@@ -24,8 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "gd", vim.lsp.buf.definition, "Go to definition")
     map("n", "gT", vim.lsp.buf.type_definition, "Go to type definition")
-    -- <C-S> is the nvim default for signature_help but collides with tmux prefix
-    map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
     map("n", "<leader>ld", vim.diagnostic.open_float, "Show diagnostic")
     map("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostic list")
   end,

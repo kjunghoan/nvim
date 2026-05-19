@@ -15,5 +15,6 @@ spec("colorscheme")
 
 -- plugins
 spec("plugins.treesitter")
+spec("plugins.blink-cmp")
 
 require("config.lazy")

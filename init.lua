@@ -14,6 +14,6 @@ require("config.lsp")
 spec("colorscheme")
 
 -- plugins
--- spec("plugins.gitsigns")
+spec("plugins.treesitter")
 
 require("config.lazy")

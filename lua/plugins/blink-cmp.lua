@@ -28,6 +28,8 @@ return {
         ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
+        ["<Tab>"] = { "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
       },
       signature = { enabled = true },
       appearance = {

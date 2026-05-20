@@ -33,7 +33,14 @@ return {
         end
 
         vim.notify("treesitter: installing parser for " .. lang, vim.log.levels.INFO)
-        pcall(require("nvim-treesitter").install, { lang })
+        vim.schedule(function()
+          pcall(function()
+            require("nvim-treesitter").install({ lang }):wait(60000)
+          end)
+          if vim.api.nvim_buf_is_valid(args.buf) then
+            pcall(vim.treesitter.start, args.buf, lang)
+          end
+        end)
       end,
     })
   end,

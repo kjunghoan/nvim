@@ -33,5 +33,8 @@ spec("plugins.obsidian")
 spec("plugins.kubectl")
 spec("plugins.dadbod")
 spec("plugins.typst-preview")
+spec("plugins.trouble")
+spec("plugins.todo-comments")
+spec("plugins.diffview")
 
 require("config.lazy")

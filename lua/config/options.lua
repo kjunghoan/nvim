@@ -34,6 +34,7 @@ vo.termguicolors = true
 vo.signcolumn = "yes"
 vo.colorcolumn = "80"
 vo.list = true -- Show invisible characters
+vo.listchars:append({ trail = "-" }) -- visible trailing-whitespace marker
 
 -- Indentation and Tab Settings
 vo.autoindent = true -- Automatically indent new lines to the same level as the previous line

@@ -14,6 +14,7 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
+    "Exafunction/windsurf.nvim",
   },
   config = function()
     require("blink.cmp").setup({
@@ -47,6 +48,10 @@ return {
           "path",
           "snippets",
           "buffer",
+          "codeium",
+        },
+        providers = {
+          codeium = { name = "Codeium", module = "codeium.blink", async = true },
         },
       },
     })

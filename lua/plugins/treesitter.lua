@@ -21,6 +21,9 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("user-treesitter", { clear = true }),
       callback = function(args)
+        if vim.bo[args.buf].buftype ~= "" then
+          return
+        end
         local ft = vim.bo[args.buf].filetype
         if not ft or ft == "" then
           return

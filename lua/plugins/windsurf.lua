@@ -15,6 +15,7 @@ return {
           gitcommit = false,
           gitrebase = false,
           cvs = false,
+          oil = false,
         },
         default_filetype_enabled = true,
         key_bindings = {

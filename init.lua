@@ -27,5 +27,7 @@ spec("plugins.gitsigns")
 spec("plugins.undotree")
 spec("plugins.windsurf")
 spec("plugins.harpoon")
+spec("plugins.conform")
+spec("plugins.nvim-lint")
 
 require("config.lazy")

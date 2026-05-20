@@ -26,5 +26,6 @@ spec("plugins.nvim-web-devicons")
 spec("plugins.gitsigns")
 spec("plugins.undotree")
 spec("plugins.windsurf")
+spec("plugins.harpoon")
 
 require("config.lazy")

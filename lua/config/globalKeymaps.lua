@@ -54,9 +54,3 @@ km(
   ":nohlsearch<CR>",
   { noremap = true, silent = true, desc = "Clear Search Highlight" }
 )
-
--- Lazygit
-km("n", "<leader>gg", function()
-  vim.cmd("tabnew term://lazygit")
-  vim.cmd("startinsert")
-end, { noremap = true, silent = true, desc = "Lazygit" })

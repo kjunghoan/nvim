@@ -1,6 +1,7 @@
 -- https://github.com/Ramilito/kubectl.nvim
 return {
   "Ramilito/kubectl.nvim",
+  version = "2.*",
   dependencies = { "saghen/blink.download" },
   cmd = { "Kubectl", "Kubectx", "Kubens" },
   keys = {
@@ -11,7 +12,6 @@ return {
       namespace = "All",
     })
 
-    -- Smart helm path detection
     local helm_paths = {
       "/home/linuxbrew/.linuxbrew/bin/helm",
       vim.fn.exepath("helm"),

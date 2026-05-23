@@ -2,7 +2,7 @@
 return {
   "stevearc/oil.nvim",
   lazy = false,
-  dependencies = { "nvim-mini/mini.icons" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     require("oil").setup({
       default_file_explorer = true,
@@ -27,7 +27,6 @@ return {
       },
     })
 
-    -- Plugin-specific keymaps
     vim.keymap.set(
       "n",
       "<leader>pv",

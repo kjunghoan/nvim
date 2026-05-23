@@ -1,5 +1,4 @@
--- Vue language server configuration (hybrid mode, v3.0+)
--- Works alongside ts_ls, which loads @vue/typescript-plugin.
+-- https://github.com/vuejs/language-tools
 return {
   cmd = { "vue-language-server", "--stdio" },
   filetypes = { "vue" },

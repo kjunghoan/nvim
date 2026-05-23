@@ -1,4 +1,4 @@
--- Go language server configuration
+-- https://github.com/golang/tools/tree/master/gopls
 return {
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },

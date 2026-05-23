@@ -6,8 +6,6 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = function()
     local default_workspaces = {}
-
-    -- Check if local-config was loaded (by init.lua)
     local local_config = package.loaded["local-config"]
     local workspaces = default_workspaces
     if local_config and local_config.obsidian_workspaces then
@@ -17,35 +15,8 @@ return {
     return {
       legacy_commands = false,
       workspaces = workspaces,
-      frontmatter = {
-        enabled = true,
-      },
-
-      -- UI options
-      ui = {
-        enable = false,
-        update_debounce = 200,
-        bullets = {
-          char = "•",
-          padding = 1,
-        },
-        conceallevel = 1,
-      },
-
+      ui = { enable = false },
       notes_subdir = "notes",
-      new_notes_location = "current_dir",
-
-      -- Completion integration with blink.cmp
-      completion = {
-        blink = true,
-        min_chars = 2,
-      },
-
-      picker = {
-        name = "mini.pick",
-      },
-
-      -- Note ID generation
       note_id_func = function(title)
         local suffix = ""
         if title ~= nil then
@@ -57,23 +28,11 @@ return {
         end
         return tostring(os.time()) .. "-" .. suffix
       end,
-
-      -- Templates
-      templates = {
-        subdir = "templates",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
-      },
-
-      open = {
-        func = vim.ui.open,
-        app_foreground = false,
-      },
+      templates = { folder = "templates" },
     }
   end,
 
   config = function(_, opts)
-    -- Only setup if we have workspaces configured
     if opts.workspaces and #opts.workspaces > 0 then
       require("obsidian").setup(opts)
     else
@@ -84,25 +43,20 @@ return {
       return
     end
 
-    -- Markdown file settings
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "markdown",
       callback = function()
         vim.opt_local.spell = true
-        vim.opt_local.conceallevel = 1
       end,
     })
 
-    -- Keymaps (using new command format)
     local map = function(keys, cmd, desc)
       vim.keymap.set("n", keys, cmd, { noremap = true, silent = true, desc = desc })
     end
-
     local vmap = function(keys, cmd, desc)
       vim.keymap.set("v", keys, cmd, { noremap = true, silent = true, desc = desc })
     end
 
-    -- Top-level commands
     map("<leader>oD", "<cmd>Obsidian dailies<CR>", "List daily Notes")
     map("<leader>oh", "<cmd>Obsidian help<CR>", "Help")
     map("<leader>on", "<cmd>Obsidian new<CR>", "New Note")
@@ -115,7 +69,6 @@ return {
     map("<leader>ot", "<cmd>Obsidian tags<CR>", "Search Tags")
     map("<leader>ow", "<cmd>Obsidian workspace<CR>", "Switch Workspace")
 
-    -- Note commands
     map("<leader>ob", "<cmd>Obsidian backlinks<CR>", "Show Backlinks")
     map("<leader>oT", "<cmd>Obsidian toc<CR>", "Table of Contents")
     map("<leader>ol", ":Obsidian links<CR>", "List Links")

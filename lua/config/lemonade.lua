@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: duplicate-set-field
 vim.ui.open = function(path)
   local cmd = { "lemonade" }
   local host = os.getenv("LEMONADE_HOST")

@@ -1,4 +1,4 @@
--- Python language server configuration
+-- https://github.com/microsoft/pyright
 return {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },

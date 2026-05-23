@@ -46,13 +46,6 @@ return {
       { desc = "Toggle Blame" }
     )
     vim.keymap.set("n", "<leader>gR", gs.reset_buffer, { desc = "Reset Buffer" })
-    vim.keymap.set("n", "<leader>gs", gs.stage_hunk, { desc = "Stage Hunk" })
-    vim.keymap.set("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
-    vim.keymap.set(
-      "n",
-      "<leader>gd",
-      "<cmd>Gitsigns diffthis HEAD<CR>",
-      { desc = "Git Diff" }
-    )
+    vim.keymap.set("n", "<leader>gs", gs.stage_hunk, { desc = "Toggle Stage Hunk" })
   end,
 }

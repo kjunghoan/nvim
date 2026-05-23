@@ -6,7 +6,6 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = function()
     local default_workspaces = {}
-
     local local_config = package.loaded["local-config"]
     local workspaces = default_workspaces
     if local_config and local_config.obsidian_workspaces then
@@ -16,32 +15,8 @@ return {
     return {
       legacy_commands = false,
       workspaces = workspaces,
-      frontmatter = {
-        enabled = true,
-      },
-
-      ui = {
-        enable = false,
-        update_debounce = 200,
-        bullets = {
-          char = "•",
-          padding = 1,
-        },
-        conceallevel = 1,
-      },
-
+      ui = { enable = false },
       notes_subdir = "notes",
-      new_notes_location = "current_dir",
-
-      completion = {
-        blink = true,
-        min_chars = 2,
-      },
-
-      picker = {
-        name = "snacks.picker",
-      },
-
       note_id_func = function(title)
         local suffix = ""
         if title ~= nil then
@@ -53,17 +28,7 @@ return {
         end
         return tostring(os.time()) .. "-" .. suffix
       end,
-
-      templates = {
-        subdir = "templates",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
-      },
-
-      open = {
-        func = vim.ui.open,
-        app_foreground = false,
-      },
+      templates = { folder = "templates" },
     }
   end,
 
@@ -82,7 +47,6 @@ return {
       pattern = "markdown",
       callback = function()
         vim.opt_local.spell = true
-        vim.opt_local.conceallevel = 1
       end,
     })
 

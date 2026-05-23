@@ -1,4 +1,4 @@
--- Ruby language server configuration
+-- https://github.com/Shopify/ruby-lsp
 return {
   cmd = { "ruby-lsp" },
   filetypes = { "ruby" },

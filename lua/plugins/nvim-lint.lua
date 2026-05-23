@@ -1,25 +1,20 @@
+-- https://github.com/mfussenegger/nvim-lint
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
-
-    -- Configure linters by filetype
     lint.linters_by_ft = {
-      python = { "ruff" },
-      lua = { "luacheck" },
-      javascript = { "eslint" },
-      typescript = { "eslint" },
-      yaml = { "yamllint" },
       go = { "golangcilint" },
-      proto = { "buf_lint", "protolint" },
-      tofu = { "tofu" },
+      markdown = { "markdownlint" },
+      yaml = { "yamllint" },
+      nix = { "statix", "deadnix" },
+      dockerfile = { "hadolint" },
+      terraform = { "tflint" },
     }
-
-    -- Create autocmd to trigger linting
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-      group = lint_augroup,
+    lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "MD033" }
+    vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+      group = vim.api.nvim_create_augroup("nvim_lint", { clear = true }),
       callback = function()
         lint.try_lint()
       end,

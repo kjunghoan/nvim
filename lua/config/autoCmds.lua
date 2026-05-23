@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("CmdWinEnter", {
+vim.api.nvim_create_autocmd("CmdwinEnter", {
   group = augroup,
   callback = function()
     vim.cmd("quit")
@@ -48,13 +48,17 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup,
   callback = function()
-    vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
+    vim.hl.on_yank({ higroup = "Visual", timeout = 40 })
   end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup,
-  pattern = { ".env", ".env.*", "*.dev.vars" },
+  pattern = {
+    ".env",
+    ".env.*",
+    "*.dev.vars"
+  },
   callback = function()
     vim.opt_local.filetype = "sh"
   end,
@@ -63,6 +67,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd("DirChanged", {
   group = augroup,
   callback = function()
-    vim.g.python3_host_prog = require("config.options").find_project_venv()
+    vim.g.python3_host_prog = require("util.venv").find_project_venv()
   end,
 })

@@ -1,4 +1,4 @@
--- OpenTofu language server configuration
+-- https://github.com/opentofu/tofu-ls
 return {
   cmd = { "tofu-ls", "serve" },
   filetypes = { "terraform", "tf" },

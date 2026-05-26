@@ -70,3 +70,14 @@ vim.api.nvim_create_autocmd("DirChanged", {
     vim.g.python3_host_prog = require("util.venv").find_project_venv()
   end,
 })
+
+-- markdown: foldmethod=manual so zf/zF work for ad-hoc folds.
+-- overrides the global foldmethod=expr from lua/config/lsp.lua.
+-- foldmethod is a window-local option, so use opt_local.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.foldmethod = "manual"
+  end,
+})

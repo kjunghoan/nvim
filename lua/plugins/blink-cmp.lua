@@ -58,7 +58,8 @@ return {
             module = "codeium.blink",
             async = true,
             enabled = function()
-              return vim.bo.filetype ~= "oil"
+              local ft = vim.bo.filetype
+              return ft ~= "oil" and not ft:match("^k8s_")
             end,
           },
         },

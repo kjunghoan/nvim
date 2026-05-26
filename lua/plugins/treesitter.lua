@@ -35,6 +35,12 @@ return {
           return
         end
 
+        -- skip filetypes nvim-treesitter has no parser for (oil, lazy, etc.)
+        local parsers_ok, parsers = pcall(require, "nvim-treesitter.parsers")
+        if not parsers_ok or parsers[lang] == nil then
+          return
+        end
+
         vim.notify("treesitter: installing parser for " .. lang, vim.log.levels.INFO)
         vim.schedule(function()
           pcall(function()

@@ -5,6 +5,8 @@ return {
       enabled = true,
       ui_select = true,
       matcher = { frecency = true },
+      -- open files in the window focused when the picker launched,
+      main = { current = true },
       win = {
         input = {
           keys = {

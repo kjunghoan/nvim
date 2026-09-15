@@ -9,6 +9,7 @@ globals = {
 
 read_globals = {
   "vim",
+  "Snacks",
 }
 
 ignore = {

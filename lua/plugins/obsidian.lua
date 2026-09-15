@@ -66,11 +66,20 @@ return {
     map("<leader>o]", "<cmd>Obsidian tomorrow<CR>", "Open Tomorrow Note")
     map("<leader>of", "<cmd>Obsidian quick_switch<CR>", "Find Note")
     map("<leader>os", "<cmd>Obsidian search<CR>", "Search Notes")
-    map("<leader>ot", "<cmd>Obsidian tags<CR>", "Search Tags")
+    map("<leader>ot", "<cmd>ObsidianTagsAll<CR>", "Find Notes With All Tags")
     map("<leader>ow", "<cmd>Obsidian workspace<CR>", "Switch Workspace")
 
     map("<leader>oi", "<cmd>Obsidian template<CR>", "Insert Template")
     map("<leader>ob", "<cmd>Obsidian backlinks<CR>", "Show Backlinks")
+    vim.api.nvim_create_user_command("ObsidianTagsAll", function(cmd)
+      require("util.obsidian_tags_all").find_notes_with_all_tags(cmd.fargs)
+    end, {
+      nargs = "*",
+      complete = function(arg_lead)
+        return require("util.obsidian_tags_all").complete_tags(arg_lead)
+      end,
+      desc = "Find notes carrying every given tag",
+    })
     map("<leader>oT", "<cmd>Obsidian toc<CR>", "Table of Contents")
     map("<leader>ol", ":Obsidian links<CR>", "List Links")
     map("<leader>op", "<cmd>Obsidian paste_img<CR>", "Paste Image")

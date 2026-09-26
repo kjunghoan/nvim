@@ -1,7 +1,7 @@
 -- https://github.com/opentofu/tofu-ls
 return {
   cmd = { "tofu-ls", "serve" },
-  filetypes = { "terraform", "tf" },
+  filetypes = { "terraform", "terraform-vars" },
   root_markers = { ".terraform", ".git" },
   settings = {
     ["terraform-ls"] = {

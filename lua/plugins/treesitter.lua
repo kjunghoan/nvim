@@ -16,6 +16,7 @@ return {
       "markdown",
       "markdown_inline",
       "bash",
+      "regex",
     })
 
     vim.api.nvim_create_autocmd("FileType", {

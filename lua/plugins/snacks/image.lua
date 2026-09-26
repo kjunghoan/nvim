@@ -5,6 +5,10 @@ return {
       enabled = true,
     },
   },
+  init = function()
+    require("util.image_buffer").register_autocmd()
+    require("util.pdf_pager").register_autocmd()
+  end,
   keys = {
     {
       "<leader>i",

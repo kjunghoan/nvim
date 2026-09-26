@@ -81,7 +81,9 @@ return {
       desc = "Find notes carrying every given tag",
     })
     map("<leader>oT", "<cmd>Obsidian toc<CR>", "Table of Contents")
-    map("<leader>ol", ":Obsidian links<CR>", "List Links")
+    map("<leader>ol", function()
+      require("util.obsidian_links_preview").pick_links_with_preview()
+    end, "List Links")
     map("<leader>op", "<cmd>Obsidian paste_img<CR>", "Paste Image")
     map("<leader>or", "<cmd>Obsidian rename<CR>", "Rename Note")
 

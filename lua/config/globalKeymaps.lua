@@ -40,11 +40,23 @@ km(
   ":split<CR>",
   { noremap = true, silent = true, desc = "Split Horizontally" }
 )
+km(
+  "n",
+  "<leader>sV",
+  ":aboveleft vsplit<CR>",
+  { noremap = true, silent = true, desc = "Split vertically (left)" }
+)
+km(
+  "n",
+  "<leader>sH",
+  ":aboveleft split<CR>",
+  { noremap = true, silent = true, desc = "Split Horizontally (above)" }
+)
 
 -- Toggle wrap with linebreak
 km("n", "<leader>w", function()
-  vim.opt.wrap = not vim.opt.wrap:get()
-  vim.opt.linebreak = not vim.opt.linebreak:get()
+  vim.o.wrap = not vim.o.wrap
+  vim.o.linebreak = not vim.o.linebreak
 end, { noremap = true, silent = true, desc = "Toggle Wrap at Words" })
 
 -- Clear search highlight

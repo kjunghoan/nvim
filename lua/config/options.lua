@@ -76,3 +76,6 @@ vo.backspace = { "start", "eol", "indent" }
 vo.undofile = true
 
 vim.g.python3_host_prog = require("util.venv").find_project_venv()
+
+-- Filetypes
+vim.filetype.add({ filename = { [".markdownlintrc"] = "json" } })

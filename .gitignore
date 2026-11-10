@@ -1,6 +1,5 @@
-.direnv
-lazy-lock.json
 .vscode
+.direnv
 spell/
 venv
 CLAUDE.md

@@ -1,9 +1,5 @@
 local vo = vim.opt
 
--- Disable unused providers
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-
 vim.scriptencoding = "utf-8"
 vo.encoding = "utf-8"
 vo.fileencoding = "utf-8"
@@ -74,8 +70,4 @@ vo.timeoutlen = 1000
 -- General
 vo.backspace = { "start", "eol", "indent" }
 vo.undofile = true
-
-vim.g.python3_host_prog = require("util.venv").find_project_venv()
-
--- Filetypes
-vim.filetype.add({ filename = { [".markdownlintrc"] = "json" } })
+vo.foldmethod = "manual"

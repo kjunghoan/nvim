@@ -3,14 +3,13 @@ local augroup = vim.api.nvim_create_augroup("UserAutoCmds", { clear = true })
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = augroup,
   callback = function()
-    vim.opt.formatoptions:remove("cro")
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup,
   pattern = {
-    "netrw",
     "qf",
     "git",
     "help",
@@ -49,45 +48,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup,
   callback = function()
     vim.hl.on_yank({ higroup = "Visual", timeout = 40 })
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup,
-  pattern = {
-    ".env",
-    ".env.*",
-    "*.dev.vars"
-  },
-  callback = function()
-    vim.opt_local.filetype = "sh"
-  end,
-})
-
-vim.api.nvim_create_autocmd("DirChanged", {
-  group = augroup,
-  callback = function()
-    vim.g.python3_host_prog = require("util.venv").find_project_venv()
-  end,
-})
-
--- markdown: foldmethod=manual so zf/zF work for ad-hoc folds.
--- overrides the global foldmethod=expr from lua/config/lsp.lua.
--- foldmethod is a window-local option, so use opt_local.
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup,
-  pattern = "markdown",
-  callback = function()
-    vim.opt_local.foldmethod = "manual"
-  end,
-})
-
--- tex/typst: foldmethod=marker so zf writes {{{ }}} fold markers into comments.
--- markers persist across sessions and are ignored by both compilers.
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup,
-  pattern = { "tex", "plaintex", "typst" },
-  callback = function()
-    vim.opt_local.foldmethod = "marker"
   end,
 })

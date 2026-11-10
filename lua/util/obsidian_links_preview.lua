@@ -5,24 +5,12 @@
 ---@param link string
 ---@return string|nil
 local function resolve_link_to_path(link)
-  local obsidian_util = require("obsidian.util")
-  local location = obsidian_util.parse_link(link)
-  if not location or obsidian_util.is_uri(location) then
+  local parsed_reference = require("obsidian.parse.refs").extract(link)[1]
+  if not parsed_reference then
     return nil
   end
-  location = vim.uri_decode(location) or location
-  location = obsidian_util.strip_block_links(location)
-  location = obsidian_util.strip_anchor_links(location)
-  if location == "" then
-    return nil
-  end
-
-  if require("obsidian.attachment").is_attachment_path(location) then
-    return require("obsidian.link").resolve_link_path(location)
-  end
-
-  local matching_note = require("obsidian.search").resolve_note(location)[1]
-  return matching_note and tostring(matching_note.path) or nil
+  local location = vim.uri_decode(parsed_reference.target) or parsed_reference.target
+  return require("obsidian.link").resolve_link_path(location)
 end
 
 ---@param message string
@@ -38,7 +26,7 @@ end
 ---@return obsidian.ui_select_preview_spec
 local function preview_link_entry(entry)
   if entry.resolved_path then
-    return require("obsidian.util").preview_path(entry.resolved_path)
+    return require("obsidian.picker.util").preview_path(entry.resolved_path)
   end
   return placeholder_preview("unresolved or external link: " .. entry.link)
 end

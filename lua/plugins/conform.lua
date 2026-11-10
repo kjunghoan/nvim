@@ -24,6 +24,8 @@ return {
       typescript = { "prettier" },
       vue = { "prettier" },
       markdown = { "prettier" },
+      typst = { "typstyle" },
+      tex = { "tex-fmt" },
     },
     default_format_opts = {
       lsp_format = "fallback",

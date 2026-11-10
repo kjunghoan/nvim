@@ -81,3 +81,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldmethod = "manual"
   end,
 })
+
+-- tex/typst: foldmethod=marker so zf writes {{{ }}} fold markers into comments.
+-- markers persist across sessions and are ignored by both compilers.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
+  pattern = { "tex", "plaintex", "typst" },
+  callback = function()
+    vim.opt_local.foldmethod = "marker"
+  end,
+})

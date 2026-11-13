@@ -48,6 +48,10 @@
       "rev": "d7133a9a244a8d93ccee42ff37fb9499af5956fb",
       "src": "https://github.com/nvim-mini/mini.statusline"
     },
+    "mini.surround": {
+      "rev": "f993f66edfc2741cc515aa1f782816fd5c17bc14",
+      "src": "https://github.com/nvim-mini/mini.surround"
+    },
     "neovim-ayu": {
       "rev": "e5a9f0fa2918d6b5f57c21b3ac014314ee5e41c8",
       "src": "https://github.com/Shatur/neovim-ayu"
@@ -104,6 +108,10 @@
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
+    },
+    "tree-sitter-ghostty": {
+      "rev": "a2075c3761a41449bb4faf69794c902dfef6d70e",
+      "src": "https://github.com/bezhermoso/tree-sitter-ghostty"
     },
     "treesj": {
       "rev": "9f349ba62c524f065d6f43254d731ddf8319b9bf",

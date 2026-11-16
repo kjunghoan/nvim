@@ -7,7 +7,7 @@ require("conform").setup({
     sh = { "shfmt" },
     python = { "ruff_format" },
     rust = { "rustfmt" },
-    json = { "prettier" },
+    json = { "prettier", "jq", stop_after_first = true },
     yaml = { "prettier" },
     css = { "prettier" },
     javascript = { "prettier" },

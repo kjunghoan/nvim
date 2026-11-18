@@ -93,6 +93,9 @@ end, { desc = "Find All Files" })
 vim.keymap.set("n", "<leader>fb", function()
   Snacks.picker.buffers()
 end, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>ls", function()
+  Snacks.picker.spelling()
+end, { desc = "Spelling Suggestions" })
 
 -- lazygit
 vim.keymap.set("n", "<leader>gg", function()

@@ -2,13 +2,13 @@ vim.pack.add({ "https://codeberg.org/mfussenegger/nvim-lint" })
 local lint = require("lint")
 lint.linters_by_ft = {
   go = { "golangcilint" },
-  markdown = { "markdownlint" },
+  markdown = { "rumdl" },
   yaml = { "yamllint" },
   nix = { "statix", "deadnix" },
   dockerfile = { "hadolint" },
   terraform = { "tflint" },
 }
-lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "MD033", "MD029" }
+lint.linters.rumdl.stream = "stdout"
 
 local function linter_is_installed(linter)
   local command = type(linter.cmd) == "function" and linter.cmd() or linter.cmd

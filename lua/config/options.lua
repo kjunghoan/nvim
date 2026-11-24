@@ -4,6 +4,8 @@ vim.scriptencoding = "utf-8"
 vo.encoding = "utf-8"
 vo.fileencoding = "utf-8"
 
+vim.o.exrc = true
+
 -- UI settings
 vo.number = true
 vo.relativenumber = true

@@ -4,6 +4,8 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     nix = { "nixfmt" },
+    terraform = { "tofu_fmt" },
+    ["terraform-vars"] = { "tofu_fmt" },
     sh = { "shfmt" },
     python = { "ruff_format" },
     rust = { "rustfmt" },

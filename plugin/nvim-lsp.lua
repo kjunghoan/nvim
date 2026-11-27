@@ -27,6 +27,21 @@ local binary_for_server = {
   yamlls = "yaml-language-server",
 }
 
+local function typescript_major_version_on_path()
+  if vim.fn.executable("tsc") ~= 1 then
+    return nil
+  end
+  local result = vim.system({ "tsc", "--version" }, { text = true }):wait()
+  local version_text = (result.stdout or ""):match("%d+%.%d+%.%d+")
+  local version = version_text and vim.version.parse(version_text)
+  return version and version.major
+end
+
+if (typescript_major_version_on_path() or 0) >= 7 then
+  binary_for_server.ts_ls = nil
+  binary_for_server.tsc = "tsc"
+end
+
 local servers_with_binary_on_path = {}
 local servers_missing_binary = {}
 for server, binary in pairs(binary_for_server) do

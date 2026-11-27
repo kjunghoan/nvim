@@ -3,7 +3,8 @@ require("which-key").setup({})
 
 require("which-key").add({
   -- { "<leader>", group = ""},
-  { "<leader>c", group = "copilot"},
+  { "<leader>c", group = "AI" },
+  { "<leader>e", group = "Sops" },
   { "<leader>f", group = "Find" },
   { "<leader>g", group = "Git" },
   { "<leader>l", group = "LSP" },

@@ -14,6 +14,10 @@
       "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",
       "src": "https://github.com/saghen/blink.download"
     },
+    "claudecode.nvim": {
+      "rev": "8bcc7bb816750405b624b4a4e05f9ef367715d1e",
+      "src": "https://github.com/coder/claudecode.nvim"
+    },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -124,6 +128,10 @@
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "sops.nvim": {
+      "rev": "26592d8fab2a4c133d2a5d95e90d2ba54eb3c018",
+      "src": "https://github.com/trixnz/sops.nvim"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
